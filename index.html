@@ -1,95 +1,97 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>佛法語言學習平台</title>
-  <link rel="stylesheet" href="css/assetsstyles.css">
+  <link rel="stylesheet" href="css/assetsstyles.css" />
   <style>
     body {
-      font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
-      background-color: #fefcf7;
-      color: #333;
-      line-height: 1.6;
-      padding: 2em;
-      max-width: 860px;
-      margin: auto;
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      display: flex;
+      height: 100vh;
     }
-    h1 {
-      text-align: center;
-      color: #5c4033;
+
+    .sidebar {
+      width: 220px;
+      background-color: #f5f3f1;
+      border-right: 1px solid #ccc;
+      padding: 1em;
+      box-sizing: border-box;
+      overflow-y: auto;
     }
-    .section {
-      margin: 2em 0;
+
+    .sidebar h2 {
+      font-size: 1.2em;
+      color: #5a3825;
+      margin-top: 0;
     }
-    a {
-      color: #5a4a3f;
+
+    .sidebar a {
+      display: block;
+      padding: 0.5em 0;
       text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      background-color: #f7f7f7;
-      padding: 1.5em 1em;
-      font-size: 1em;
-      line-height: 1.6;
-      text-align: center;
       color: #333;
-      font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
-      border-top: 1px solid #ccc;
+      font-weight: 500;
     }
-    footer p {
-      margin: 0.5em 0;
+
+    .sidebar a:hover {
+      color: #a88ac2;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 0;
+      height: 100vh;
+    }
+
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+        height: auto;
+      }
+
+      .main-content {
+        height: calc(100vh - 200px);
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>佛法語言學習平台</h1>
-
-  <div class="section">
-    <h2>🧘‍♀️ 經典語言學習模組</h2>
-    <ul>
-      <li><a href="pages/heartsutra.html">《心經》中英對照版（含 B1 簡易英文）</a></li>
-      <li><a href="pages/dictionary.html">佛教英語詞彙字典查詢</a></li>
-      <li><a href="pages/diamond.html">《金剛經》對照版（即將推出）</a></li>
-    </ul>
+  <div class="sidebar">
+    <h2>📚 導覽</h2>
+    <a href="#" onclick="loadPage('pages/heartsutra.html')">🧘 心經中英對照</a>
+    <a href="#" onclick="loadPage('pages/dictionary.html')">📘 佛學與素食字典</a>
+    <a href="#" onclick="loadPage('pages/game.html')">🎮 詞彙配對遊戲</a>
+    <a href="#" onclick="loadPage('pages/exercise.html')">✏️ 心經語序練習</a>
+    <a href="#" onclick="loadPage('pages/vegetarian-in-taiwan.html')">🍱 台灣素食英語</a>
+    <a href="#" onclick="loadPage('pages/vegetarian-uk-fr.html')">🇬🇧🇫🇷 英法素食詞彙</a>
+    <a href="#" onclick="loadPage('pages/vegetarian-us-ca.html')">🇺🇸🇨🇦 美加素食詞彙</a>
   </div>
 
-  <div class="section">
-    <h2>🍱 素食英語生活教學</h2>
-    <ul>
-      <li><a href="pages/vegetarian-in-taiwan.html">外國人在台灣怎麼吃素？</a></li>
-      <li><a href="pages/vegetarian-uk-fr.html">英國／法國素食詞彙與表達</a></li>
-      <li><a href="pages/vegetarian.html">美加常見素食分類詞卡</a></li>
-    </ul>
+  <div class="main-content">
+    <iframe id="mainFrame" src="pages/heartsutra.html"></iframe>
   </div>
 
-  <div class="section">
-    <h2>🎮 練習與遊戲</h2>
-    <ul>
-      <li><a href="pages/exercise.html">🧘 心經語序練習</a></li>
-      <li><a href="pages/game.html">🧩 佛學詞彙配對小遊戲</a></li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>📚 資源連結</h2>
-    <ul>
-      <li><a href="https://github.com/yourname/yourrepo" target="_blank">GitHub 專案頁面</a></li>
-      <li><a href="https://buddhism-dictionary.vercel.app" target="_blank">佛教字典開放平台（開發中）</a></li>
-    </ul>
-  </div>
-
-  <footer>
-    <div style="max-width: 720px; margin: auto;">
-      <p lang="zh">(c) 版權所有：祥雲寺三藏學院教師釋印承（國立陽明交通大學教育所博士生吳宜倫）</p>
-      <p lang="en">(c) Copyright: Bhikkhuni Yin-Cheng, English Instructor, Tripitaka Institute, Hsian-Yun Temple</p>
-      <p lang="en">(PhD student Yi-Lin Wu, Institute of Education, National Yang Ming Chiao Tung University)</p>
-      <p>Since 佛曆 2569 (B.E.) / 2025 (C.E.)</p>
-    </div>
-  </footer>
+  <script>
+    function loadPage(path) {
+      document.getElementById("mainFrame").src = path;
+    }
+  </script>
 
 </body>
 </html>

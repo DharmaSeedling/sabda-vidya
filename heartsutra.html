@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>🧘 心經中英對照</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/assetsstyles.css">
+  <style>
+    body {
+      font-family: "Noto Serif TC", serif;
+      background: #f9f7f1;
+      max-width: 960px;
+      margin: 2em auto;
+      padding: 1em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border-bottom: 1px solid #ccc;
+      padding: 0.6em;
+      vertical-align: top;
+    }
+    th {
+      background-color: #eee;
+    }
+    .b1 {
+      color: #6c4d7d;
+      font-style: italic;
+    }
+    .hidden {
+      display: none;
+    }
+    .toggle-btn {
+      margin-bottom: 1em;
+      background: #a88ac2;
+      color: white;
+      padding: 0.4em 0.8em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      font-size: 0.85em;
+      text-align: center;
+      color: #777;
+      margin-top: 2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="text-align:center;">🧘 般若波羅蜜多心經 Heart Sutra</h1>
+  <p style="text-align:center; font-size:0.9em; color:#777;">
+    中文：玄奘法師 · 英譯（主）：James Legge · B1 英文版：Yi-Lin Wu
+  </p>
+
+  <button class="toggle-btn" onclick="toggleB1()">📘 顯示 / 隱藏 簡易英文</button>
+
+  <table id="sutra-table">
+    <thead>
+      <tr>
+        <th>🈷️ 中文</th>
+        <th>📖 James Legge 英文</th>
+        <th class="b1-col">🌱 B1 簡易英文</th>
+      </tr>
+    </thead>
+    <tbody id="sutra-body"></tbody>
+  </table>
+
+  <footer>
+    經文依《大正藏》玄奘譯本 · 英譯由 James Legge 翻譯（public domain）<br>
+    B1 英文由 Yi-Lin Wu 吳宜倫 編寫（用於佛法初學教學）
+  </footer>
+
+  <script>
+    fetch("../data/heartsutra-data.json")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById("sutra-body");
+        data.forEach(line => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${line.zh}</td>
+            <td>${line.en_legge || "-"}</td>
+            <td class="b1-col b1">${line.en_b1 || "-"}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      });
+
+    function toggleB1() {
+      const b1Cols = document.querySelectorAll(".b1-col");
+      b1Cols.forEach(col => col.classList.toggle("hidden"));
+    }
+  </script>
+
+</body>
+</html>
