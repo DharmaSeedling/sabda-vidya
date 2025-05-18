@@ -2,8 +2,9 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
+  <title>佛法語言互動平台</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>佛法語言學習平台</title>
+  <meta name="description" content="互動式學習心經、佛學與素食英語的網頁平台。" />
   <link rel="stylesheet" href="css/assetsstyles.css" />
   <style>
     body {
@@ -73,18 +74,17 @@
 <body>
 
   <div class="sidebar">
-    <h2>📚 導覽</h2>
-    <a href="#" onclick="loadPage('pages/heartsutra.html')">🧘 心經中英對照</a>
-    <a href="#" onclick="loadPage('pages/dictionary.html')">📘 佛學與素食字典</a>
-    <a href="#" onclick="loadPage('pages/game.html')">🎮 詞彙配對遊戲</a>
-    <a href="#" onclick="loadPage('pages/exercise.html')">✏️ 心經語序練習</a>
-    <a href="#" onclick="loadPage('pages/vegetarian-in-taiwan.html')">🍱 台灣素食英語</a>
-    <a href="#" onclick="loadPage('pages/vegetarian-uk-fr.html')">🇬🇧🇫🇷 英法素食詞彙</a>
-    <a href="#" onclick="loadPage('pages/vegetarian-us-ca.html')">🇺🇸🇨🇦 美加素食詞彙</a>
+    <h2>📚 導覽選單</h2>
+    <a href="#" onclick="loadPage('pages/exercise-builder.html')">🧘 心經語序練習</a>
+    <a href="#" onclick="loadPage('pages/vocab-game.html')">🥦 詞彙配對遊戲</a>
+    <a href="#" onclick="loadPage('pages/rank.html')">🏆 精進排行榜</a>
+    <a href="#" onclick="loadPage('pages/dictionary.html')">📘 字典查詢</a>
+    <a href="#" onclick="loadPage('pages/heartsutra.html')">📜 心經對照</a>
+    <a href="#" onclick="loadPage('pages/vegetarian-in-taiwan.html')">🍱 台灣素食用語</a>
   </div>
 
   <div class="main-content">
-    <iframe id="mainFrame" src="pages/heartsutra.html"></iframe>
+    <iframe id="mainFrame" src="pages/exercise-builder.html"></iframe>
   </div>
 
   <script>
