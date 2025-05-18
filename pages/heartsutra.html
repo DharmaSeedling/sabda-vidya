@@ -2,164 +2,96 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>心經對照｜Sabda Vidyā</title>
+  <title>般若波羅蜜多心經｜Sabda Vidyā</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../css/assetsstyles.css" />
   <style>
     body {
-      font-family: 'Noto Serif TC', serif;
+      font-family: "Noto Serif TC", serif;
+      padding: 2em;
+      background: #fdfcf7;
       line-height: 1.8;
-      background-color: #fffdf8;
-      padding: 1.5em;
-      max-width: 900px;
-      margin: auto;
     }
-    h1, h2, h3 {
-      color: #4b3621;
-    }
-    blockquote {
-      background: #f7f3ed;
-      padding: 1em;
-      border-left: 4px solid #c4a36b;
-      margin: 1.5em 0;
-    }
-    .sutra-text, .sutra-translation {
-      margin: 1em 0;
-      padding: 1em;
-      background: #f9f9f6;
-      border-left: 4px solid #d2b48c;
-    }
-    input {
-      font-size: 1em;
-      padding: 0.5em;
-      width: 80%;
-      max-width: 500px;
-      margin-bottom: 1em;
-    }
-    #searchResult {
-      padding: 1em;
-      background: #f0f0ef;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #e4d6b7;
-      color: #3b2f23;
-      border: none;
-      padding: 0.6em 1em;
-      cursor: pointer;
-      margin-top: 1em;
-    }
-    #bios {
-      display: none;
-      margin-top: 2em;
-      background: #fdfbf2;
-      padding: 1em;
-      border: 1px solid #ddd;
-    }
+    h1, h2, h3 { color: #42260a; }
+    .sutra-line { margin-bottom: 1.2em; }
+    .legge, .b1 { margin-left: 1em; font-style: italic; color: #555; }
+    .word { cursor: pointer; padding: 0 0.2em; border-bottom: 1px dotted #aaa; }
+    #searchBox { margin-top: 2em; }
+    #searchResult { margin-top: 1em; background: #f2f2f2; padding: 1em; border: 1px solid #ccc; }
   </style>
 </head>
 <body>
 
-  <h1>📜 般若波羅蜜多心經</h1>
+<h1>📜 般若波羅蜜多心經</h1>
+<p><strong>大唐三藏法師 玄奘 譯</strong>｜<strong>James Legge, 1815–1897 英譯</strong></p>
 
-  <!-- 開經偈 -->
-  <section>
-    <h2>🙏 開經偈</h2>
-    <blockquote>
-      無上甚深微妙法，百千萬劫難遭遇。<br />
-      我今見聞得受持，願解如來真實義。<br /><br />
-      <em>Homage to the Supreme Dharma: profound and subtle, rare to encounter through eons.<br />
-      Now that I see, hear, and receive it, may I understand the Tathāgata’s true intent.</em>
-    </blockquote>
-  </section>
+<h2>🙏 開經偈</h2>
+<blockquote>
+  無上甚深微妙法，百千萬劫難遭遇。<br />
+  我今見聞得受持，願解如來真實義。<br /><br />
+  <em>Homage to the Supreme Dharma: profound and subtle, rare to encounter through eons.  
+  Now that I see, hear, and receive it, may I understand the Tathāgata’s true intent.</em>
+</blockquote>
 
-  <!-- 中文原文 -->
-  <section>
-    <h2>🈶 心經原文（玄奘法師 譯）</h2>
-    <p class="sutra-text">
-      觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。<br>
-      舍利子，色不異空，空不異色；色即是空，空即是色；受想行識，亦復如是。<br>
-      舍利子，是諸法空相，不生不滅，不垢不淨，不增不減。<br>
-      是故空中無色，無受想行識，無眼耳鼻舌身意，無色聲香味觸法，<br>
-      無眼界，乃至無意識界，無無明，亦無無明盡，乃至無老死，亦無老死盡。<br>
-      無苦集滅道，無智亦無得，以無所得故。<br>
-      菩提薩埵，依般若波羅蜜多故，心無罣礙；無罣礙故，無有恐怖，<br>
-      遠離顛倒夢想，究竟涅槃。三世諸佛，依般若波羅蜜多故，得阿耨多羅三藐三菩提。<br>
-      故知般若波羅蜜多是大神咒，是大明咒，是無上咒，是無等等咒，<br>
-      能除一切苦，真實不虛。故說般若波羅蜜多咒，即說咒曰：<br>
-      揭諦 揭諦 波羅揭諦 波羅僧揭諦 菩提薩婆訶。
-    </p>
-  </section>
+<h2>📖 經文對照</h2>
 
-  <!-- 英文翻譯 -->
-  <section>
-    <h2>🕉️ Heart Sutra (James Legge, 1815–1897)</h2>
-    <p class="sutra-translation">
-      Avalokiteshvara, while practicing deeply the Prajnaparamita, clearly saw that the five aggregates are all empty, and so relieved all suffering.<br>
-      O Śāriputra, form is not different from emptiness, and emptiness is not different from form. Form is emptiness; emptiness is form. So too are feeling, perception, volition, and consciousness.<br>
-      O Śāriputra, all dharmas are marked with emptiness: not born, not destroyed, not impure, not pure, neither increasing nor decreasing...<br>
-      Therefore, know that Prajnaparamita is the great spiritual mantra, the great bright mantra, the supreme mantra, the unequaled mantra, which removes all suffering—true and not false.<br>
-      Thus is the Prajnaparamita mantra proclaimed: Gate gate paragate parasamgate bodhi svaha.
-    </p>
+<div class="sutra-line">
+  <span class="word" onclick="lookup('觀自在')">觀自在</span>
+  <span class="word" onclick="lookup('菩薩')">菩薩</span>，
+  <span class="word" onclick="lookup('行')">行</span>
+  <span class="word" onclick="lookup('深')">深</span>
+  <span class="word" onclick="lookup('般若波羅蜜多')">般若波羅蜜多</span>時，
+  <span class="word" onclick="lookup('照見')">照見</span>
+  <span class="word" onclick="lookup('五蘊')">五蘊</span>皆空，
+  <span class="word" onclick="lookup('度')">度</span>
+  <span class="word" onclick="lookup('一切')">一切</span>
+  <span class="word" onclick="lookup('苦厄')">苦厄</span>。
+  <div class="legge">(Legge) Avalokiteshvara, while practicing deeply the Prajnaparamita, clearly saw that the five aggregates are all empty, and so relieved all suffering.</div>
+  <div class="b1">(Plain English B1) When Avalokiteshvara was deeply meditating, he saw that everything is empty, and this helped him overcome suffering.</div>
+</div>
 
-    <h3>💬 Simplified English (B1 Level Translation)</h3>
-    <p class="sutra-translation">
-      When Avalokiteshvara was deeply meditating, he saw that everything is empty, and this helped him overcome suffering.<br>
-      O Shariputra, form is not different from emptiness. Emptiness is not different from form. Form is emptiness, and emptiness is form. The same goes for feeling, perception, thinking, and awareness.<br>
-      Nothing is born or ends. Nothing is dirty or pure. Nothing increases or decreases...<br>
-      So we say the wisdom mantra like this: gate gate paragate parasamgate bodhi svaha.
-    </p>
-  </section>
+<!-- 你可以繼續貼更多句子，重複這樣的格式 -->
 
-  <!-- 經文譯者介紹 -->
-  <button onclick="toggleBio()">📖 經文譯者介紹（顯示 / 隱藏）</button>
-  <section id="bios">
-    <p><strong>玄奘法師（602–664）</strong>：唐代三藏法師，赴印度取經，帶回 657 部經典，譯出包括《大般若經》《金剛經》等，被尊為「翻經之祖」。</p>
-    <p><strong>James Legge（1815–1897）</strong>：英國漢學家，早期將漢語佛經、儒家典籍翻譯為英文，任牛津大學漢學講座教授。他的譯文已屬公領域（Public Domain）。</p>
-  </section>
+<h2>🔎 經文詞彙查詢</h2>
+<div id="searchBox">
+  <input type="text" id="searchInput" placeholder="輸入詞彙（如：觀自在）" oninput="manualLookup()" />
+  <div id="searchResult">請輸入詞語或點擊上方經文。</div>
+</div>
 
-  <!-- 字典查詢 -->
-  <hr />
-  <section id="dictionary-section">
-    <h2>🔎 經文詞彙查詢</h2>
-    <input type="text" id="searchInput" placeholder="輸入詞彙（如：般若）" oninput="lookupTerm()" />
-    <div id="searchResult">請輸入詞語，即時查詢解釋與注音。</div>
-  </section>
+<!-- 字典與查詢 -->
+<script src="../js/dictionary.js"></script>
+<script src="../js/zhuyin.js"></script>
+<script>
+  function lookup(word) {
+    document.getElementById('searchInput').value = word;
+    search(word);
+  }
 
-  <script>
-    function toggleBio() {
-      const bio = document.getElementById('bios');
-      bio.style.display = bio.style.display === 'none' ? 'block' : 'none';
+  function manualLookup() {
+    const term = document.getElementById("searchInput").value.trim();
+    search(term);
+  }
+
+  function search(term) {
+    const result = document.getElementById("searchResult");
+    if (!term) {
+      result.innerHTML = "請輸入詞語或點擊上方經文。";
+      return;
     }
 
-    async function lookupTerm() {
-      const input = document.getElementById("searchInput").value.trim();
-      const result = document.getElementById("searchResult");
-      if (!input) {
-        result.innerHTML = "請輸入詞語，即時查詢解釋與注音。";
-        return;
-      }
-
-      // 假設 dictionary.js 有載入 dictionaryData
-      if (typeof dictionaryData === "undefined") {
-        result.innerHTML = "⚠️ 字典資料尚未載入。";
-        return;
-      }
-
-      const found = dictionaryData.find(entry => entry.word === input);
-      if (found) {
-        result.innerHTML = `
-          <p><strong>${found.word}</strong> (${found.zhuyin})</p>
-          <p>${found.definition}</p>
-        `;
-      } else {
-        result.innerHTML = "查無資料，請嘗試其他詞彙。";
-      }
+    if (typeof dictionaryData === "undefined") {
+      result.innerHTML = "⚠️ 字典資料尚未載入。";
+      return;
     }
-  </script>
 
-  <!-- 請確保你在頁面中有載入 dictionary.js 和 zhuyin.js -->
-  <script src="../js/zhuyin.js"></script>
-  <script src="../js/dictionary.js"></script>
+    const found = dictionaryData.find(entry => entry.word === term);
+    if (found) {
+      result.innerHTML = `<p><strong>${found.word}</strong> (${found.zhuyin})</p><p>${found.definition}</p>`;
+    } else {
+      result.innerHTML = "查無資料，請嘗試其他詞彙。";
+    }
+  }
+</script>
 
 </body>
 </html>
