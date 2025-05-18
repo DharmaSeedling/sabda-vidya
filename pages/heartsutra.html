@@ -1,93 +1,165 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>《心經》對照閱讀 Heart Sutra Study</title>
-  <link rel="stylesheet" href="../css/assetsstyles.css" />
+  <meta charset="UTF-8">
+  <title>心經對照｜Sabda Vidyā</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
-      background-color: #fcf9f5;
-      padding: 2em;
-      color: #333;
+      font-family: 'Noto Serif TC', serif;
+      line-height: 1.8;
+      background-color: #fffdf8;
+      padding: 1.5em;
+      max-width: 900px;
+      margin: auto;
     }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 2em;
-      color: #5d3781;
+    h1, h2, h3 {
+      color: #4b3621;
     }
-
-    .sutra-block {
+    blockquote {
+      background: #f7f3ed;
       padding: 1em;
-      margin-bottom: 1.5em;
-      background: #fffaf7;
-      border-left: 5px solid #a88ac2;
-      border-radius: 6px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border-left: 4px solid #c4a36b;
+      margin: 1.5em 0;
     }
-
-    .sutra-block h4 {
-      margin: 0 0 0.5em;
-      font-weight: normal;
-      color: #926bb2;
+    .sutra-text, .sutra-translation {
+      margin: 1em 0;
+      padding: 1em;
+      background: #f9f9f6;
+      border-left: 4px solid #d2b48c;
     }
-
-    .sutra-zh {
-      font-size: 1.2em;
-      margin-bottom: 0.6em;
-    }
-
-    .sutra-en {
+    input {
       font-size: 1em;
-      color: #666;
-      line-height: 1.6;
+      padding: 0.5em;
+      width: 80%;
+      max-width: 500px;
+      margin-bottom: 1em;
     }
-
-    details summary {
+    #searchResult {
+      padding: 1em;
+      background: #f0f0ef;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #e4d6b7;
+      color: #3b2f23;
+      border: none;
+      padding: 0.6em 1em;
       cursor: pointer;
-      font-weight: bold;
-      margin-top: 0.5em;
+      margin-top: 1em;
     }
-
-    #sutra-container {
-      max-width: 800px;
-      margin: 0 auto;
+    #bios {
+      display: none;
+      margin-top: 2em;
+      background: #fdfbf2;
+      padding: 1em;
+      border: 1px solid #ddd;
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>《心經》對照閱讀 Heart Sutra Study</h1>
-    <div id="sutra-container">載入中 Loading...</div>
-  </main>
+
+  <h1>📜 般若波羅蜜多心經</h1>
+
+  <!-- 開經偈 -->
+  <section>
+    <h2>🙏 開經偈</h2>
+    <blockquote>
+      無上甚深微妙法，百千萬劫難遭遇。<br />
+      我今見聞得受持，願解如來真實義。<br /><br />
+      <em>Homage to the Supreme Dharma: profound and subtle, rare to encounter through eons.<br />
+      Now that I see, hear, and receive it, may I understand the Tathāgata’s true intent.</em>
+    </blockquote>
+  </section>
+
+  <!-- 中文原文 -->
+  <section>
+    <h2>🈶 心經原文（玄奘法師 譯）</h2>
+    <p class="sutra-text">
+      觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。<br>
+      舍利子，色不異空，空不異色；色即是空，空即是色；受想行識，亦復如是。<br>
+      舍利子，是諸法空相，不生不滅，不垢不淨，不增不減。<br>
+      是故空中無色，無受想行識，無眼耳鼻舌身意，無色聲香味觸法，<br>
+      無眼界，乃至無意識界，無無明，亦無無明盡，乃至無老死，亦無老死盡。<br>
+      無苦集滅道，無智亦無得，以無所得故。<br>
+      菩提薩埵，依般若波羅蜜多故，心無罣礙；無罣礙故，無有恐怖，<br>
+      遠離顛倒夢想，究竟涅槃。三世諸佛，依般若波羅蜜多故，得阿耨多羅三藐三菩提。<br>
+      故知般若波羅蜜多是大神咒，是大明咒，是無上咒，是無等等咒，<br>
+      能除一切苦，真實不虛。故說般若波羅蜜多咒，即說咒曰：<br>
+      揭諦 揭諦 波羅揭諦 波羅僧揭諦 菩提薩婆訶。
+    </p>
+  </section>
+
+  <!-- 英文翻譯 -->
+  <section>
+    <h2>🕉️ Heart Sutra (James Legge, 1815–1897)</h2>
+    <p class="sutra-translation">
+      Avalokiteshvara, while practicing deeply the Prajnaparamita, clearly saw that the five aggregates are all empty, and so relieved all suffering.<br>
+      O Śāriputra, form is not different from emptiness, and emptiness is not different from form. Form is emptiness; emptiness is form. So too are feeling, perception, volition, and consciousness.<br>
+      O Śāriputra, all dharmas are marked with emptiness: not born, not destroyed, not impure, not pure, neither increasing nor decreasing...<br>
+      Therefore, know that Prajnaparamita is the great spiritual mantra, the great bright mantra, the supreme mantra, the unequaled mantra, which removes all suffering—true and not false.<br>
+      Thus is the Prajnaparamita mantra proclaimed: Gate gate paragate parasamgate bodhi svaha.
+    </p>
+
+    <h3>💬 Simplified English (B1 Level Translation)</h3>
+    <p class="sutra-translation">
+      When Avalokiteshvara was deeply meditating, he saw that everything is empty, and this helped him overcome suffering.<br>
+      O Shariputra, form is not different from emptiness. Emptiness is not different from form. Form is emptiness, and emptiness is form. The same goes for feeling, perception, thinking, and awareness.<br>
+      Nothing is born or ends. Nothing is dirty or pure. Nothing increases or decreases...<br>
+      So we say the wisdom mantra like this: gate gate paragate parasamgate bodhi svaha.
+    </p>
+  </section>
+
+  <!-- 經文譯者介紹 -->
+  <button onclick="toggleBio()">📖 經文譯者介紹（顯示 / 隱藏）</button>
+  <section id="bios">
+    <p><strong>玄奘法師（602–664）</strong>：唐代三藏法師，赴印度取經，帶回 657 部經典，譯出包括《大般若經》《金剛經》等，被尊為「翻經之祖」。</p>
+    <p><strong>James Legge（1815–1897）</strong>：英國漢學家，早期將漢語佛經、儒家典籍翻譯為英文，任牛津大學漢學講座教授。他的譯文已屬公領域（Public Domain）。</p>
+  </section>
+
+  <!-- 字典查詢 -->
+  <hr />
+  <section id="dictionary-section">
+    <h2>🔎 經文詞彙查詢</h2>
+    <input type="text" id="searchInput" placeholder="輸入詞彙（如：般若）" oninput="lookupTerm()" />
+    <div id="searchResult">請輸入詞語，即時查詢解釋與注音。</div>
+  </section>
 
   <script>
-    fetch("../data/heartsutra-data.json")
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById("sutra-container");
-        container.innerHTML = "";
+    function toggleBio() {
+      const bio = document.getElementById('bios');
+      bio.style.display = bio.style.display === 'none' ? 'block' : 'none';
+    }
 
-        data.forEach(item => {
-          const block = document.createElement("div");
-          block.className = "sutra-block";
-          block.innerHTML = `
-            ${item.title ? `<h4>${item.title}</h4>` : ""}
-            <p class="sutra-zh">${item.zh}</p>
-            <details>
-              <summary>🌐 英文翻譯</summary>
-              <p class="sutra-en">${item.en}</p>
-            </details>
-          `;
-          container.appendChild(block);
-        });
-      })
-      .catch(err => {
-        console.error("載入經文失敗", err);
-        document.getElementById("sutra-container").innerHTML = "⚠️ 經文載入失敗";
-      });
+    async function lookupTerm() {
+      const input = document.getElementById("searchInput").value.trim();
+      const result = document.getElementById("searchResult");
+      if (!input) {
+        result.innerHTML = "請輸入詞語，即時查詢解釋與注音。";
+        return;
+      }
+
+      // 假設 dictionary.js 有載入 dictionaryData
+      if (typeof dictionaryData === "undefined") {
+        result.innerHTML = "⚠️ 字典資料尚未載入。";
+        return;
+      }
+
+      const found = dictionaryData.find(entry => entry.word === input);
+      if (found) {
+        result.innerHTML = `
+          <p><strong>${found.word}</strong> (${found.zhuyin})</p>
+          <p>${found.definition}</p>
+        `;
+      } else {
+        result.innerHTML = "查無資料，請嘗試其他詞彙。";
+      }
+    }
   </script>
+
+  <!-- 請確保你在頁面中有載入 dictionary.js 和 zhuyin.js -->
+  <script src="../js/zhuyin.js"></script>
+  <script src="../js/dictionary.js"></script>
+
 </body>
 </html>
