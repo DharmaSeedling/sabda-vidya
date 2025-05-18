@@ -1,0 +1,44 @@
+[
+  {
+    "en": "vegan",
+    "zh": "全素",
+    "ipa": "/ˈviː.ɡən/",
+    "kk": "[ˈviːɡən]",
+    "definition": "不吃任何動物性產品（包括奶蛋）"
+  },
+  {
+    "en": "vegetarian",
+    "zh": "蛋奶素",
+    "ipa": "/ˌvedʒ.əˈteə.ri.ən/",
+    "kk": "[ˌvɛʤəˈtɛriən]",
+    "definition": "不吃肉，但可吃蛋和奶"
+  },
+  {
+    "en": "plant-based",
+    "zh": "植物性飲食",
+    "ipa": "/plɑːnt beɪst/",
+    "kk": "[plænt beɪst]",
+    "definition": "以植物為主的健康飲食方式"
+  },
+  {
+    "en": "dairy-free",
+    "zh": "無乳製品",
+    "ipa": "/ˈdeə.ri friː/",
+    "kk": "[ˈdɛri fri]",
+    "definition": "不含牛奶、起司、奶油等成分"
+  },
+  {
+    "en": "gluten-free",
+    "zh": "無麩質",
+    "ipa": "/ˈɡluː.tən friː/",
+    "kk": "[ˈɡlutən fri]",
+    "definition": "適合麩質過敏或麩質不耐者"
+  },
+  {
+    "en": "vegan-friendly",
+    "zh": "友善全素（餐廳 / 商品）",
+    "ipa": "/ˈviː.ɡən ˈfrend.li/",
+    "kk": "[ˈviɡən ˈfrɛndli]",
+    "definition": "不含動物性原料，適合 vegan"
+  }
+]

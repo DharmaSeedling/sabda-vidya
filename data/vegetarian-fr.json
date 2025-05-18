@@ -1,0 +1,32 @@
+[
+  {
+    "fr": "Je suis végétarien / végétarienne.",
+    "zh": "我是素食者。",
+    "ipa": "/ʒə sɥi veʒetaʁjɛ̃/",
+    "definition": "介紹自己吃素，男性用 végétarien，女性用 végétarienne"
+  },
+  {
+    "fr": "Avez-vous un plat végétarien ?",
+    "zh": "你們有素食餐點嗎？",
+    "ipa": "/avɛ vu ɛ̃ pla veʒetaʁjɛ̃/",
+    "definition": "問餐廳是否提供素食選擇"
+  },
+  {
+    "fr": "Je ne mange pas de viande.",
+    "zh": "我不吃肉。",
+    "ipa": "/ʒə nə mɑ̃ʒ pa də vjɑ̃d/",
+    "definition": "表達不吃任何肉類"
+  },
+  {
+    "fr": "Sans œufs, sans lait, s'il vous plaît.",
+    "zh": "請不要蛋和奶。",
+    "ipa": "/sɑ̃ zø sɑ̃ lɛ sil vu plɛ/",
+    "definition": "常用於 vegan 場景，特別說明不含蛋奶"
+  },
+  {
+    "fr": "Je mange végétalien.",
+    "zh": "我吃全素。",
+    "ipa": "/ʒə mɑ̃ʒ veʒetaljɛ̃/",
+    "definition": "végétalien = vegan（不吃任何動物產品）"
+  }
+]

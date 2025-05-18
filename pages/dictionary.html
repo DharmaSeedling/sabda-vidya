@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>佛教與素食中英字典 | Dictionary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../css/assetsstyles.css" />
+  <style>
+    body {
+      font-family: 'Noto Serif TC', serif;
+      max-width: 860px;
+      margin: 2em auto;
+      padding: 1em;
+      background-color: #fcfbf6;
+      color: #333;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.6em;
+      font-size: 1.1em;
+      margin-bottom: 1em;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+    h1 {
+      text-align: center;
+      color: #5a3825;
+    }
+    .entry {
+      padding: 1em;
+      background: #fff;
+      border-left: 5px solid #a88ac2;
+      margin-bottom: 1em;
+      border-radius: 6px;
+    }
+    .level {
+      font-size: 0.85em;
+      background: #eee;
+      padding: 0 5px;
+      border-radius: 3px;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>中英字典：佛教 & 素食詞彙</h1>
+
+  <label for="category">📂 選擇分類：</label>
+  <select id="category">
+    <option value="dictionary">佛教核心詞彙</option>
+    <option value="us">美加素食詞彙</option>
+    <option value="fr">法國素食詞彙</option>
+    <option value="tw">台灣素食詞句</option>
+  </select>
+
+  <input type="text" id="searchBox" placeholder="🔍 搜尋英文或中文…" />
+  <div id="dictionaryEntries">載入中…</div>
+
+  <script src="../js/dictionary-ui.js"></script>
+  <script>
+    let dictionaryData = [];
+
+    function convertToZhuyin(pinyin) {
+      const map = {
+        a: "ㄚ", b: "ㄅ", c: "ㄘ", d: "ㄉ", e: "ㄜ", f: "ㄈ", g: "ㄍ", h: "ㄏ",
+        i: "ㄧ", j: "ㄐ", k: "ㄎ", l: "ㄌ", m: "ㄇ", n: "ㄋ", o: "ㄛ", p: "ㄆ",
+        q: "ㄑ", r: "ㄖ", s: "ㄙ", t: "ㄊ", u: "ㄨ", v: "ㄩ", w: "ㄨ", x: "ㄒ",
+        y: "ㄧ", z: "ㄗ"
+      };
+      return pinyin?.split("").map(c => map[c.toLowerCase()] || c).join("") || "";
+    }
+
+    function enrichZhuyin(data) {
+      return data.map(entry => {
+        if (!entry.zhuyin && entry.pinyin) {
+          entry.zhuyin = convertToZhuyin(entry.pinyin);
+        }
+        return entry;
+      });
+    }
+
+    function loadData(file) {
+      fetch(`../data/${file}`)
+        .then(res => res.json())
+        .then(data => {
+          dictionaryData = enrichZhuyin(data);
+          renderEntries(dictionaryData);
+        });
+    }
+
+    function searchDictionary(keyword) {
+      keyword = keyword.trim().toLowerCase();
+      return dictionaryData.filter(entry =>
+        entry.en.toLowerCase().includes(keyword) ||
+        entry.zh.includes(keyword) ||
+        (entry.pinyin && entry.pinyin.includes(keyword)) ||
+        (entry.definition && entry.definition.toLowerCase().includes(keyword))
+      );
+    }
+
+    document.getElementById("category").addEventListener("change", e => {
+      const val = e.target.value;
+      if (val === "dictionary") loadData("dictionary-data.json");
+      if (val === "us") loadData("vegetarian-us-ca.json");
+      if (val === "fr") loadData("vegetarian-fr.json");
+      if (val === "tw") loadData("vegetarian-taiwan.json");
+    });
+
+    document.getElementById("searchBox").addEventListener("input", () => {
+      const keyword = document.getElementById("searchBox").value;
+      const result = searchDictionary(keyword);
+      renderEntries(result);
+    });
+
+    // 預設載入
+    loadData("dictionary-data.json");
+  </script>
+</body>
+</html>

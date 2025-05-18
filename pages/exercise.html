@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>🧘 心經語序練習</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/assetsstyles.css">
+  <style>
+    body {
+      font-family: 'Noto Serif TC', serif;
+      background: #fcf9f5;
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #5d3781;
+      margin-bottom: 1em;
+    }
+    #sentenceTarget {
+      border: 2px dashed #aaa;
+      padding: 1em;
+      min-height: 60px;
+      margin-bottom: 2em;
+      background-color: #fff8dc;
+      font-size: 1.2em;
+    }
+    .word {
+      display: inline-block;
+      background: #f8f0ff;
+      border: 1px solid #a88ac2;
+      padding: 0.4em 0.8em;
+      margin: 0.3em;
+      cursor: grab;
+      user-select: none;
+      border-radius: 6px;
+    }
+    .word.dragging {
+      opacity: 0.5;
+    }
+    button {
+      padding: 0.5em 1em;
+      font-size: 1em;
+      background-color: #a88ac2;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #feedback {
+      margin-top: 1em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧘 心經語序練習：Sentence Builder</h1>
+  <p>Drag the words below into the correct order:</p>
+
+  <div id="sentenceTarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="wordBank"></div>
+
+  <button onclick="checkAnswer()">✔️ Check Answer</button>
+  <p id="feedback"></p>
+
+  <script>
+    const correctSentence = ["Form", "is", "emptiness", ",", "emptiness", "is", "form", "."];
+    const shuffledWords = [...correctSentence].sort(() => Math.random() - 0.5);
+
+    const wordBank = document.getElementById("wordBank");
+    const target = document.getElementById("sentenceTarget");
+
+    shuffledWords.forEach(word => {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.draggable = true;
+      span.textContent = word;
+      span.ondragstart = e => {
+        e.dataTransfer.setData("text/plain", e.target.textContent);
+        e.target.classList.add("dragging");
+      };
+      span.ondragend = e => e.target.classList.remove("dragging");
+      wordBank.appendChild(span);
+    });
+
+    function allowDrop(e) {
+      e.preventDefault();
+    }
+
+    function drop(e) {
+      e.preventDefault();
+      const data = e.dataTransfer.getData("text");
+      const span = document.createElement("span");
+      span.className = "word";
+      span.textContent = data;
+      span.draggable = true;
+      span.ondragstart = e => {
+        e.dataTransfer.setData("text/plain", e.target.textContent);
+        e.target.classList.add("dragging");
+      };
+      span.ondragend = e => e.target.classList.remove("dragging");
+      target.appendChild(span);
+    }
+
+    function checkAnswer() {
+      const words = Array.from(target.querySelectorAll(".word")).map(span => span.textContent);
+      const isCorrect = words.join(" ") === correctSentence.join(" ");
+      const feedback = document.getElementById("feedback");
+      if (isCorrect) {
+        feedback.textContent = "✅ 正確！Good job!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = "❌ 不對喔～再試一次！";
+        feedback.style.color = "crimson";
+      }
+    }
+  </script>
+</body>
+</html>

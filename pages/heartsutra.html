@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>《心經》對照閱讀 Heart Sutra Study</title>
+  <link rel="stylesheet" href="../css/assetsstyles.css" />
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fcf9f5;
+      padding: 2em;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2em;
+      color: #5d3781;
+    }
+
+    .sutra-block {
+      padding: 1em;
+      margin-bottom: 1.5em;
+      background: #fffaf7;
+      border-left: 5px solid #a88ac2;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .sutra-block h4 {
+      margin: 0 0 0.5em;
+      font-weight: normal;
+      color: #926bb2;
+    }
+
+    .sutra-zh {
+      font-size: 1.2em;
+      margin-bottom: 0.6em;
+    }
+
+    .sutra-en {
+      font-size: 1em;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 0.5em;
+    }
+
+    #sutra-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>《心經》對照閱讀 Heart Sutra Study</h1>
+    <div id="sutra-container">載入中 Loading...</div>
+  </main>
+
+  <script>
+    fetch("../data/heartsutra-data.json")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("sutra-container");
+        container.innerHTML = "";
+
+        data.forEach(item => {
+          const block = document.createElement("div");
+          block.className = "sutra-block";
+          block.innerHTML = `
+            ${item.title ? `<h4>${item.title}</h4>` : ""}
+            <p class="sutra-zh">${item.zh}</p>
+            <details>
+              <summary>🌐 英文翻譯</summary>
+              <p class="sutra-en">${item.en}</p>
+            </details>
+          `;
+          container.appendChild(block);
+        });
+      })
+      .catch(err => {
+        console.error("載入經文失敗", err);
+        document.getElementById("sutra-container").innerHTML = "⚠️ 經文載入失敗";
+      });
+  </script>
+</body>
+</html>

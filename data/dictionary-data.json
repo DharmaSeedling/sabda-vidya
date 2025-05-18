@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "en": "vegan",
+    "zh": "純素者",
+    "level": "B1",
+    "definition": "a person who does not eat or use animal products",
+    "examples": ["Are there any vegan options available?"],
+    "ipa": "/ˈviːɡən/",
+    "kk": "[ˋviɡən]",
+    "pinyin": "chún sù zhě",
+    "zhuyin": "ㄔㄨㄣˊ ㄙㄨˋ ㄓㄜˇ"
+  },
+  {
+    "id": "2",
+    "en": "compassion",
+    "zh": "慈悲",
+    "level": "C1",
+    "definition": "sympathetic concern for the suffering of others",
+    "examples": ["Compassion is central in Mahayana Buddhism."],
+    "ipa": "/kəmˈpæʃ.ən/",
+    "kk": "[kəmˋpæʃən]",
+    "pinyin": "cí bēi",
+    "zhuyin": "ㄘˊ ㄅㄟ"
+  },
+  {
+    "id": "3",
+    "en": "emptiness",
+    "zh": "空性",
+    "level": "C1",
+    "definition": "the Buddhist concept that all things lack intrinsic existence",
+    "examples": ["Understanding emptiness is key to wisdom."],
+    "ipa": "/ˈemp.ti.nəs/",
+    "kk": "[ˋɛmptɪnɪs]",
+    "pinyin": "kōng xìng",
+    "zhuyin": "ㄎㄨㄥ ㄒㄧㄥˋ"
+  }
+]

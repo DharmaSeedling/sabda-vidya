@@ -1,0 +1,24 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  padding: 1rem;
+  background: #f9f9f9;
+}
+.sutra-block {
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+.en-plain, .grammar {
+  color: #444;
+  font-size: 0.95em;
+}
+.grammar {
+  background: #f0f0f0;
+  padding: 0.5rem;
+  display: none;
+}
+button {
+  margin-top: 0.5rem;
+}

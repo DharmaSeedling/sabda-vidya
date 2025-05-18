@@ -1,0 +1,32 @@
+[
+  {
+    "en": "lacto-vegetarian",
+    "zh": "奶素",
+    "ipa": "/ˈlæk.təʊ ˌvedʒ.əˈteə.ri.ən/",
+    "definition": "不吃肉與蛋，只吃乳製品和植物食物"
+  },
+  {
+    "en": "ovo-vegetarian",
+    "zh": "蛋素",
+    "ipa": "/ˈəʊ.vəʊ ˌvedʒ.əˈteə.ri.ən/",
+    "definition": "不吃肉與奶，只吃蛋與植物食物"
+  },
+  {
+    "en": "pescatarian",
+    "zh": "海鮮素 / 魚素",
+    "ipa": "/ˌpes.kəˈteə.ri.ən/",
+    "definition": "不吃紅肉與家禽，但吃魚與海鮮"
+  },
+  {
+    "en": "flexitarian",
+    "zh": "彈性素食者",
+    "ipa": "/ˌflek.sɪˈteə.ri.ən/",
+    "definition": "大多吃素，偶爾吃肉"
+  },
+  {
+    "en": "vegan-friendly",
+    "zh": "友善全素者的（產品 / 餐廳）",
+    "ipa": "/ˈviː.ɡən ˈfrend.li/",
+    "definition": "不含動物性成分的產品或料理"
+  }
+]

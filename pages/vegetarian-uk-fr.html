@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🇬🇧🇫🇷 英法素食英語詞彙對照</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/assetsstyles.css">
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: #f7f6f3;
+      padding: 2em;
+    }
+    h1 {
+      text-align: center;
+      color: #3a2f2f;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1em;
+      margin: 1em 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .details {
+      display: none;
+      margin-top: 0.5em;
+      background: #eef6ff;
+      padding: 0.5em;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #5c6bc0;
+      color: white;
+      border: none;
+      padding: 0.4em 0.8em;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3f51b5;
+    }
+  </style>
+</head>
+<body>
+  <h1>🇬🇧🇫🇷 英國 / 法國常見素食詞彙</h1>
+  <p style="text-align: center;">中英對照、IPA音標、簡易解釋</p>
+
+  <div id="cards-container"></div>
+
+  <script>
+    async function loadData() {
+      const response = await fetch("../data/vegetarian-uk-fr.json");
+      const data = await response.json();
+      const container = document.getElementById("cards-container");
+
+      data.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <p><strong>英文：</strong> ${item.en}</p>
+          <p><strong>中文：</strong> ${item.zh}</p>
+          <button onclick="toggleDetails(this)">📖 顯示發音資訊</button>
+          <div class="details">
+            <p><strong>IPA：</strong> ${item.ipa || "-"}</p>
+            <p><strong>解釋：</strong> ${item.definition || "-"}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleDetails(btn) {
+      const details = btn.nextElementSibling;
+      const shown = details.style.display === "block";
+      details.style.display = shown ? "none" : "block";
+      btn.textContent = shown ? "📖 顯示發音資訊" : "📘 收起發音資訊";
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

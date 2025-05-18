@@ -1,0 +1,37 @@
+[
+  {
+    "en": "I'm vegetarian.",
+    "zh": "我吃素。",
+    "ipa": "/aɪm ˌvedʒ.əˈteə.ri.ən/",
+    "bopomofo": "ㄨㄛˇ ㄔ ㄙㄨˋ",
+    "pinyin": "wǒ chī sù"
+  },
+  {
+    "en": "Do you have vegetarian options?",
+    "zh": "你們有素食的選擇嗎？",
+    "ipa": "/duː juː hæv ˌvedʒ.əˈteə.ri.ən ˈɒp.ʃənz/",
+    "bopomofo": "ㄋㄧˇ ㄇㄣˊ ㄧㄡˇ ㄙㄨˋ ㄕˊ ㄉㄜ˙ ㄒㄩㄢˇ ㄗㄜˊ ㄇㄚ˙",
+    "pinyin": "nǐmen yǒu sùshí de xuǎnzé ma?"
+  },
+  {
+    "en": "No meat, please.",
+    "zh": "請不要肉。",
+    "ipa": "/nəʊ miːt pliːz/",
+    "bopomofo": "ㄑㄧㄥˇ ㄅㄨˋ ㄧㄠˋ ㄖㄡˋ",
+    "pinyin": "qǐng bù yào ròu"
+  },
+  {
+    "en": "No onion and garlic, please.",
+    "zh": "請不要蔥蒜。",
+    "ipa": "/nəʊ ˈʌn.jən ənd ˈɡɑː.lɪk pliːz/",
+    "bopomofo": "ㄑㄧㄥˇ ㄅㄨˋ ㄧㄠˋ ㄘㄨㄥ ㄙㄨㄢˋ",
+    "pinyin": "qǐng bù yào cōng suàn"
+  },
+  {
+    "en": "Do you have Buddhist vegetarian meals?",
+    "zh": "你們有佛教素食嗎？",
+    "ipa": "/duː juː hæv ˈbʊd.ɪst ˌvedʒ.əˈteə.ri.ən miːlz/",
+    "bopomofo": "ㄋㄧˇ ㄇㄣˊ ㄧㄡˇ ㄈㄛˊ ㄐㄧㄠˋ ㄙㄨˋ ㄕˊ ㄇㄚ˙",
+    "pinyin": "nǐmen yǒu fójiào sùshí ma?"
+  }
+]

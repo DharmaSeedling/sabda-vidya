@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>🇫🇷 法文素食用語卡</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/assetsstyles.css">
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: #fcfcf9;
+      padding: 2em;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4b3a32;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1em;
+      margin: 1em 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .details {
+      display: none;
+      background: #eef6ff;
+      margin-top: 0.5em;
+      padding: 0.6em;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #5c6bc0;
+      color: white;
+      border: none;
+      padding: 0.4em 0.8em;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3f51b5;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🇫🇷 法文素食常用語彙</h1>
+  <p style="text-align:center;">Vegetarian French phrases for travel and daily life.</p>
+
+  <div id="cards-container"></div>
+
+  <script>
+    async function loadData() {
+      const res = await fetch("../data/vegetarian-fr.json");
+      const data = await res.json();
+      const container = document.getElementById("cards-container");
+
+      data.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <p><strong>法文：</strong> ${item.fr}</p>
+          <p><strong>中文：</strong> ${item.zh}</p>
+          <button onclick="toggleDetails(this)">📖 顯示發音與解釋</button>
+          <div class="details">
+            <p><strong>IPA：</strong> ${item.ipa || "-"}</p>
+            <p><strong>說明：</strong> ${item.definition || "-"}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleDetails(btn) {
+      const detail = btn.nextElementSibling;
+      const open = detail.style.display === "block";
+      detail.style.display = open ? "none" : "block";
+      btn.textContent = open ? "📖 顯示發音與解釋" : "📘 收起發音與解釋";
+    }
+
+    loadData();
+  </script>
+
+</body>
+</html>
