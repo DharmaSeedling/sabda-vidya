@@ -1,0 +1,24 @@
+[
+  {
+    "region": "Taiwan",
+    "dishes": [
+      { "zh": "滷豆乾", "en": "Braised dried tofu" },
+      { "zh": "素排", "en": "Vegetarian steak (mock meat)" },
+      { "zh": "香積飯", "en": "Temple-style rice" }
+    ]
+  },
+  {
+    "region": "India",
+    "dishes": [
+      { "zh": "奶茶", "en": "Chai (milk tea)" },
+      { "zh": "純素咖哩", "en": "Vegan curry" }
+    ]
+  },
+  {
+    "region": "USA",
+    "dishes": [
+      { "zh": "Falafel", "en": "Falafel (豆餅)" },
+      { "zh": "Hummus", "en": "鷹嘴豆泥" }
+    ]
+  }
+]
