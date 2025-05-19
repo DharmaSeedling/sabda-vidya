@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>般若波羅蜜多心經 - 互動式學習</title>
+  <meta charset="UTF-8" />
+  <title>般若波羅蜜多心經｜互動版框架</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       font-family: 'Arial', '微軟正黑體', sans-serif;
       line-height: 1.8;
       max-width: 800px;
-      margin: 0 auto;
+      margin: 20px auto;
       padding: 20px;
       background-color: #f9f9f9;
+      color: #333;
     }
-    
     h1 {
       text-align: center;
       color: #8B4513;
@@ -21,208 +21,139 @@
       margin-bottom: 30px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
-    
-    details {
-      background: white;
-      border: 2px solid #D2691E;
-      border-radius: 10px;
-      margin: 15px 0;
-      padding: 15px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-    
-    details:hover {
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-      transform: translateY(-2px);
-    }
-    
-    summary {
-      font-size: 1.4em;
-      color: #8B4513;
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    
-    summary:hover {
-      color: #CD853F;
-    }
-    
-    details[open] summary {
-      border-bottom: 2px solid #D2691E;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-    }
-    
-    p {
-      font-size: 1.2em;
-      color: #333;
-      background: #FFF8DC;
-      padding: 15px;
+    #tooltip {
+      position: absolute;
+      background: #333;
+      color: white;
+      padding: 6px 10px;
       border-radius: 8px;
-      border-left: 4px solid #D2691E;
-      position: relative;
+      font-size: 14px;
+      max-width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      pointer-events: none;
+      z-index: 10000;
+      display: none;
+      line-height: 1.4;
+      letter-spacing: 0.5px;
+      white-space: normal;
     }
-    
     .word {
       cursor: pointer;
       padding: 2px 4px;
-      margin: 1px;
       border-radius: 3px;
       transition: all 0.2s ease;
       display: inline-block;
     }
-    
     .word:hover {
       background: #FFE4B5;
       transform: scale(1.05);
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
-    
-    #tooltip {
-      position: absolute;
-      background: #333;
-      color: white;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      max-width: 300px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      z-index: 1000;
-      display: none;
-      line-height: 1.4;
-    }
-    
-    #tooltip:after {
-      content: '';
-      position: absolute;
-      top: -8px;
-      left: 20px;
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-bottom: 8px solid #333;
-    }
-    
-    .play-btn {
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      font-size: 14px;
-      margin-left: 10px;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .play-btn:hover {
-      background: #45a049;
-      transform: scale(1.1);
-    }
-    
-    .play-btn:before {
-      content: '▶';
-    }
-    
-    .mantra {
-      text-align: center;
-      font-size: 1.8em;
-      color: #8B0000;
-      font-weight: bold;
-      letter-spacing: 3px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    }
-    
-    .intro {
-      background: #F0F8FF;
-      border: 2px dashed #4682B4;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 30px;
-      text-align: center;
-      color: #2F4F4F;
-    }
-    
-    .intro h2 {
-      color: #4682B4;
-      margin-top: 0;
-    }
-
-    .resources {
+    .verse {
       background: #FFF8DC;
-      border: 2px solid #D2691E;
-      border-radius: 10px;
-      padding: 20px;
-      margin-top: 30px;
-    }
-
-    .resources h2 {
-      color: #8B4513;
-      margin-top: 0;
-    }
-
-    .resources a {
-      color: #4682B4;
-      text-decoration: none;
-    }
-
-    .resources a:hover {
-      text-decoration: underline;
+      border-left: 4px solid #D2691E;
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 6px;
+      font-size: 1.2em;
+      line-height: 1.6;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     }
   </style>
 </head>
 <body>
-  <h1>般若波羅蜜多心經</h1>
-  <h1 style="font-size: 1.8em; color: #666;">Heart Sutra</h1>
+
+<h1>📜 般若波羅蜜多心經</h1>
+<h1 style="font-size: 1.8em; color: #666;">🕉️ Heart Sutra</h1>
+
+<div class="intro" style="background:#f0f8ff; border: 2px dashed #4682B4; border-radius:10px; padding:20px; margin-bottom:30px; color:#2F4F4F; text-align: left;">
+
+  <h3>📜 中文譯本：大唐三藏法師 玄奘（602–664）</h3>
   
-  <div class="intro">
-    <h2>使用說明</h2>
-    <p>將滑鼠移到文字上可查看注音、拼音和詞義解釋<br/>
-    點擊 ▶ 按鈕可播放英文發音<br/>
-    點擊每段標題可展開/收起內容</p>
-    <p>中文譯本：大唐三藏法師 玄奘（602–664）<br/>
-    英文譯本：James Legge（1815–1897）<br/>
-    B1 學習英譯：簡易英文，約 CEFR B1 等級（多益 TOEIC 550 分，全民英檢 GEPT 中級）</p>
-  </div>
+  <h3>🇬🇧 英文譯本：James Legge（1815–1897）</h3>
+  
+  <h3>🎓 B1 學習英譯：簡易英文，約 CEFR B1 等級，多益 TOEIC 550 分，全民英檢 GEPT 中級
+    （<a href="https://www.efset.org/zht/cefr/b1/" target="_blank" style="color:#4682B4; text-decoration:none;">可自測</a>）
+  </h3>
+
+  <h3>🧙‍♂️ 新手村使用說明</h3>
+  
+  <p>
+    🔍 將滑鼠移到文字上可查看<span style="color:#a3862a;">注音、拼音和詞義解釋</span><br/>
+    📂 點擊每段標題可展開/收起內容<br/>
+    📖 下面Legge表示James Legge英文譯本（公有領域），若需要國內與日本高僧大德翻譯（排名依筆畫），請翻到頁面最下方。<br/>
+    🐣 B1表示本網站旨在接引基礎英文學習，心經意義深奧，記住只是開始，「誦經千遍，其義自現」🙏
+  </p>
+</div>
 
   <details>
     <summary class="mantra">🙏 開經偈</summary>
-    <p>
-      <span class="word" data-word="無上甚深微妙法" data-zhuyin="ㄨˊ ㄕㄤˋ ㄕㄣ ㄕㄣ ㄨㄟ ㄇㄧㄠˋ ㄈㄚˇ" data-pinyin="wú shàng shèn shēn wēi miào fǎ" data-definition="至高無上的深奧微妙法">無上甚深微妙法</span>，
-      <span class="word" data-word="百千萬劫難遭遇" data-zhuyin="ㄅㄞˇ ㄑㄧㄢ ㄨㄢˋ ㄐㄧㄝˊ ㄋㄢˊ ㄗㄠ ㄩˋ" data-pinyin="bǎi qiān wàn jié nán zāo yù" data-definition="百千萬劫難以遇到">百千萬劫難遭遇</span>。<br/>
-      <span class="word" data-word="我今見聞得受持" data-zhuyin="ㄨㄛˇ ㄐㄧㄣ ㄐㄧㄢˋ ㄨㄣˊ ㄉㄜˊ ㄕㄡˋ ㄔˊ" data-pinyin="wǒ jīn jiàn wén dé shòu chí" data-definition="我今見聞並接受持守">我今見聞得受持</span>，
-      <span class="word" data-word="願解如來真實義" data-zhuyin="ㄩㄢˋ ㄐㄧㄝˇ ㄖㄨˊ ㄌㄞˊ ㄓㄣ ㄕˊ ㄧˋ" data-pinyin="yuàn jiě rú lái zhēn shí yì" data-definition="願理解如來的真實義">願解如來真實義</span>。
-    </p>
-    <p>
-      Legge: Homage to the Supreme Dharma: profound and subtle, rare to encounter through eons. Now that I see, hear, and receive it, may I understand the Tathāgata’s true intent.<br/>
-      B1: We honor the great teaching, deep and special, hard to find for ages. Now I see and hear it, and I hope to understand its true meaning.
-    </p>
-  </details>
+<p>
+  <span class="word" data-word="無上甚深微妙法" data-zhuyin="ㄨˊ ㄕㄤˋ ㄕㄣ ㄕㄣ ㄨㄟ ㄇㄧㄠˋ ㄈㄚˇ" data-pinyin="wú shàng shèn shēn wēi miào fǎ" data-definition="至高無上的深奧微妙法">無上甚深微妙法</span>，
+  <span class="word" data-word="百千萬劫難遭遇" data-zhuyin="ㄅㄞˇ ㄑㄧㄢ ㄨㄢˋ ㄐㄧㄝˊ ㄋㄢˊ ㄗㄠ ㄩˋ" data-pinyin="bǎi qiān wàn jié nán zāo yù" data-definition="百千萬劫難以遇到">百千萬劫難遭遇</span>。<br/>
+  <span class="word" data-word="我今見聞得受持" data-zhuyin="ㄨㄛˇ ㄐㄧㄣ ㄐㄧㄢˋ ㄨㄣˊ ㄉㄜˊ ㄕㄡˋ ㄔˊ" data-pinyin="wǒ jīn jiàn wén dé shòu chí" data-definition="我今見聞並接受持守">我今見聞得受持</span>，
+  <span class="word" data-word="願解如來真實義" data-zhuyin="ㄩㄢˋ ㄐㄧㄝˇ ㄖㄨˊ ㄌㄞˊ ㄓㄣ ㄕˊ ㄧˋ" data-pinyin="yuàn jiě rú lái zhēn shí yì" data-definition="願理解如來的真實義">願解如來真實義</span>。
+</p>
+<p>
+  Legge: 
+  <span class="word" data-word="Homage" data-definition="敬意">Homage</span> to the 
+  <span class="word" data-word="Supreme" data-definition="至高無上的">Supreme</span> 
+  <span class="word" data-word="Dharma" data-definition="法，佛法">Dharma</span>: 
+  <span class="word" data-word="profound" data-definition="深奧的">profound</span> and 
+  <span class="word" data-word="subtle" data-definition="微妙的">subtle</span>, 
+  <span class="word" data-word="rare" data-definition="稀有的">rare</span> to 
+  <span class="word" data-word="encounter" data-definition="遇到">encounter</span> 
+  through 
+  <span class="word" data-word="eons" data-definition="無數劫">eons</span>. Now that I 
+  <span class="word" data-word="see" data-definition="看見">see</span>, 
+  <span class="word" data-word="hear" data-definition="聽見">hear</span>, and 
+  <span class="word" data-word="receive" data-definition="接受">receive</span> it, may I 
+  <span class="word" data-word="understand" data-definition="理解">understand</span> the 
+  <span class="word" data-word="Tathāgata" data-definition="如來">Tathāgata</span>’s true 
+  <span class="word" data-word="intent" data-definition="意圖">intent</span>.<br/>
+  B1: We honor the 
+  <span class="word" data-word="great" data-definition="偉大的">great</span> 
+  <span class="word" data-word="teaching" data-definition="教導">teaching</span>, 
+  <span class="word" data-word="deep" data-definition="深的">deep</span> and 
+  <span class="word" data-word="special" data-definition="特別的">special</span>, 
+  <span class="word" data-word="hard" data-definition="困難的">hard</span> to 
+  <span class="word" data-word="find" data-definition="找到">find</span> for 
+  <span class="word" data-word="ages" data-definition="很長時間">ages</span>. Now I 
+  <span class="word" data-word="see" data-definition="看見">see</span> and 
+  <span class="word" data-word="hear" data-definition="聽見">hear</span> it, and I 
+  <span class="word" data-word="hope" data-definition="希望">hope</span> to 
+  <span class="word" data-word="understand" data-definition="理解">understand</span> its 
+  <span class="word" data-word="true" data-definition="真正的">true</span> 
+  <span class="word" data-word="meaning" data-definition="意思">meaning</span>.
+</p>
 
-  <h2 style="color: #8B4513; text-align: center;">📖 經文對照</h2>
 
-  <details>
-    <summary>
-      <span class="word" data-word="觀自在菩薩" data-zhuyin="ㄍㄨㄢ ㄗˋ ㄗㄞˋ ㄆㄨˊ ㄙㄚˋ" data-pinyin="guān zì zài pú sà" data-definition="觀世音菩薩的另一個名字">觀自在菩薩</span>，
-      <span class="word" data-word="行深般若波羅蜜多時" data-zhuyin="ㄒㄧㄥˊ ㄕㄣ ㄅㄛ ㄖㄜˇ ㄅㄛ ㄌㄨㄛˊ ㄇㄧˋ ㄉㄨㄛ ㄕˊ" data-pinyin="xíng shēn bō rě bō luó mì duō shí" data-definition="修行深奧的般若波羅蜜多時">行深般若波羅蜜多時</span>，
-      <span class="word" data-word="照見" data-zhuyin="ㄓㄠˋ ㄐㄧㄢˋ" data-pinyin="zhào jiàn" data-definition="清楚地看見">照見</span>
-      <span class="word" data-word="五蘊皆空" data-zhuyin="ㄨˇ ㄩㄣˋ ㄐㄧㄝ ㄎㄨㄥ" data-pinyin="wǔ yùn jiē kōng" data-definition="五蘊都是空的">五蘊皆空</span>，
-      <span class="word" data-word="度一切苦厄" data-zhuyin="ㄉㄨˋ ㄧ ㄑㄧㄝˋ ㄎㄨˇ ㄜˋ" data-pinyin="dù yī qiè kǔ è" data-definition="度脫一切苦難">度一切苦厄</span>。
-    </summary>
-    <p>
-      Legge: Avalokiteshvara, while practicing deeply the Prajnaparamita, clearly saw that the five aggregates are all empty, and so relieved all suffering.<br/>
-      B1: Avalokiteshvara saw that everything is empty, and this helped him overcome suffering.
-    </p>
-  </details>
+  <h3 style="color: #8B4513; text-align: center;">📖 經文對照</h3>
 
-  <details>
+ <details>
+  <summary>
+    <span class="word" data-word="觀自在菩薩" data-zhuyin="ㄍㄨㄢ ㄗˋ ㄗㄞˋ ㄆㄨˊ ㄙㄚˋ" data-pinyin="guān zì zài pú sà" data-definition="觀世音菩薩的另一個名字">觀自在菩薩</span>，
+    <span class="word" data-word="行深般若波羅蜜多時" data-zhuyin="ㄒㄧㄥˊ ㄕㄣ ㄅㄛ ㄖㄜˇ ㄅㄛ ㄌㄨㄛˊ ㄇㄧˋ ㄉㄨㄛ ㄕˊ" data-pinyin="xíng shēn bō rě bō luó mì duō shí" data-definition="修行深奧的般若波羅蜜多時">行深般若波羅蜜多時</span>，
+    <span class="word" data-word="照見" data-zhuyin="ㄓㄠˋ ㄐㄧㄢˋ" data-pinyin="zhào jiàn" data-definition="清楚地看見">照見</span>，
+    <span class="word" data-word="五蘊皆空" data-zhuyin="ㄨˇ ㄩㄣˋ ㄐㄧㄝ ㄎㄨㄥ" data-pinyin="wǔ yùn jiē kōng" data-definition="五蘊都是空的">五蘊皆空</span>，
+    <span class="word" data-word="度一切苦厄" data-zhuyin="ㄉㄨˋ ㄧ ㄑㄧㄝˋ ㄎㄨˇ ㄜˋ" data-pinyin="dù yī qiè kǔ è" data-definition="度脫一切苦難">度一切苦厄</span>。
+  </summary>
+
+  <p>
+    <span class="word" data-word="Avalokiteshvara" data-definition="觀世音菩薩，佛教中的慈悲菩薩">Avalokiteshvara</span>, while 
+    <span class="word" data-word="practicing" data-definition="練習、修行">practicing</span> deeply the 
+    <span class="word" data-word="Prajnaparamita" data-definition="般若波羅蜜多，智慧之波羅蜜">Prajnaparamita</span>, clearly 
+    <span class="word" data-word="saw" data-definition="看到">saw</span> that the five 
+    <span class="word" data-word="aggregates" data-definition="五蘊，構成生命的五種元素">aggregates</span> are all empty, and so relieved all suffering.
+  </p>
+
+  <p>
+    <span class="word" data-word="Avalokiteshvara" data-definition="觀世音菩薩">Avalokiteshvara</span> saw that everything is 
+    <span class="word" data-word="empty" data-definition="空的">empty</span>, and it helped him overcome suffering.
+  </p>
+</details>
+
+ <details>
     <summary>
       <span class="word" data-word="舍利子" data-zhuyin="ㄕㄜˋ ㄌㄧˋ ㄗˇ" data-pinyin="shè lì zǐ" data-definition="舍利弗，佛陀的弟子">舍利子</span>，
       <span class="word" data-word="色不異空" data-zhuyin="ㄙㄜˋ ㄅㄨˋ ㄧˋ ㄎㄨㄥ" data-pinyin="sè bù yì kōng" data-definition="色與空並無不同">色不異空</span>，
@@ -232,9 +163,25 @@
       <span class="word" data-word="受想行識" data-zhuyin="ㄕㄡˋ ㄒㄧㄤˇ ㄒㄧㄥˊ ㄓˋ" data-pinyin="shòu xiǎng xíng zhì" data-definition="感受、想法、行動、識別">受想行識</span>，
       <span class="word" data-word="亦復如是" data-zhuyin="ㄧˋ ㄈㄨˋ ㄖㄨˊ ㄕˋ" data-pinyin="yì fù rú shì" data-definition="也是如此">亦復如是</span>。
     </summary>
-    <p>
-      Legge: Shariputra, form is not different from emptiness, and emptiness is not different from form. Form is emptiness; emptiness is form. So too are feeling, perception, volition, and consciousness.<br/>
-      B1: Shariputra, form is the same as emptiness. Feeling, thought, action, and awareness are the same too.
+<p>
+  Legge: 
+  <span class="word" data-word="Shariputra" data-definition="舍利子，佛陀的弟子">Shariputra</span>, 
+  form is not different from 
+  <span class="word" data-word="emptiness" data-definition="空">emptiness</span>, and 
+  emptiness is not different from form. 
+  Form is emptiness; emptiness is form. So too are 
+  <span class="word" data-word="feeling" data-definition="感受">feeling</span>, 
+  <span class="word" data-word="perception" data-definition="知覺">perception</span>, 
+  <span class="word" data-word="volition" data-definition="意志">volition</span>, and 
+  <span class="word" data-word="consciousness" data-definition="意識">consciousness</span>.<br/>
+  B1: 
+  <span class="word" data-word="Shariputra" data-definition="舍利子">Shariputra</span>, 
+  form is the same as emptiness. 
+  <span class="word" data-word="feeling" data-definition="感受">Feeling</span>, 
+  <span class="word" data-word="thought" data-definition="思想">thought</span>, 
+  <span class="word" data-word="action" data-definition="行為">action</span>, and 
+  <span class="word" data-word="awareness" data-definition="覺察">awareness</span> are the same too.
+</p>
     </p>
   </details>
 
@@ -246,10 +193,28 @@
       <span class="word" data-word="不垢不淨" data-zhuyin="ㄅㄨˋ ㄍㄡˋ ㄅㄨˋ ㄐㄧㄥˋ" data-pinyin="bù gòu bù jìng" data-definition="不髒也不淨">不垢不淨</span>，
       <span class="word" data-word="不增不減" data-zhuyin="ㄅㄨˋ ㄗㄥ ㄅㄨˋ ㄐㄧㄢˇ" data-pinyin="bù zēng bù jiǎn" data-definition="不增也不減">不增不減</span>。
     </summary>
-    <p>
-      Legge: Shariputra, all phenomena have the characteristics of emptiness: they are not born, they do not die, they are not defiled, they are not pure, they do not increase, they do not decrease.<br/>
-      B1: Shariputra, everything is empty. It doesn’t start, end, get dirty, get clean, grow, or shrink.
-    </p>
+<p>
+  Legge: 
+  <span class="word" data-word="Shariputra" data-definition="舍利子，佛陀弟子">Shariputra</span>, 
+  all phenomena have the characteristics of 
+  <span class="word" data-word="emptiness" data-definition="空性">emptiness</span>: they are not 
+  <span class="word" data-word="born" data-definition="生">born</span>, they do not 
+  <span class="word" data-word="die" data-definition="死">die</span>, they are not 
+  <span class="word" data-word="defiled" data-definition="污穢">defiled</span>, they are not 
+  <span class="word" data-word="pure" data-definition="淨">pure</span>, they do not 
+  <span class="word" data-word="increase" data-definition="增加">increase</span>, they do not 
+  <span class="word" data-word="decrease" data-definition="減少">decrease</span>.<br/>
+  B1: 
+  <span class="word" data-word="Shariputra" data-definition="舍利子">Shariputra</span>, 
+  everything is 
+  <span class="word" data-word="empty" data-definition="空的">empty</span>. It doesn’t 
+  <span class="word" data-word="start" data-definition="開始">start</span>, 
+  <span class="word" data-word="end" data-definition="結束">end</span>, get 
+  <span class="word" data-word="dirty" data-definition="髒">dirty</span>, get 
+  <span class="word" data-word="clean" data-definition="乾淨">clean</span>, 
+  <span class="word" data-word="grow" data-definition="成長">grow</span>, or 
+  <span class="word" data-word="shrink" data-definition="縮小">shrink</span>.
+</p>
   </details>
 
   <details>
@@ -260,10 +225,46 @@
       <span class="word" data-word="無眼耳鼻舌身意" data-zhuyin="ㄨˊ ㄧㄢˇ ㄦˇ ㄅㄧˊ ㄕㄜˊ ㄕㄣ ㄧˋ" data-pinyin="wú yǎn ěr bí shé shēn yì" data-definition="沒有六根">無眼耳鼻舌身意</span>，
       <span class="word" data-word="無色聲香味觸法" data-zhuyin="ㄨˊ ㄙㄜˋ ㄕㄥ ㄒㄧㄤ ㄨㄟˋ ㄔㄨˋ ㄈㄚˇ" data-pinyin="wú sè shēng xiāng wèi chù fǎ" data-definition="沒有六塵">無色聲香味觸法</span>。
     </summary>
-    <p>
-      Legge: Therefore, in emptiness, there is no form, no sensation, perception, formation, or consciousness; no eyes, ears, nose, tongue, body, or mind; no forms, sounds, smells, tastes, tactile objects, or dharmas.<br/>
-      B1: So, in emptiness, there is no form, feeling, thought, action, or awareness; no eyes, ears, nose, tongue, body, or mind; no sights, sounds, smells, tastes, touches, or ideas.
-    </p>
+<p>
+  Legge: Therefore, in 
+  <span class="word" data-word="emptiness" data-definition="空">emptiness</span>, there is no 
+  <span class="word" data-word="form" data-definition="色，形態">form</span>, no 
+  <span class="word" data-word="sensation" data-definition="感覺">sensation</span>, 
+  <span class="word" data-word="perception" data-definition="知覺">perception</span>, 
+  <span class="word" data-word="formation" data-definition="形成">formation</span>, or 
+  <span class="word" data-word="consciousness" data-definition="意識">consciousness</span>; no 
+  <span class="word" data-word="eyes" data-definition="眼">eyes</span>, 
+  <span class="word" data-word="ears" data-definition="耳">ears</span>, 
+  <span class="word" data-word="nose" data-definition="鼻">nose</span>, 
+  <span class="word" data-word="tongue" data-definition="舌">tongue</span>, 
+  <span class="word" data-word="body" data-definition="身">body</span>, or 
+  <span class="word" data-word="mind" data-definition="意">mind</span>; no 
+  <span class="word" data-word="forms" data-definition="形態">forms</span>, 
+  <span class="word" data-word="sounds" data-definition="聲音">sounds</span>, 
+  <span class="word" data-word="smells" data-definition="氣味">smells</span>, 
+  <span class="word" data-word="tastes" data-definition="味道">tastes</span>, 
+  <span class="word" data-word="tactile objects" data-definition="觸覺物">tactile objects</span>, or 
+  <span class="word" data-word="dharmas" data-definition="法">dharmas</span>.<br/>
+  B1: So, in 
+  <span class="word" data-word="emptiness" data-definition="空">emptiness</span>, there is no 
+  <span class="word" data-word="form" data-definition="形態">form</span>, 
+  <span class="word" data-word="feeling" data-definition="感覺">feeling</span>, 
+  <span class="word" data-word="thought" data-definition="思想">thought</span>, 
+  <span class="word" data-word="action" data-definition="行動">action</span>, or 
+  <span class="word" data-word="awareness" data-definition="覺察">awareness</span>; no 
+  <span class="word" data-word="eyes" data-definition="眼睛">eyes</span>, 
+  <span class="word" data-word="ears" data-definition="耳朵">ears</span>, 
+  <span class="word" data-word="nose" data-definition="鼻子">nose</span>, 
+  <span class="word" data-word="tongue" data-definition="舌頭">tongue</span>, 
+  <span class="word" data-word="body" data-definition="身體">body</span>, or 
+  <span class="word" data-word="mind" data-definition="心">mind</span>; no 
+  <span class="word" data-word="sights" data-definition="視覺">sights</span>, 
+  <span class="word" data-word="sounds" data-definition="聲音">sounds</span>, 
+  <span class="word" data-word="smells" data-definition="氣味">smells</span>, 
+  <span class="word" data-word="tastes" data-definition="味覺">tastes</span>, 
+  <span class="word" data-word="touches" data-definition="觸覺">touches</span>, or 
+  <span class="word" data-word="ideas" data-definition="觀念">ideas</span>.
+</p>
   </details>
 
 <details>
@@ -275,125 +276,57 @@
     <span class="word" data-word="乃至無老死" data-zhuyin="ㄋㄞˇ ㄓˋ ㄨˊ ㄌㄠˇ ㄙˇ" data-pinyin="nǎi zhì wú lǎo sǐ" data-definition="直到沒有老死">乃至無老死</span>，
     <span class="word" data-word="亦無老死盡" data-zhuyin="ㄧˋ ㄨˊ ㄌㄠˇ ㄙˇ ㄐㄧㄣˋ" data-pinyin="yì wú lǎo sǐ jìn" data-definition="也沒有老死的結束">亦無老死盡</span>。
   </summary>
-  <p>
-    Legge: No eye, ear, nose, tongue, body, mind; no form, sound, smell, taste, touch, or dharmas; no realm of eyes and so forth until no realm of mind consciousness; no ignorance and also no extinction of ignorance; and so forth until no old age and death and also no extinction of old age and death.<br/>
-    B1: There is no eye realm, up to no mind consciousness realm; no ignorance, no end of ignorance; up to no old age and death, no end of old age and death.
-  </p>
+<p>
+  Legge: No 
+  <span class="word" data-word="eye" data-definition="眼睛">eye</span>, 
+  <span class="word" data-word="ear" data-definition="耳朵">ear</span>, 
+  <span class="word" data-word="nose" data-definition="鼻子">nose</span>, 
+  <span class="word" data-word="tongue" data-definition="舌頭">tongue</span>, 
+  <span class="word" data-word="body" data-definition="身體">body</span>, 
+  <span class="word" data-word="mind" data-definition="心">mind</span>; no 
+  <span class="word" data-word="form" data-definition="形態">form</span>, 
+  <span class="word" data-word="sound" data-definition="聲音">sound</span>, 
+  <span class="word" data-word="smell" data-definition="氣味">smell</span>, 
+  <span class="word" data-word="taste" data-definition="味覺">taste</span>, 
+  <span class="word" data-word="touch" data-definition="觸覺">touch</span>, or 
+  <span class="word" data-word="dharmas" data-definition="法">dharmas</span>; no 
+  <span class="word" data-word="realm" data-definition="境界">realm</span> of 
+  <span class="word" data-word="eyes" data-definition="眼睛">eyes</span> and so forth until no realm of 
+  <span class="word" data-word="mind consciousness" data-definition="心識">mind consciousness</span>; no 
+  <span class="word" data-word="ignorance" data-definition="無明">ignorance</span> and also no extinction of ignorance; and so forth until no 
+  <span class="word" data-word="old age" data-definition="老年">old age</span> and 
+  <span class="word" data-word="death" data-definition="死亡">death</span> and also no extinction of old age and death.<br/>
+  B1: There is no 
+  <span class="word" data-word="eye realm" data-definition="眼界">eye realm</span>, up to no 
+  <span class="word" data-word="mind consciousness realm" data-definition="意識界">mind consciousness realm</span>; no 
+  <span class="word" data-word="ignorance" data-definition="無明">ignorance</span>, no end of ignorance; up to no 
+  <span class="word" data-word="old age" data-definition="老年">old age</span> and 
+  <span class="word" data-word="death" data-definition="死亡">death</span>, no end of old age and death.
+</p>
 </details>
-<details>
-  <summary>
-    <span class="word" data-word="無苦集滅道" data-zhuyin="ㄨˊ ㄎㄨˇ ㄐㄧˊ ㄇㄧㄝˋ ㄉㄠˋ" data-pinyin="wú kǔ jí miè dào" data-definition="沒有苦、集、滅、道四聖諦">無苦集滅道</span>，
-    <span class="word" data-word="無智" data-zhuyin="ㄨˊ ㄓˋ" data-pinyin="wú zhì" data-definition="沒有智慧">無智</span>，
-    <span class="word" data-word="亦無得" data-zhuyin="ㄧˋ ㄨˊ ㄉㄜˊ" data-pinyin="yì wú dé" data-definition="也沒有所得">亦無得</span>，
-    <span class="word" data-word="以無所得故" data-zhuyin="ㄧˇ ㄨˊ ㄙㄨㄛˇ ㄉㄜˊ ㄍㄨˋ" data-pinyin="yǐ wú suǒ dé gù" data-definition="因為沒有所得">以無所得故</span>。
-  </summary>
-  <p>
-    Legge: 
-    <span class="word-en" data-cn="沒有" data-zhuyin="ㄇㄟˊ ㄧㄡˇ" data-pinyin="méi yǒu" data-kk="noʊ" data-ipa="noʊ">There</span> 
-    <span class="word-en" data-cn="是" data-zhuyin="ㄕˋ" data-pinyin="shì" data-kk="ɪz" data-ipa="ɪz">is</span> 
-    <span class="word-en" data-cn="沒有" data-zhuyin="ㄇㄟˊ ㄧㄡˇ" data-pinyin="méi yǒu" data-kk="noʊ" data-ipa="noʊ">no</span> 
-    <span class="word-en" data-cn="苦難" data-zhuyin="ㄎㄨˇ ㄋㄢˋ" data-pinyin="kǔ nàn" data-kk="ˈsʌfərɪŋ" data-ipa="ˈsʌfərɪŋ">suffering</span>, 
-    <span class="word-en" data-cn="沒有" data-zhuyin="ㄇㄟˊ ㄧㄡˇ" data-pinyin="méi yǒu" data-kk="noʊ" data-ipa="noʊ">no</span> 
-    <span class="word-en" data-cn="起源" data-zhuyin="ㄑㄧˇ ㄩㄢˊ" data-pinyin="qǐ yuán" data-kk="ˈɔrɪdʒɪn" data-ipa="ˈɒrɪdʒɪn">origin</span>, 
-    <span class="word-en" data-cn="沒有" data-zhuyin="ㄇㄟˊ ㄧㄡˇ" data-pinyin="méi yǒu" data-kk="noʊ" data-ipa="noʊ">no</span> 
-    <span class="word-en" data-cn="結束" data-zhuyin="ㄐㄧㄝˊ ㄕㄨˋ" data-pinyin="jié shù" data-kk="ˈsɛsəˌʃən" data-ipa="ˈsɛsəʃən">cessation</span>, 
-    <span class="word-en" data-cn="沒有" data-zhuyin="ㄇㄟˊ ㄧㄡˇ" data-pinyin="méi yǒu" data-kk="noʊ" data-ipa="noʊ">no</span> 
-    <span class="word-en" data-cn="道路" data-zhuyin="ㄉㄠˋ ㄌㄨˋ" data-pinyin="dào lù" data-kk="pæθ" data-ipa="pæθ">path</span>. 
-    <span class="word-en" data-cn="沒有" data-zhuyin="ㄇㄟˊ ㄧㄡˇ" data-pinyin="méi yǒu" data-kk="ðɛər ɪz noʊ" data-ipa="ðɛər ɪz noʊ">There is no</span> 
-    <span class="word-en" data-cn="智慧" data-zhuyin="ㄓˋ ㄏㄨㄟˋ" data-pinyin="zhì huì" data-kk="ˈwɪzdəm" data-ipa="ˈwɪzdəm">wisdom</span> 
-    <span class="word-en" data-cn="也沒有" data-zhuyin="ㄧㄝˇ ㄇㄟˊ ㄧㄡˇ" data-pinyin="yě méi yǒu" data-kk="ænd noʊ" data-ipa="ænd noʊ">and no</span> 
-    <span class="word-en" data-cn="獲得" data-zhuyin="ㄏㄨㄛˋ ㄉㄜˊ" data-pinyin="huò dé" data-kk="ɡeɪn" data-ipa="ɡeɪn">gain</span>. 
-    <span class="word-en" data-cn="因為" data-zhuyin="ㄧㄣ ㄨㄟˋ" data-pinyin="yīn wèi" data-kk="bɪˈkɔz" data-ipa="bɪˈkɔz">Because</span> 
-    <span class="word-en" data-cn="沒有" data-zhuyin="ㄇㄟˊ ㄧㄡˇ" data-pinyin="méi yǒu" data-kk="ˈnʌθɪŋ" data-ipa="ˈnʌθɪŋ">nothing</span> 
-    <span class="word-en" data-cn="獲得" data-zhuyin="ㄏㄨㄛˋ ㄉㄜˊ" data-pinyin="huò dé" data-kk="ɪz ɡeɪnd" data-ipa="ɪz ɡeɪnd">is gained</span>.
-  </p>
-</details>
-
-<style>
-.word-en {
-  cursor: pointer;
-  border-bottom: 1px dotted #666;
-  padding: 2px 4px;
-  margin: 1px;
-  border-radius: 3px;
-  display: inline-block;
-  transition: all 0.2s ease;
-}
-.word-en:hover {
-  background: #d9e7ff;
-  transform: scale(1.05);
-  box-shadow: 0 2px 4px rgba(0,0,255,0.2);
-}
-.play-btn {
-  background: #4CAF50;
-  border-radius: 50%;
-  color: white;
-  border: none;
-  width: 28px;
-  height: 28px;
-  font-size: 14px;
-  margin-left: 8px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  user-select:none;
-}
-.play-btn:hover {
-  background: #45a049;
-  transform: scale(1.1);
-}
-.play-btn:before {
-  content: '▶';
-}
-</style>
-
-<script>
-const tooltip = document.getElementById('tooltip');
-const synth = window.speechSynthesis;
-
-document.body.addEventListener('mousemove', e => {
-  const target = e.target;
-  if (target.classList.contains('word') || target.classList.contains('word-en')) {
-    let content = '';
-    if(target.classList.contains('word')) {
-      content = `<strong>${target.dataset.word}</strong><br/>注音：${target.dataset.zhuyin}<br/>拼音：${target.dataset.pinyin}<br/>解釋：${target.dataset.definition}`;
-    } else if(target.classList.contains('word-en')) {
-      content = `<strong>${target.textContent}</strong><br/>中文：${target.dataset.cn}<br/>注音：${target.dataset.zhuyin}<br/>拼音：${target.dataset.pinyin}<br/>KK音標：${target.dataset.kk}<br/>IPA音標：${target.dataset.ipa}`;
-    }
-    const maxWidth = window.innerWidth - 320;
-    let x = e.pageX + 15;
-    let y = e.pageY + 15;
-    if (x > maxWidth) x = maxWidth;
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
-    tooltip.innerHTML = content;
-    tooltip.style.display = 'block';
-  } else {
-    tooltip.style.display = 'none';
-  }
-});
-
-document.body.addEventListener('click', e => {
-  if (e.target.classList.contains('play-btn')) {
-    e.stopPropagation();
-    const text = e.target.dataset.text;
-    if (synth.speaking) {
-      synth.cancel();
-    }
-    if (text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      synth.speak(utterance);
-    }
-  }
-});
-
-const tooltipElem = document.getElementById('tooltip');
-tooltipElem.addEventListener('click', e => e.stopPropagation());
-</script>
-
-<div id="tooltip" style="position:absolute; background:#333; color:#fff; padding:10px; border-radius:6px; max-width:320px; font-size:14px; display:none; pointer-events:none; z-index:1000; line-height:1.4;"></div>
+    <summary>
+      <span class="word" data-word="無苦集滅道" data-zhuyin="ㄨˊ ㄎㄨˇ ㄐㄧˊ ㄇㄧㄝˋ ㄉㄠˋ" data-pinyin="wú kǔ jí miè dào" data-definition="沒有苦、集、滅、道四聖諦">無苦集滅道</span>，
+      <span class="word" data-word="無智" data-zhuyin="ㄨˊ ㄓˋ" data-pinyin="wú zhì" data-definition="沒有智慧">無智</span>，
+      <span class="word" data-word="亦無得" data-zhuyin="ㄧˋ ㄨˊ ㄉㄜˊ" data-pinyin="yì wú dé" data-definition="也沒有所得">亦無得</span>，
+      <span class="word" data-word="以無所得故" data-zhuyin="ㄧˇ ㄨˊ ㄙㄨㄛˇ ㄉㄜˊ ㄍㄨˋ" data-pinyin="yǐ wú suǒ dé gù" data-definition="因為沒有所得">以無所得故</span>。
+    </summary>
+<p>
+  Legge: There is no 
+  <span class="word" data-word="suffering" data-definition="苦難">suffering</span>, no 
+  <span class="word" data-word="origin" data-definition="起源">origin</span>, no 
+  <span class="word" data-word="cessation" data-definition="結束">cessation</span>, no 
+  <span class="word" data-word="path" data-definition="道路">path</span>. There is no 
+  <span class="word" data-word="wisdom" data-definition="智慧">wisdom</span> and no 
+  <span class="word" data-word="gain" data-definition="獲得">gain</span>. Because nothing is gained.<br/>
+  B1: No 
+  <span class="word" data-word="suffering" data-definition="苦難">suffering</span>, no 
+  <span class="word" data-word="cause" data-definition="原因">cause</span>, no 
+  <span class="word" data-word="end" data-definition="結束">end</span>, no 
+  <span class="word" data-word="path" data-definition="道路">path</span>. No 
+  <span class="word" data-word="wisdom" data-definition="智慧">wisdom</span> or 
+  <span class="word" data-word="gains" data-definition="獲得">gains</span>. Nothing to get.
+</p>
+  </details>
 
   <details>
     <summary>
@@ -404,10 +337,19 @@ tooltipElem.addEventListener('click', e => e.stopPropagation());
       <span class="word" data-word="無罣礙故" data-zhuyin="ㄨˊ ㄍㄨㄞ ㄞˋ ㄍㄨˋ" data-pinyin="wú guāi ài gù" data-definition="因為沒有障礙">無罣礙故</span>，
       <span class="word" data-word="無有恐怖" data-zhuyin="ㄨˊ ㄧㄡˇ ㄎㄨㄥˇ ㄅㄨˋ" data-pinyin="wú yǒu kǒng bù" data-definition="沒有恐懼">無有恐怖</span>。
     </summary>
-    <p>
-      Legge: Because bodhisattvas rely on Prajnaparamita, their minds have no hindrance; because there is no hindrance, they have no fear.<br/>
-      B1: Bodhisattvas rely on wisdom, so their minds have no obstacles and no fear.
-         </p>
+<p>
+  Legge: Because 
+  <span class="word" data-word="bodhisattvas" data-definition="菩薩，修行者">bodhisattvas</span> rely on 
+  <span class="word" data-word="Prajnaparamita" data-definition="般若波羅蜜多，智慧之波羅蜜">Prajnaparamita</span>, their minds have no 
+  <span class="word" data-word="hindrance" data-definition="障礙">hindrance</span>; because there is no 
+  <span class="word" data-word="hindrance" data-definition="障礙">hindrance</span>, they have no 
+  <span class="word" data-word="fear" data-definition="恐懼">fear</span>.<br/>
+  B1: 
+  <span class="word" data-word="bodhisattvas" data-definition="菩薩">Bodhisattvas</span> rely on 
+  <span class="word" data-word="wisdom" data-definition="智慧">wisdom</span>, so their minds have no 
+  <span class="word" data-word="obstacles" data-definition="障礙">obstacles</span> and no 
+  <span class="word" data-word="fear" data-definition="恐懼">fear</span>.
+</p>
   </details>
 
   <details>
@@ -417,10 +359,14 @@ tooltipElem.addEventListener('click', e => e.stopPropagation());
       <span class="word" data-word="究竟" data-zhuyin="ㄐㄧㄡˋ ㄐㄧㄥˋ" data-pinyin="jiù jìng" data-definition="最終">究竟</span>
       <span class="word" data-word="涅槃" data-zhuyin="ㄋㄧㄝˋ ㄆㄢˊ" data-pinyin="niè pán" data-definition="佛教解脫境界">涅槃</span>。
     </summary>
-    <p>
-      Legge: They are far from delusions and reach Nirvana.<br/>
-      B1: They leave illusions behind and reach Nirvana.
-    </p>
+<p>
+  Legge: They are far from 
+  <span class="word" data-word="delusions" data-definition="妄想，錯覺">delusions</span> and reach 
+  <span class="word" data-word="Nirvana" data-definition="涅槃，解脫境界">Nirvana</span>.<br/>
+  B1: They leave 
+  <span class="word" data-word="illusions" data-definition="錯覺">illusions</span> behind and reach 
+  <span class="word" data-word="Nirvana" data-definition="涅槃">Nirvana</span>.
+</p>
   </details>
 
   <details>
@@ -429,10 +375,17 @@ tooltipElem.addEventListener('click', e => e.stopPropagation());
       <span class="word" data-word="依般若波羅蜜多故" data-zhuyin="ㄧ ㄅㄛ ㄖㄜˇ ㄅㄛ ㄌㄨㄛˊ ㄇㄧˋ ㄉㄨㄛ ㄍㄨˋ" data-pinyin="yī bō rě bō luó mì duō gù" data-definition="依靠般若波羅蜜多">依般若波羅蜜多故</span>，
       <span class="word" data-word="得阿耨多羅三藐三菩提" data-zhuyin="ㄉㄜˊ ㄚ ㄋㄡˋ ㄉㄨㄛ ㄌㄨㄛˊ ㄙㄢ ㄇㄧㄠˇ ㄙㄢ ㄆㄨˊ ㄊㄧˊ" data-pinyin="dé ā nòu duō luó sān miǎo sān pú tí" data-definition="得到無上正等正覺">得阿耨多羅三藐三菩提</span>。
     </summary>
-    <p>
-      Legge: The Buddhas of the three times rely on Prajnaparamita and attain Anuttara Samyak Sambodhi.<br/>
-      B1: Buddhas of past, present, and future rely on wisdom to become fully enlightened.
-    </p>
+<p>
+  Legge: The 
+  <span class="word" data-word="Buddhas" data-definition="佛陀">Buddhas</span> of the 
+  <span class="word" data-word="three times" data-definition="三世：過去、現在、未來">three times</span> rely on 
+  <span class="word" data-word="Prajnaparamita" data-definition="般若波羅蜜多，智慧波羅蜜">Prajnaparamita</span> and attain 
+  <span class="word" data-word="Anuttara Samyak Sambodhi" data-definition="無上正等正覺，最高佛果">Anuttara Samyak Sambodhi</span>.<br/>
+  B1: 
+  <span class="word" data-word="Buddhas" data-definition="佛陀">Buddhas</span> of past, present, and future rely on 
+  <span class="word" data-word="wisdom" data-definition="智慧">wisdom</span> to become fully 
+  <span class="word" data-word="enlightened" data-definition="覺悟">enlightened</span>.
+</p>
   </details>
 
   <details>
@@ -443,10 +396,20 @@ tooltipElem.addEventListener('click', e => e.stopPropagation());
       <span class="word" data-word="是無上咒" data-zhuyin="ㄕˋ ㄨˊ ㄕㄤˋ ㄓㄡˋ" data-pinyin="shì wú shàng zhòu" data-definition="是最高的咒語">是無上咒</span>，
       <span class="word" data-word="是無等等咒" data-zhuyin="ㄕˋ ㄨˊ ㄉㄥˇ ㄉㄥˇ ㄓㄡˋ" data-pinyin="shì wú děng děng zhòu" data-definition="是無可比擬的咒語">是無等等咒</span>。
     </summary>
-    <p>
-      Legge: Therefore know that Prajnaparamita is the great mantra, the bright mantra, the supreme mantra, the unequalled mantra.<br/>
-      B1: So know that this wisdom is the great mantra, the bright mantra, the best mantra, the only mantra.
-    </p>
+<p>
+  Legge: Therefore know that 
+  <span class="word" data-word="Prajnaparamita" data-definition="般若波羅蜜多，智慧的波羅蜜">Prajnaparamita</span> is the 
+  <span class="word" data-word="great mantra" data-definition="大神咒">great mantra</span>, the 
+  <span class="word" data-word="bright mantra" data-definition="大明咒">bright mantra</span>, the 
+  <span class="word" data-word="supreme mantra" data-definition="無上咒">supreme mantra</span>, the 
+  <span class="word" data-word="unequalled mantra" data-definition="無等等咒">unequalled mantra</span>.<br/>
+  B1: So know that this 
+  <span class="word" data-word="wisdom" data-definition="智慧">wisdom</span> is the 
+  <span class="word" data-word="great mantra" data-definition="大神咒">great mantra</span>, the 
+  <span class="word" data-word="bright mantra" data-definition="大明咒">bright mantra</span>, the 
+  <span class="word" data-word="best mantra" data-definition="最佳咒語">best mantra</span>, the 
+  <span class="word" data-word="only mantra" data-definition="唯一的咒語">only mantra</span>.
+</p>
   </details>
 
   <details>
@@ -454,10 +417,12 @@ tooltipElem.addEventListener('click', e => e.stopPropagation());
       <span class="word" data-word="能除一切苦" data-zhuyin="ㄋㄥˊ ㄔㄨˊ ㄧ ㄑㄧㄝˋ ㄎㄨˇ" data-pinyin="néng chú yī qiè kǔ" data-definition="能解除一切痛苦">能除一切苦</span>，
       <span class="word" data-word="真實不虛" data-zhuyin="ㄓㄣ ㄕˊ ㄅㄨˋ ㄒㄖ" data-pinyin="zhēn shí bù xū" data-definition="真實不虛假">真實不虛</span>。
     </summary>
-    <p>
-      Legge: Which removes all suffering, true and not false.<br/>
-      B1: It removes all pain, it is true.
-    </p>
+<p>
+  Legge: Which removes all 
+  <span class="word" data-word="suffering" data-definition="苦難">suffering</span>, true and not false.<br/>
+  B1: It removes all 
+  <span class="word" data-word="pain" data-definition="痛苦">pain</span>, it is true.
+</p>
   </details>
 
   <details>
@@ -465,10 +430,14 @@ tooltipElem.addEventListener('click', e => e.stopPropagation());
       <span class="word" data-word="故說般若波羅蜜多咒" data-zhuyin="ㄍㄨˋ ㄕㄨㄛ ㄅㄛ ㄖㄜˇ ㄅㄛ ㄌㄨㄛˊ ㄇㄧˋ ㄉㄨㄛ ㄓㄡˋ" data-pinyin="gù shuō bō rě bō luó mì duō zhòu" data-definition="因此說般若波羅蜜多咒">故說般若波羅蜜多咒</span>，
       <span class="word" data-word="即說咒曰" data-zhuyin="ㄐㄧˊ ㄕㄨㄛ ㄓㄡˋ ㄩㄝ" data-pinyin="jí shuō zhòu yuē" data-definition="即說咒語">即說咒曰</span>：
     </summary>
-    <p>
-      Legge: Thus is the Prajnaparamita mantra proclaimed.<br/>
-      B1: So we say the wisdom mantra.
-    </p>
+<p>
+  Legge: Thus is the 
+  <span class="word" data-word="Prajnaparamita" data-definition="般若波羅蜜多，智慧的波羅蜜">Prajnaparamita</span> 
+  <span class="word" data-word="mantra" data-definition="咒語">mantra</span> proclaimed.<br/>
+  B1: So we say the 
+  <span class="word" data-word="wisdom" data-definition="智慧">wisdom</span> 
+  <span class="word" data-word="mantra" data-definition="咒語">mantra</span>.
+</p>
   </details>
 
   <details>
@@ -479,76 +448,89 @@ tooltipElem.addEventListener('click', e => e.stopPropagation());
       <span class="word" data-word="波羅僧揭諦" data-zhuyin="ㄅㄛ ㄌㄨㄛˊ ㄙㄥ ㄐㄧㄝ ㄉㄧˋ" data-pinyin="bō luó sēng jiē dì" data-definition="波羅僧前往">波羅僧揭諦</span>
       <span class="word" data-word="菩提薩婆訶" data-zhuyin="ㄆㄨˊ ㄊㄧˊ ㄙㄚˋ ㄆㄛ ㄏㄜ" data-pinyin="pú tí sà pó hē" data-definition="咒語結尾">菩提薩婆訶</span>。
     </summary>
-    <p>
-      Legge: Gate gate paragate parasamgate bodhi svaha.<br/>
-      B1: Go! Go! Go beyond! Go fully beyond! Enlightenment! Hurray!
-    </p>
+<p>
+  Legge: 
+  <span class="word" data-word="Gate" data-definition="去、行">Gate</span> 
+  <span class="word" data-word="gate" data-definition="去、行">gate</span> 
+  <span class="word" data-word="paragate" data-definition="去彼岸">paragate</span> 
+  <span class="word" data-word="parasamgate" data-definition="完全去彼岸">parasamgate</span> 
+  <span class="word" data-word="bodhi" data-definition="覺悟、菩提">bodhi</span> 
+  <span class="word" data-word="svaha" data-definition="願成就">svaha</span>.<br/>
+  B1: 
+  <span class="word" data-word="Go" data-definition="去、行">Go!</span> 
+  <span class="word" data-word="Go" data-definition="去、行">Go!</span> 
+  <span class="word" data-word="Go beyond" data-definition="超越">Go beyond!</span> 
+  <span class="word" data-word="Go fully beyond" data-definition="完全超越">Go fully beyond!</span> 
+  <span class="word" data-word="Enlightenment" data-definition="覺悟">Enlightenment!</span> 
+  <span class="word" data-word="Hurray" data-definition="萬歲、讚嘆">Hurray!</span>
+</p>
+
   </details>
 
-  <script>
-    const tooltip = document.createElement('div');
-    tooltip.id = 'tooltip';
-    document.body.appendChild(tooltip);
 
-    const synth = window.speechSynthesis;
+<h3>📌 翻譯版本與延伸資源</h3>
+<ul>
+  <li>其他版本如 <strong>Edward Conze</strong>、<strong>法鼓山</strong>、<strong>佛光山</strong>、<strong>成觀法師</strong> 譯本，因未進入公版領域，本站不引述全文。</li>
+  <li>可參考原始授權網站：
+    <ul>
+      <li><a href="https://www.abtemple.org/" target="_blank">大毘盧寺成觀法師</a></li>
+      <li><a href="https://www.fgs.org.tw/" target="_blank">佛光山</a></li>
+      <li><a href="https://www.ddc.org.tw/" target="_blank">法鼓文教</a></li>
+      <li><a href="https://suttacentral.net/" target="_blank">SuttaCentral (國際對照)</a></li>
+      <li><a href="https://www.bdk.tw/tripitaka.html" target="_blank">佛教傳道協會（BDK 台灣，開放公版）</a> </li>
+    </ul>
+  </li>
+</ul>
 
-    function showTooltip(e, content) {
-      tooltip.innerHTML = content;
-      let x = e.pageX + 15;
-      let y = e.pageY + 15;
-      const maxWidth = window.innerWidth - 320;
-      if (x > maxWidth) x = maxWidth;
-      tooltip.style.left = x + 'px';
-      tooltip.style.top = y + 'px';
-      tooltip.style.display = 'block';
-    }
-
-    function hideTooltip() {
-      tooltip.style.display = 'none';
-    }
-
-    document.body.addEventListener('mousemove', e => {
-      const target = e.target;
-      if (target.classList.contains('word')) {
-        const word = target.dataset.word || '';
-        const zhuyin = target.dataset.zhuyin || '';
-        const pinyin = target.dataset.pinyin || '';
-        const definition = target.dataset.definition || '';
-
-        let content = `<strong>${word}</strong><br/>`;
-        if (zhuyin) content += `注音：${zhuyin}<br/>`;
-        if (pinyin) content += `拼音：${pinyin}<br/>`;
-        if (definition) content += `解釋：${definition}`;
-        showTooltip(e, content);
-      } else {
-        hideTooltip();
-      }
-    });
-
-    document.body.addEventListener('click', e => {
-      if (e.target.classList.contains('play-btn')) {
-        e.stopPropagation();
-        const text = e.target.dataset.text;
-        if (synth.speaking) {
-          synth.cancel();
-        }
-        if (text) {
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = 'en-US';
-          synth.speak(utterance);
-        }
-      } else if (!e.target.classList.contains('word') && e.target.id !== 'tooltip') {
-        hideTooltip();
-      }
-    });
-
-    tooltip.addEventListener('click', e => e.stopPropagation());
-  </script>
+<h3>🔮 未來規劃</h3>
+<p>本站將逐步串連：</p>
+<ul>
+  <li><strong>佛教字典查詢（中英）</strong> 📘</li>
+  <li><strong>Buddhism A-Z 條目整理</strong> 🧠</li>
+  <li><strong>三藏法數</strong>📜</li>
+  <li><strong>《四語翻譯名義集》連結</strong>（梵藏漢英）🌍</li>
+</ul>
 <p style="text-align: center;">
   (c) 版權所有：祥雲寺三藏學院教師釋印承（國立陽明交通大學教育所博士生吳宜倫），創用CC-姓名標示- 非商業性- 相同方式分享 Attribution-Noncommercial-Share Alike<br>
   (c) Copyright: Bhikkhuni Yin-Cheng, English Instructor, Tripitaka Institute, Hsian-Yun Temple, Creative Commons  Attribution-Noncommercial-Share Alike <br>
   (PhD Student Yi-Lin Wu, Institute of Education, National Yang Ming Chiao Tung University)<br>
   since 佛曆 2569 (B.E.) / 2025 (C.E.)
 </p>
+  <div id="tooltip"></div>
+
+<script>
+  const tooltip = document.getElementById('tooltip');
+  document.body.addEventListener('mousemove', e => {
+    const target = e.target;
+    if (target.classList.contains('word')) {
+      const cn = target.dataset.definition || '';
+      const zhuyin = target.dataset.zhuyin || '';
+      const pinyin = target.dataset.pinyin || '';
+      const kk = target.dataset.kk || '';
+      const ipa = target.dataset.ipa || '';
+      let content = `<strong>${target.textContent}</strong><br>`;
+      if (cn) content += `中文：${cn}<br>`;
+      if (zhuyin) content += `注音：${zhuyin}<br>`;
+      if (pinyin) content += `拼音：${pinyin}<br>`;
+      if (kk) content += `KK音標：${kk}<br>`;
+      if (ipa) content += `IPA音標：${ipa}`;
+      tooltip.innerHTML = content;
+
+      let x = e.pageX + 8;
+      let y = e.pageY - tooltip.offsetHeight - 12; //浮動視窗靠上，避免遮擋文字
+      const maxWidth = window.innerWidth - tooltip.offsetWidth - 20;
+      if (x > maxWidth) x = maxWidth;
+      if (y < 20) y = e.pageY + 20; //如果上方不夠擺就改下面擺
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+      tooltip.style.display = 'block';
+    } else {
+      tooltip.style.display = 'none';
+    }
+  });
+</script>
+
+<div id="tooltip"></div>
+
 </body>
 </html>
