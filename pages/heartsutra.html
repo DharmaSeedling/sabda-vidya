@@ -1,97 +1,181 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>般若波羅蜜多心經｜Sabda Vidyā</title>
+  <meta charset="UTF-8" />
+  <title>般若波羅蜜多心經｜三語對照版</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="../css/assetsstyles.css" />
   <style>
     body {
       font-family: "Noto Serif TC", serif;
+      background: #fffdf6;
       padding: 2em;
-      background: #fdfcf7;
-      line-height: 1.8;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.7;
+      color: #3b2f1f;
     }
-    h1, h2, h3 { color: #42260a; }
-    .sutra-line { margin-bottom: 1.2em; }
-    .legge, .b1 { margin-left: 1em; font-style: italic; color: #555; }
-    .word { cursor: pointer; padding: 0 0.2em; border-bottom: 1px dotted #aaa; }
-    #searchBox { margin-top: 2em; }
-    #searchResult { margin-top: 1em; background: #f2f2f2; padding: 1em; border: 1px solid #ccc; }
+    h1, h2 {
+      color: #5a442b;
+    }
+    details {
+      background: #f9f8f4;
+      margin-bottom: 1em;
+      padding: 1em;
+      border-left: 4px solid #c1a36a;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.1em;
+      outline: none;
+      list-style: none;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    details[open] summary::before {
+      content: "▼ ";
+    }
+    summary::before {
+      content: "▶ ";
+      color: #997e3d;
+    }
+    p {
+      margin: 0.5em 0 1em 1em;
+      font-style: normal;
+      color: #555;
+    }
+    p.emphasis {
+      font-style: italic;
+      color: #7a6f57;
+      margin-left: 1.2em;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #d3caa5;
+      margin: 3em 0 2em;
+    }
+    ul {
+      margin-left: 1.2em;
+      color: #4a3c1d;
+    }
+    a {
+      color: #a3862a;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
-<h1>📜 般若波羅蜜多心經</h1>
-<p><strong>大唐三藏法師 玄奘 譯</strong>｜<strong>James Legge, 1815–1897 英譯</strong></p>
+  <h1>📜 般若波羅蜜多心經</h1>
+  <p><strong>中文譯本：</strong>大唐三藏法師 玄奘（602–664）<br />
+     <strong>英文譯本：</strong>James Legge（1815–1897）<br />
+     <strong>B1 學習英譯：</strong>本站協同 ChatGPT 製作，供初學者參考</p>
 
-<h2>🙏 開經偈</h2>
-<blockquote>
-  無上甚深微妙法，百千萬劫難遭遇。<br />
-  我今見聞得受持，願解如來真實義。<br /><br />
-  <em>Homage to the Supreme Dharma: profound and subtle, rare to encounter through eons.  
-  Now that I see, hear, and receive it, may I understand the Tathāgata’s true intent.</em>
-</blockquote>
+  <hr>
 
-<h2>📖 經文對照</h2>
+  <h2>🙏 開經偈</h2>
+  <details open>
+    <summary>無上甚深微妙法，百千萬劫難遭遇。我今見聞得受持，願解如來真實義。</summary>
+    <p class="emphasis">Homage to the Supreme Dharma: profound and subtle, rare to encounter through eons.<br>
+    Now that I see, hear, and receive it, may I understand the Tathāgata’s true intent.</p>
+  </details>
 
-<div class="sutra-line">
-  <span class="word" onclick="lookup('觀自在')">觀自在</span>
-  <span class="word" onclick="lookup('菩薩')">菩薩</span>，
-  <span class="word" onclick="lookup('行')">行</span>
-  <span class="word" onclick="lookup('深')">深</span>
-  <span class="word" onclick="lookup('般若波羅蜜多')">般若波羅蜜多</span>時，
-  <span class="word" onclick="lookup('照見')">照見</span>
-  <span class="word" onclick="lookup('五蘊')">五蘊</span>皆空，
-  <span class="word" onclick="lookup('度')">度</span>
-  <span class="word" onclick="lookup('一切')">一切</span>
-  <span class="word" onclick="lookup('苦厄')">苦厄</span>。
-  <div class="legge">(Legge) Avalokiteshvara, while practicing deeply the Prajnaparamita, clearly saw that the five aggregates are all empty, and so relieved all suffering.</div>
-  <div class="b1">(Plain English B1) When Avalokiteshvara was deeply meditating, he saw that everything is empty, and this helped him overcome suffering.</div>
-</div>
+  <h2>📖 經文對照</h2>
 
-<!-- 你可以繼續貼更多句子，重複這樣的格式 -->
+  <details>
+    <summary>觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。</summary>
+    <p><strong>Legge:</strong> Avalokiteshvara, while practicing deeply the Prajnaparamita, clearly saw that the five aggregates are all empty, and so relieved all suffering.</p>
+    <p><strong>B1:</strong> Avalokiteshvara saw that everything is empty, and it helped him overcome suffering.</p>
+  </details>
 
-<h2>🔎 經文詞彙查詢</h2>
-<div id="searchBox">
-  <input type="text" id="searchInput" placeholder="輸入詞彙（如：觀自在）" oninput="manualLookup()" />
-  <div id="searchResult">請輸入詞語或點擊上方經文。</div>
-</div>
+  <details>
+    <summary>舍利子，色不異空，空不異色；色即是空，空即是色；受想行識，亦復如是。</summary>
+    <p><strong>Legge:</strong> Form is not different from emptiness, and emptiness is not different from form. Form is emptiness; emptiness is form. So too are feeling, perception, volition, and consciousness.</p>
+    <p><strong>B1:</strong> Form is the same as emptiness. Feeling and thought are the same too.</p>
+  </details>
 
-<!-- 字典與查詢 -->
-<script src="../js/dictionary.js"></script>
-<script src="../js/zhuyin.js"></script>
-<script>
-  function lookup(word) {
-    document.getElementById('searchInput').value = word;
-    search(word);
-  }
+  <details>
+    <summary>舍利子，是諸法空相，不生不滅，不垢不淨，不增不減。</summary>
+    <p><strong>Legge:</strong> All dharmas are marked with emptiness: not born, not destroyed, not impure, not pure, neither increasing nor decreasing.</p>
+    <p><strong>B1:</strong> All things are empty. Nothing is born or ends, nothing is dirty or clean.</p>
+  </details>
 
-  function manualLookup() {
-    const term = document.getElementById("searchInput").value.trim();
-    search(term);
-  }
+  <details>
+    <summary>是故空中無色，無受想行識，無眼耳鼻舌身意，無色聲香味觸法，</summary>
+    <p><strong>Legge:</strong> Therefore in emptiness there is no form, no feeling, no perception, no volition, no consciousness,</p>
+    <p><strong>B1:</strong> In emptiness there are no senses, no thoughts, no mind.</p>
+  </details>
 
-  function search(term) {
-    const result = document.getElementById("searchResult");
-    if (!term) {
-      result.innerHTML = "請輸入詞語或點擊上方經文。";
-      return;
-    }
+  <details>
+    <summary>無眼界，乃至無意識界，無無明，亦無無明盡，乃至無老死，亦無老死盡。</summary>
+    <p><strong>Legge:</strong> No eye, ear, nose, tongue, body, mind; no form, sound, smell, taste, touch, or dharmas; no realm of eyes and so forth until no realm of mind consciousness; no ignorance and also no extinction of ignorance; and so forth until no old age and death and also no extinction of old age and death.</p>
+    <p><strong>B1:</strong> No eye, ear, nose, tongue, body, or mind; no sights, sounds, smells, tastes, touches, or things; no world of eyes or consciousness; no ignorance or end of ignorance; no aging or death, or end of aging or death.</p>
+  </details>
 
-    if (typeof dictionaryData === "undefined") {
-      result.innerHTML = "⚠️ 字典資料尚未載入。";
-      return;
-    }
+  <details>
+    <summary>無苦集滅道，無智亦無得，以無所得故。</summary>
+    <p><strong>Legge:</strong> There is no suffering, no origin, no cessation, no path. There is no wisdom and no gain. Because nothing is gained.</p>
+    <p><strong>B1:</strong> No suffering, no cause, no end, no path. No wisdom or gains. Nothing to get.</p>
+  </details>
 
-    const found = dictionaryData.find(entry => entry.word === term);
-    if (found) {
-      result.innerHTML = `<p><strong>${found.word}</strong> (${found.zhuyin})</p><p>${found.definition}</p>`;
-    } else {
-      result.innerHTML = "查無資料，請嘗試其他詞彙。";
-    }
-  }
-</script>
+  <details>
+    <summary>菩提薩埵，依般若波羅蜜多故，心無罣礙；無罣礙故，無有恐怖，</summary>
+    <p><strong>Legge:</strong> Because bodhisattvas rely on Prajnaparamita, their minds have no hindrance; because there is no hindrance, they have no fear.</p>
+    <p><strong>B1:</strong> Bodhisattvas rely on wisdom, so their minds have no obstacles and no fear.</p>
+  </details>
+
+  <details>
+    <summary>遠離顛倒夢想，究竟涅槃。三世諸佛，依般若波羅蜜多故，得阿耨多羅三藐三菩提。</summary>
+    <p><strong>Legge:</strong> They are far from delusions and reach Nirvana. The Buddhas of the three times rely on Prajnaparamita and attain unsurpassed perfect enlightenment.</p>
+    <p><strong>B1:</strong> They leave illusions behind and reach Nirvana. Buddhas of past, present, and future rely on this wisdom to become fully awakened.</p>
+  </details>
+
+  <details>
+    <summary>故知般若波羅蜜多是大神咒，是大明咒，是無上咒，是無等等咒，</summary>
+    <p><strong>Legge:</strong> Therefore, know that Prajnaparamita is the great mantra, the bright mantra, the supreme mantra, the unequalled mantra,</p>
+    <p><strong>B1:</strong> So know that this wisdom is the great mantra, the bright mantra, the best mantra, the only mantra.</p>
+  </details>
+
+  <details>
+    <summary>能除一切苦，真實不虛。故說般若波羅蜜多咒，即說咒曰：</summary>
+    <p><strong>Legge:</strong> Which removes all suffering, true and not false. Thus is the Prajnaparamita mantra proclaimed:</p>
+    <p><strong>B1:</strong> It removes all pain, it is true. So we say the wisdom mantra:</p>
+  </details>
+
+  <details>
+    <summary>揭諦 揭諦 波羅揭諦 波羅僧揭諦 菩提薩婆訶。</summary>
+    <p><strong>Legge:</strong> Gate gate paragate parasamgate bodhi svaha.</p>
+    <p><strong>B1:</strong> Go! Go! Go beyond! Go fully beyond! Enlightenment! Hurray!</p>
+  </details>
+
+  <hr>
+
+  <h2>📌 翻譯版本與延伸資源</h2>
+  <ul>
+    <li>其他版本如 <strong>Edward Conze</strong>、<strong>法鼓山</strong>、<strong>佛光山</strong>、<strong>成觀法師</strong> 譯本，因未進入公版領域，本站不引述全文。</li>
+    <li>可參考原始授權網站：
+      <ul>
+        <li><a href="https://www.fgs.org.tw/" target="_blank" rel="noopener noreferrer">佛光山</a></li>
+        <li><a href="https://www.ddc.org.tw/" target="_blank" rel="noopener noreferrer">法鼓文教</a></li>
+        <li><a href="https://suttacentral.net/" target="_blank" rel="noopener noreferrer">SuttaCentral (國際對照)</a></li>
+        <li><a href="https://www.bdk.tw/tripitaka.html" target="_blank" rel="noopener noreferrer">佛教傳道協會（BDK 台灣）</a> - 公版譯本授權</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>🔮 未來規劃</h2>
+  <p>本站將逐步串連：</p>
+  <ul>
+    <li><strong>佛教字典查詢（中英）</strong> 📘</li>
+    <li><strong>Buddhism A-Z 條目整理</strong> 🧠</li>
+    <li><strong>三藏法數</strong>（諸行無常／四諦等概念對照）📜</li>
+    <li><strong>《四語翻譯名義集》連結</strong>（梵藏漢英）🌍</li>
+  </ul>
 
 </body>
 </html>
