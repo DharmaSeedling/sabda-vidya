@@ -72,6 +72,7 @@
       border-bottom: 1px dotted #997e3d;
       padding: 0 0.15em;
       transition: background-color 0.3s;
+      user-select: none;
     }
     .word:hover {
       background-color: #f0e4b6;
@@ -88,6 +89,7 @@
       display: none;
       z-index: 1000;
       border-radius: 6px;
+      pointer-events: none;
     }
     #tooltip strong {
       color: #997e3d;
@@ -129,7 +131,6 @@
 
 <details open>
   <summary>
-    <!-- 中文詞彙 -->
     <span class="word" data-word="觀自在" data-zhuyin="ㄍㄨㄢ ㄗˋ ㄗㄞˋ" data-pinyin="guān zì zài" data-definition="觀察自我自在的菩薩">觀自在</span>
     <span class="word" data-word="菩薩" data-zhuyin="ㄆㄨˊ ㄙㄨㄛˇ" data-pinyin="pú suǒ" data-definition="佛教中的覺悟者">菩薩</span>，
     <span class="word" data-word="行" data-zhuyin="ㄒㄧㄥˊ" data-pinyin="xíng" data-definition="實踐、修行">行</span>
@@ -142,7 +143,6 @@
     <span class="word" data-word="苦厄" data-zhuyin="ㄎㄨˇ ㄜˋ" data-pinyin="kǔ è" data-definition="痛苦和困難">苦厄</span>。
   </summary>
   <p>
-    <!-- 英文詞彙 -->
     <span class="word" data-word="Avalokiteshvara" data-definition="觀世音菩薩，佛教中的慈悲菩薩">Avalokiteshvara</span>,
     while
     <span class="word" data-word="practicing" data-definition="練習、修行">practicing</span>
@@ -164,7 +164,33 @@
   </p>
 </details>
 
-<!-- 你可依照此模式繼續補充全文 -->
+<details>
+  <summary>
+    <span class="word" data-word="舍利子" data-zhuyin="ㄕㄜˇ ㄌㄧˋ ㄗˇ" data-pinyin="shè lì zǐ" data-definition="佛陀的弟子">舍利子</span>，
+    <span class="word" data-word="色" data-zhuyin="ㄙㄜˋ" data-pinyin="sè" data-definition="物質現象">色</span>
+    <span class="word" data-word="不異" data-zhuyin="ㄅㄨˋ ㄧˋ" data-pinyin="bù yì" data-definition="沒有不同">不異</span>
+    <span class="word" data-word="空" data-zhuyin="ㄎㄨㄥ" data-pinyin="kōng" data-definition="空無、虛空">空</span>，
+    <span class="word" data-word="空不異色" data-zhuyin="ㄎㄨㄥ ㄅㄨˋ ㄧˋ ㄙㄜˋ" data-pinyin="kōng bù yì sè" data-definition="空與色不不同">空不異色</span>；
+    <span class="word" data-word="色即是空" data-zhuyin="ㄙㄜˋ ㄐㄧˊ ㄕˋ ㄎㄨㄥ" data-pinyin="sè jí shì kōng" data-definition="色就是空">色即是空</span>，
+    <span class="word" data-word="空即是色" data-zhuyin="ㄎㄨㄥ ㄐㄧˊ ㄕˋ ㄙㄜˋ" data-pinyin="kōng jí shì sè" data-definition="空就是色">空即是色</span>；
+    <span class="word" data-word="受想行識" data-zhuyin="ㄕㄡˋ ㄒㄧㄤˇ ㄒㄧㄥˊ ㄕˊ" data-pinyin="shòu xiǎng xíng shí" data-definition="五蘊的感受、想像、行動、識別">受想行識</span>，
+    <span class="word" data-word="亦復如是" data-zhuyin="ㄧˋ ㄈㄨˋ ㄖㄨˊ ㄕˋ" data-pinyin="yì fù rú shì" data-definition="也是如此">亦復如是</span>。
+  </summary>
+  <p>
+    <span class="word" data-word="Form" data-definition="物質">Form</span> is not different from
+    <span class="word" data-word="emptiness" data-definition="空">emptiness</span>, and
+    <span class="word" data-word="emptiness" data-definition="空">emptiness</span> is not different from
+    <span class="word" data-word="form" data-definition="物質">form</span>. Form is emptiness; emptiness is form. So too are
+    <span class="word" data-word="feeling" data-definition="感覺">feeling</span>,
+    <span class="word" data-word="perception" data-definition="感知">perception</span>,
+    <span class="word" data-word="volition" data-definition="意志">volition</span>,
+    and
+    <span class="word" data-word="consciousness" data-definition="意識">consciousness</span>.
+    <span class="play-btn" title="播放發音" data-text="Form is not different from emptiness and emptiness is not different from form"></span>
+  </p>
+</details>
+
+<!-- 你可以繼續以此格式，把整部心經拆完 -->
 
 <div id="tooltip"></div>
 
@@ -172,7 +198,6 @@
   const tooltip = document.getElementById('tooltip');
   const synth = window.speechSynthesis;
 
-  // 顯示提示框並定位
   function showTooltip(e, content) {
     tooltip.innerHTML = content;
     let x = e.pageX + 15;
@@ -184,12 +209,10 @@
     tooltip.style.display = 'block';
   }
 
-  // 隱藏提示框
   function hideTooltip() {
     tooltip.style.display = 'none';
   }
 
-  // 監聽點擊和滑鼠移入/移出
   document.body.addEventListener('mousemove', e => {
     const target = e.target;
     if (target.classList.contains('word')) {
@@ -208,7 +231,6 @@
     }
   });
 
-  // 發音按鈕事件
   document.body.addEventListener('click', e => {
     if (e.target.classList.contains('play-btn')) {
       e.stopPropagation();
@@ -226,7 +248,6 @@
     }
   });
 
-  // 點擊 tooltip 不關閉
   tooltip.addEventListener('click', e => e.stopPropagation());
 </script>
 
