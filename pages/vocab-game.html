@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>🕉️ 佛學詞彙配對遊戲</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+    
+    :root {
+      --primary: #8B4513;
+      --secondary: #4682B4;
+      --bg-main: #fcfaf3;
+      --text-main: #333;
+      --card-bg: #fff;
+      --correct-bg: #d6f5d6;
+      --hover-bg: #f0faff;
+      --button-bg: #946c45;
+      --hint-color: #a15d00;
+      --border-color: #ccc;
+      --border-hover: #66a3ff;
+      --border-correct: green;
+      --header-color: #5a3825;
+      --shadow-light: rgba(0,0,0,0.1);
+      --transition-speed: 0.3s;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Serif TC', serif;
+      padding: 2em;
+      background: var(--bg-main);
+      max-width: 960px;
+      margin: auto;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: var(--header-color);
+      margin-bottom: 0.8em;
+    }
+
+    .game-header {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 10px var(--shadow-light);
+    }
+
+    .game-info {
+      margin: 10px 0 20px;
+      text-align: center;
+      font-size: 0.9em;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
+    }
+
+    .level-select {
+      text-align: center;
+      margin-bottom: 1.5em;
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px var(--shadow-light);
+    }
+
+    .level-select select {
+      padding: 8px 15px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      font-family: inherit;
+      margin-right: 10px;
+      font-size: 1em;
+    }
+
+    .game-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+
+    .column {
+      width: 45%;
+      min-width: 280px;
+      flex-grow: 1;
+    }
+
+    .drag-item, .drop-zone {
+      background: var(--card-bg);
+      padding: 1em;
+      margin: 0.7em 0;
+      border: 2px dashed var(--border-color);
+      border-radius: 8px;
+      cursor: grab;
+      text-align: center;
+      transition: all var(--transition-speed) ease;
+      box-shadow: 0 2px 5px var(--shadow-light);
+    }
+
+    .drag-item {
+      font-weight: bold;
+    }
+
+    .drag-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px var(--shadow-light);
+    }
+
+    .drop-zone.over {
+      border-color: var(--border-hover);
+      background-color: var(--hover-bg);
+      transform: scale(1.03);
+    }
+
+    .drop-zone.correct {
+      background-color: var(--correct-bg);
+      border-color: var(--border-correct);
+      font-weight: bold;
+      box-shadow: 0 3px 10px rgba(0, 128, 0, 0.2);
+    }
+
+    .drop-zone.correct::after {
+      content: " ✅";
+    }
+
+    .used {
+      opacity: 0.5;
+      pointer-events: none;
+      transform: translateX(100px);
+      transition: all 0.5s ease;
+    }
+
+    #hintBox {
+      margin-top: 1.5em;
+      padding: 15px;
+      border-radius: 8px;
+      background: rgba(255, 245, 230, 0.7);
+      font-size: 0.95em;
+      color: var(--hint-color);
+      box-shadow: 0 2px 8px var(--shadow-light);
+      text-align: left;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+    }
+
+    #hintBox.active {
+      max-height: 500px;
+      padding: 15px;
+    }
+
+    .hint-item {
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .hint-item::before {
+      content: "👉";
+      position: absolute;
+      left: 0;
+    }
+
+    button {
+      display: inline-block;
+      margin: 1em 0.5em;
+      padding: 0.8em 1.2em;
+      font-size: 1em;
+      background: var(--button-bg);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 5px var(--shadow-light);
+    }
+
+    button:hover {
+      background: #7d5b3a;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .center {
+      text-align: center;
+      margin: 1.5em 0;
+    }
+
+    .score-display {
+      text-align: center;
+      margin-top: 1.5em;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #ddd;
+      border-radius: 5px;
+      margin: 10px auto;
+      max-width: 300px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #8B4513, #D2691E);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      margin-left: 5px;
+      color: #946c45;
+      cursor: help;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.9em;
+      font-weight: normal;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1em;
+      }
+      
+      .game-container {
+        flex-direction: column;
+      }
+      
+      .column {
+        width: 100%;
+      }
+    }
+
+    /* Confetti animation for correct matches */
+    @keyframes confetti {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100px) rotate(720deg); opacity: 0; }
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      animation: confetti 1s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-header">
+    <h2>🕉️ 佛學詞彙配對遊戲</h2>
+    <p>拖曳左側梵英術語到右側對應的中文解釋</p>
+  </div>
+
+  <div class="game-info">
+    配對成功時會朗讀英文，協助記憶發音。完成關卡獲得智慧點數！
+  </div>
+
+  <div class="level-select">
+    <label for="levelSelect">選擇關卡：</label>
+    <select id="levelSelect"></select>
+    <button onclick="loadLevel()">開始關卡</button>
+  </div>
+
+  <div class="game-container">
+    <div class="column" id="dragArea"></div>
+    <div class="column" id="dropArea"></div>
+  </div>
+
+  <div class="center">
+    <button onclick="showHints()">💡 提示 (-1 智慧點)</button>
+    <button onclick="resetGame()">🔄 重來</button>
+    <button onclick="pronounceAll()">🔊 朗讀全部</button>
+  </div>
+  
+  <div id="hintBox"></div>
+  
+  <div class="score-display">
+    <div>智慧進度: <span id="scoreDisplay">0</span> 點 
+      <span class="tooltip">ℹ️
+        <span class="tooltiptext">配對正確 +2 點，使用提示 -1 點，錯誤 -1 點</span>
+      </span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <script>
+    const dragArea = document.getElementById("dragArea");
+    const dropArea = document.getElementById("dropArea");
+    const levelSelect = document.getElementById("levelSelect");
+    const hintBox = document.getElementById("hintBox");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const progressFill = document.getElementById("progressFill");
+    
+    let currentPairs = [];
+    let hintUsed = false;
+    let score = parseInt(localStorage.getItem("wisdomScore") || "0");
+    let correctMatches = 0;
+    let totalPairs = 0;
+    
+    // Buddhist vocabulary levels
+    const vocabGameLevels = [
+      {
+        level: "初階：基本佛學詞彙",
+        pairs: [
+          { id: "dharma1", en: "Dharma", zh: "法", hint: "佛陀的教導，宇宙真理" },
+          { id: "buddha1", en: "Buddha", zh: "佛陀", hint: "覺者，已經覺悟的人" },
+          { id: "sutra1", en: "Sutra", zh: "經", hint: "佛教經典" },
+          { id: "karma1", en: "Karma", zh: "業", hint: "行為及其後果" },
+          { id: "sangha1", en: "Sangha", zh: "僧伽", hint: "修行者團體" }
+        ]
+      },
+      {
+        level: "中階：心經術語",
+        pairs: [
+          { id: "emptiness1", en: "Śūnyatā", zh: "空", hint: "萬物無獨立自性" },
+          { id: "form1", en: "Rūpa", zh: "色", hint: "物質現象" },
+          { id: "skandha1", en: "Skandha", zh: "蘊", hint: "構成個體的五種要素" },
+          { id: "bodhi1", en: "Bodhi", zh: "菩提", hint: "覺悟、證悟" },
+          { id: "bodhisattva1", en: "Bodhisattva", zh: "菩薩", hint: "發願利益一切眾生的修行者" },
+          { id: "prajnaparamita1", en: "Prajñāpāramitā", zh: "般若波羅蜜多", hint: "到彼岸的智慧" }
+        ]
+      },
+      {
+        level: "進階：佛教哲學概念",
+        pairs: [
+          { id: "nirvana1", en: "Nirvāṇa", zh: "涅槃", hint: "究竟解脫的境界" },
+          { id: "dependent1", en: "Pratītyasamutpāda", zh: "緣起", hint: "相互依存的生起" },
+          { id: "middle1", en: "Madhyamaka", zh: "中觀", hint: "避免極端的中道思想" },
+          { id: "consciousness1", en: "Vijñāna", zh: "識", hint: "認知、意識" },
+          { id: "impermanence1", en: "Anitya", zh: "無常", hint: "一切現象都在不斷變化" },
+          { id: "non-self1", en: "Anātman", zh: "無我", hint: "沒有永恆不變的自我" }
+        ]
+      }
+    ];
+
+    // Load levels into select
+    vocabGameLevels.forEach((level, idx) => {
+      const opt = document.createElement("option");
+      opt.value = idx;
+      opt.textContent = level.level;
+      levelSelect.appendChild(opt);
+    });
+
+    // Update score display
+    function updateScore() {
+      scoreDisplay.textContent = score;
+      localStorage.setItem("wisdomScore", score);
+      
+      // Update progress bar
+      if (totalPairs > 0) {
+        const percentage = (correctMatches / totalPairs) * 100;
+        progressFill.style.width = `${percentage}%`;
+      }
+    }
+
+    // Create confetti effect
+    function createConfetti(x, y) {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+      
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = `${x}px`;
+        confetti.style.top = `${y}px`;
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        
+        document.body.appendChild(confetti);
+        
+        // Remove confetti after animation completes
+        setTimeout(() => {
+          confetti.remove();
+        }, 1000);
+      }
+    }
+
+    function loadLevel() {
+      dragArea.innerHTML = "";
+      dropArea.innerHTML = "";
+      hintBox.innerHTML = "";
+      hintBox.classList.remove("active");
+      hintUsed = false;
+      correctMatches = 0;
+
+      const levelIndex = levelSelect.value;
+      currentPairs = vocabGameLevels[levelIndex].pairs;
+      totalPairs = currentPairs.length;
+
+      // Shuffle pairs for drag items
+      const shuffledDrag = [...currentPairs].sort(() => Math.random() - 0.5);
+      // Shuffle pairs for drop zones
+      const shuffledDrop = [...currentPairs].sort(() => Math.random() - 0.5);
+
+      shuffledDrag.forEach(pair => {
+        const dragItem = document.createElement("div");
+        dragItem.className = "drag-item";
+        dragItem.textContent = pair.en;
+        dragItem.id = pair.id;
+        dragItem.draggable = true;
+
+        dragItem.ondragstart = e => {
+          e.dataTransfer.setData("text/plain", dragItem.id);
+        };
+
+        dragArea.appendChild(dragItem);
+      });
+
+      shuffledDrop.forEach(pair => {
+        const dropZone = document.createElement("div");
+        dropZone.className = "drop-zone";
+        dropZone.dataset.match = pair.id;
+        dropZone.dataset.hint = pair.hint;
+        dropZone.textContent = pair.zh;
+
+        dropZone.ondragover = e => {
+          e.preventDefault();
+          dropZone.classList.add("over");
+        };
+
+        dropZone.ondragleave = () => {
+          dropZone.classList.remove("over");
+        };
+
+        dropZone.ondrop = e => {
+          e.preventDefault();
+          const draggedId = e.dataTransfer.getData("text/plain");
+          const draggedEl = document.getElementById(draggedId);
+
+          if (dropZone.dataset.match === draggedId) {
+            dropZone.classList.add("correct");
+            draggedEl.classList.add("used");
+            speakWord(draggedEl.textContent);
+            score += 2;
+            correctMatches++;
+            updateScore();
+            
+            // Create confetti at drop position
+            createConfetti(e.clientX, e.clientY);
+            
+            // Check if level completed
+            if (correctMatches === totalPairs) {
+              setTimeout(() => {
+                alert("恭喜！完成關卡，智慧增長！");
+              }, 500);
+            }
+          } else {
+            alert("❌ 不對應，請再試一次");
+            score = Math.max(0, score - 1);
+            updateScore();
+          }
+
+          dropZone.classList.remove("over");
+        };
+
+        dropArea.appendChild(dropZone);
+      });
+      
+      updateScore();
+    }
+
+    function speakWord(text) {
+      const msg = new SpeechSynthesisUtterance(text);
+      msg.lang = "en-US";
+      speechSynthesis.speak(msg);
+    }
+
+    function pronounceAll() {
+      const dragItems = document.querySelectorAll(".drag-item:not(.used)");
+      dragItems.forEach(item => {
+        setTimeout(() => {
+          speakWord(item.textContent);
+        }, 800 * Array.from(dragItems).indexOf(item));
+      });
+    }
+
+    function showHints() {
+      if (!hintUsed) {
+        let hintsHTML = "";
+        const zones = document.querySelectorAll(".drop-zone:not(.correct)");
+        
+        zones.forEach(zone => {
+          hintsHTML += `<div class="hint-item">${zone.textContent}：${zone.dataset.hint}</div>`;
+        });
+        
+        if (hintsHTML) {
+          hintBox.innerHTML = hintsHTML + "<div style='margin-top: 10px; font-style: italic;'>⚠️ 已使用提示，智慧點 -1</div>";
+          hintBox.classList.add("active");
+          score = Math.max(0, score - 1);
+          updateScore();
+          hintUsed = true;
+        } else {
+          alert("所有配對都已完成，不需要提示！");
+        }
+      }
+    }
+
+    function resetGame() {
+      loadLevel();
+    }
+
+    // Initial load
+    loadLevel();
+    updateScore();
+  </script>
+
+</body>
+</html>

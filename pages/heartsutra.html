@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>般若波羅蜜多心經 | 互動版</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+    
+    :root {
+      --primary: #8B4513;
+      --secondary: #4682B4;
+      --bg-main: #f9f9f9;
+      --bg-verse: #FFF8DC;
+      --bg-intro: #f0f8ff;
+      --text-main: #333;
+      --border-intro: #4682B4;
+      --border-verse: #D2691E;
+      --hover-word: #FFE4B5;
+      --shadow-light: rgba(0,0,0,0.1);
+      --shadow-medium: rgba(0,0,0,0.2);
+      --shadow-dark: rgba(0,0,0,0.3);
+      --transition-speed: 0.3s;
+      --legge-bg: #FFF2E6;
+      --b1-bg: #E6F2FF;
+      --concept-bg: #F5F5F5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', 'Arial', sans-serif;
+      line-height: 1.8;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: var(--bg-main);
+      color: var(--text-main);
+    }
+
+    h1, h2, h3 {
+      font-family: 'Noto Serif TC', serif;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 40px 20px;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: "🕉️";
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.05;
+      top: -30px;
+      right: -30px;
+      transform: rotate(-15deg);
+    }
+
+    .page-header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, var(--primary), #A0522D);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .page-header h2 {
+      font-size: 1.8em;
+      color: #666;
+      margin-top: 0;
+    }
+
+    .intro {
+      background: var(--bg-intro);
+      border: 2px dashed var(--border-intro);
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 40px;
+      color: #2F4F4F;
+      position: relative;
+      box-shadow: 0 3px 10px var(--shadow-light);
+    }
+
+    .intro-icon {
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      background: var(--bg-intro);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 1.2em;
+      color: var(--secondary);
+      box-shadow: 0 2px 5px var(--shadow-light);
+    }
+
+    .intro h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      color: var(--secondary);
+      font-size: 1.2em;
+    }
+
+    .intro p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    #tooltip {
+      position: absolute;
+      background: #333;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      max-width: 350px;
+      box-shadow: 0 4px 8px var(--shadow-dark);
+      pointer-events: none;
+      z-index: 10000;
+      display: none;
+      line-height: 1.4;
+      backdrop-filter: blur(5px);
+      transition: opacity 0.2s;
+    }
+
+    .word {
+      cursor: pointer;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: all var(--transition-speed) ease;
+      display: inline-block;
+      position: relative;
+    }
+
+    .word:hover, .word:focus {
+      background: var(--hover-word);
+      transform: scale(1.05);
+      box-shadow: 0 2px 4px var(--shadow-medium);
+      outline: none;
+    }
+
+    .word:active {
+      transform: scale(0.98);
+    }
+
+    .verse {
+      background: var(--bg-verse);
+      border-left: 4px solid var(--border-verse);
+      padding: 20px 25px;
+      margin: 20px 0;
+      border-radius: 8px;
+      font-size: 1.2em;
+      box-shadow: 0 2px 8px var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .verse::after {
+      content: "☸️";
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 2rem;
+      opacity: 0.1;
+    }
+
+    .legge-verse {
+      background: var(--legge-bg);
+    }
+
+    .b1-verse {
+      background: var(--b1-bg);
+    }
+
+    .concept-card {
+      background: var(--concept-bg);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 2px 5px var(--shadow-light);
+    }
+
+    .concept-title {
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .concept-icon {
+      margin-right: 8px;
+      color: var(--primary);
+    }
+
+    .concept-languages {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .concept-lang {
+      background: #ddd;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.9em;
+    }
+
+    .lang-sanskrit {
+      background: #E57373;
+      color: white;
+    }
+
+    .lang-chinese {
+      background: #81C784;
+      color: white;
+    }
+
+    .lang-english {
+      background: #64B5F6;
+      color: white;
+    }
+
+    .concept-meaning {
+      margin-bottom: 10px;
+    }
+
+    .concept-example {
+      font-style: italic;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 8px;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    details {
+      margin-bottom: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px var(--shadow-light);
+      overflow: hidden;
+      transition: all var(--transition-speed) ease;
+    }
+
+    details:hover {
+      box-shadow: 0 5px 15px var(--shadow-medium);
+    }
+
+    details[open] {
+      margin-bottom: 35px;
+      box-shadow: 0 8px 20px var(--shadow-medium);
+    }
+
+    summary {
+      padding: 15px 20px;
+      background: linear-gradient(to right, #f8f9fa, #eaecef);
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #555;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      transition: all var(--transition-speed) ease;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::before {
+      content: "+";
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      line-height: 24px;
+      border-radius: 50%;
+      margin-right: 12px;
+      transition: transform var(--transition-speed) ease, background-color var(--transition-speed) ease;
+    }
+
+    details[open] summary::before {
+      content: "−";
+      background: var(--secondary);
+      transform: rotate(180deg);
+    }
+
+    summary:hover {
+      background: linear-gradient(to right, #eaecef, #f8f9fa);
+    }
+
+    .resource-section {
+      margin-top: 50px;
+      background: #f4f4f4;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px var(--shadow-light);
+    }
+
+    .resource-section h3 {
+      color: var(--primary);
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .resource-section ul {
+      list-style-type: none;
+    }
+
+    .resource-section li {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .resource-section li::before {
+      content: "•";
+      color: var(--primary);
+      font-size: 1.5em;
+      position: absolute;
+      left: 0;
+      top: -5px;
+    }
+
+    .resource-section a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: all var(--transition-speed) ease;
+      border-bottom: 1px dashed var(--secondary);
+    }
+
+    .resource-section a:hover {
+      color: var(--primary);
+      border-bottom: 1px solid var(--primary);
+    }
+
+    .future-plans {
+      margin-top: 40px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4eef9 100%);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px var(--shadow-light);
+    }
+
+    .plans-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .plan-item {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px var(--shadow-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .plan-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px var(--shadow-medium);
+    }
+
+    .plan-icon {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 30px 0;
+      text-align: center;
+      color: #666;
+      border-top: 1px solid #ddd;
+      font-size: 0.9em;
+    }
+
+    .copyright {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      font-size: 0.85em;
+    }
+
+    /* Language indicators */
+    .lang-indicator {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: bold;
+      margin-right: 5px;
+      color: white;
+    }
+
+    .lang-zh {
+      background: #E57373;
+    }
+
+    .lang-en {
+      background: #64B5F6;
+    }
+
+    .lang-b1 {
+      background: #81C784;
+    }
+
+    /* Tab system for different translations */
+    .translation-tabs {
+      display: flex;
+      border-bottom: 2px solid #ddd;
+      margin: 20px 0 15px;
+    }
+
+    .tab {
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      font-weight: bold;
+      margin-right: 5px;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .tab.active {
+      border-bottom: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .tab:hover {
+      background: #f0f0f0;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Content explanation */
+    .explanation {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 3px solid #ddd;
+    }
+
+    .explanation-title {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    /* Metaphor box */
+    .metaphor-box {
+      background: linear-gradient(135deg, #fff, #f4f4f4);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      box-shadow: 0 2px 8px var(--shadow-light);
+      border-left: 3px solid #E57373;
+    }
+
+    .metaphor-title {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #E57373;
+    }
+
+    .metaphor-icon {
+      margin-right: 10px;
+      font-size: 1.2em;
+    }
+
+    /* Modern connection */
+    .modern-connection {
+      background: linear-gradient(135deg, #fff, #e8f5e9);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      box-shadow: 0 2px 8px var(--shadow-light);
+      border-left: 3px solid #81C784;
+    }
+
+    .connection-title {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #388E3C;
+    }
+
+    .connection-icon {
+      margin-right: 10px;
+      font-size: 1.2em;
+    }
+
+    /* Animation for tooltip */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #tooltip.show {
+      display: block;
+      animation: fadeIn 0.3s;
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 3px 10px var(--shadow-medium);
+      z-index: 1000;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+    }
+
+    /* Dark theme */
+    .dark-theme {
+      --bg-main: #1a1a1a;
+      --bg-verse: #2a2a2a;
+      --bg-intro: #252525;
+      --text-main: #f1f1f1;
+      --border-intro: #6495ED;
+      --border-verse: #E9967A;
+      --hover-word: #3e3e3e;
+      --legge-bg: #2d2620;
+      --b1-bg: #202d3a;
+      --concept-bg: #333;
+    }
+
+    .dark-theme .page-header {
+      background: linear-gradient(135deg, #2d3436 0%, #2c3e50 100%);
+    }
+
+    .dark-theme .page-header h1 {
+      background: linear-gradient(to right, #e6b980, #eacda3);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .dark-theme .page-header h2 {
+      color: #aaa;
+    }
+
+    .dark-theme .verse {
+      background: #2a2a2a;
+    }
+
+    .dark-theme summary {
+      background: linear-gradient(to right, #2a2a2a, #333);
+      color: #ddd;
+    }
+
+    .dark-theme .resource-section {
+      background: #252525;
+    }
+
+    .dark-theme .resource-section a {
+      color: #7CB9E8;
+    }
+
+    .dark-theme .resource-section a:hover {
+      color: #B9D9EB;
+    }
+
+    .dark-theme .future-plans {
+      background: linear-gradient(135deg, #202020 0%, #2c3e50 100%);
+    }
+
+    .dark-theme .plan-item {
+      background: #2a2a2a;
+    }
+
+    .dark-theme .copyright {
+      background: #252525;
+    }
+
+    .dark-theme .explanation {
+      background: #252525;
+    }
+
+    .dark-theme .metaphor-box {
+      background: linear-gradient(135deg, #252525, #2d2d2d);
+    }
+
+    .dark-theme .modern-connection {
+      background: linear-gradient(135deg, #252525, #263238);
+    }
+
+    .dark-theme .concept-example {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Audio control */
+    .audio-control {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-left: 5px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 12px;
+      opacity: 0.8;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .audio-control:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+
+      .page-header {
+        padding: 25px 15px;
+      }
+
+      .page-header h1 {
+        font-size: 2em;
+      }
+
+      .plans-list {
+        grid-template-columns: 1fr;
+      }
+
+      .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark theme">
+  <i class="fas fa-moon"></i>
+</button>
+
+<div class="page-header fade-in">
+  <h1>📜 般若波羅蜜多心經</h1>
+  <h2>🕉️ Heart Sutra</h2>
+</div>
+
+<div class="intro fade-in">
+  <div class="intro-icon">🎓 關於本經</div>
+  <h3>📜 中文譯本：大唐三藏法師 玄奘（602–664）</h3>
+  <h3>🇬🇧 英文譯本：James Legge（1815–1897）</h3>
+  <h3>🛠️ 教學設計理念</h3>
+  <p>
+    <i class="fas fa-search"></i> <strong>多層次理解：</strong> 依照牛津大學佛學研究中心與哈佛大學佛教經典教學方法，本網站提供多層次理解機制：
+    <ul style="list-style-type: none; margin-left: 25px;">
+      <li><i class="fas fa-check"></i> 原文完整保留，不簡化佛理</li>
+      <li><i class="fas fa-check"></i> 佛學名相解釋卡（滑鼠懸停即可查看）</li>
+      <li><i class="fas fa-check"></i> 學術譯本（Legge）與現代註解並列</li>
+      <li><i class="fas fa-check"></i> 生活比喻與現代連結說明</li>
+    </ul>
+  </p>
+  <p>
+    <i class="fas fa-volume-up"></i> <strong>英語學習互動功能：</strong> 點擊單字可聽發音、滑鼠移到詞彙上可查看註解、點擊標題可展開/收起，設計讓您不必離開頁面就能深入理解，達到沉浸式學習效果。
+  </p>
+  <p>
+    <i class="fas fa-book"></i> <strong>關於譯本：</strong> 本頁使用的是James Legge英文譯本（屬公有領域）。概念解釋卡與現代連結參考了哈佛大學、麻省理工佛學公開課程，並結合台灣本土佛教文化脈絡。若需要國內與日本高僧大德的翻譯（依筆畫排列），請參考頁面最下方資源。玄奘大師之心經譯本屬於用字清晰含義深遠之譯。本經解釋主要在藉由心經學習基礎語言與基礎經義，更深層次的意涵並非本站目前規劃，但如果有解釋錯誤，還請海涵，若有改動會在最下面附上修改日期與版本紀錄。
+  </p>
+</div>
+
+<details class="fade-in">
+  <summary class="mantra">🙏 開經偈</summary>
+  <!-- 中文 -->
+  <p class="verse">
+    <span class="lang-indicator lang-zh">原文</span>
+    <span class="word" tabindex="0" data-zhuyin="ㄨˊ ㄕㄤˋ ㄕㄣ ㄕㄣ ㄨㄟ ㄇㄧㄠˋ ㄈㄚˇ" data-pinyin="wú shàng shèn shēn wēi miào fǎ" data-kk="wu2 shang4 shen4 shen1 wei1 miao4 fa3" data-ipa="/ǔ ʂâŋ ʂə̂n ʂə̂n wéɪ mjâʊ fǎ/" data-definition="至高無上的深奧微妙法">無上甚深微妙法</span>，
+    <span class="word" tabindex="0" data-zhuyin="ㄅㄞˇ ㄑㄧㄢ ㄨㄢˋ ㄐㄧㄝˊ ㄋㄢˊ ㄗㄠ ㄩˋ" data-pinyin="bǎi qiān wàn jié nán zāo yù" data-kk="bai3 qian1 wan4 jie2 nan2 zao1 yu4" data-ipa="/pài t͡ɕʰiān wân t͡ɕīe nán tsaū ỳu/" data-definition="百千萬劫難以遇到">百千萬劫難遭遇</span>。
+    <span class="audio-control" onclick="playChineseAudio('無上甚深微妙法，百千萬劫難遭遇')"><i class="fas fa-volume-up"></i></span>
+  </p>
+  <!-- 正式譯文 Legge -->
+  <p class="verse legge-verse">
+    <span class="lang-indicator lang-en">Legge</span>
+    <span class="word" tabindex="0" data-definition="敬意" data-ipa="/ˈhɒm.ɪdʒ/">Homage</span> to the 
+    <span class="word" tabindex="0" data-definition="至高無上的" data-ipa="/suːˈpriːm/">Supreme</span> 
+    <span class="word" tabindex="0" data-definition="佛法" data-ipa="/ˈdɑːr.mə/">Dharma</span>: 
+    <span class="word" tabindex="0" data-definition="深奧的" data-ipa="/prəˈfaʊnd/">profound</span> and 
+    <span class="word" tabindex="0" data-definition="微妙的" data-ipa="/ˈsʌb.tl̩/">subtle</span>, 
+    <span class="word" tabindex="0" data-definition="稀有的" data-ipa="/reər/">rare</span> to 
+    <span class="word" tabindex="0" data-definition="遇到" data-ipa="/ɪnˈkaʊn.tər/">encounter</span> through 
+    <span class="word" tabindex="0" data-definition="無數劫" data-ipa="/iːˈɒn/">eons</span>.
+    <span class="audio-control" onclick="playEnglishAudio('Homage to the Supreme Dharma: profound and subtle, rare to encounter through eons.')"><i class="fas fa-volume-up"></i></span>
+  </p>
+  
+  <div class="concept-card">
+    <div class="concept-title">
+      <i class="fas fa-key concept-icon"></i> 關鍵名相：法 / Dharma
+    </div>
+    <div class="concept-languages">
+      <span class="concept-lang lang-sanskrit">梵文: dharma</span>
+      <span class="concept-lang lang-chinese">漢: 法</span>
+      <span class="concept-lang lang-english">英: teaching, truth, law, phenomenon</span>
+    </div>
+    <div class="concept-meaning">
+      <p>在佛教中，「法」有多重意義：</p>
+      <ol>
+        <li>佛陀的教導</li>
+        <li>宇宙的真理、規律</li>
+        <li>萬事萬物現象</li>
+        <li>心靈的對象</li>
+      </ol>
+      <div class="concept-example">
+        「法」不只是文字的教導，而是指向宇宙萬物底層的真實本質。「法」是用來超越痛苦的方法，也是要被理解的現象本身。
+      </div>
+    </div>
+  </div>
+  
+  <div class="modern-connection">
+    <div class="connection-title">
+      <i class="fas fa-sync-alt connection-icon"></i> 現代連結
+    </div>
+    <p>開經偈中的「無上甚深微妙法」與「百千萬劫難遭遇」，可以理解為一種珍稀的知識體系。就像當代科學中某些重大發現需要數百年的思考積累才能突破，佛法也被視為需要許多生命週期才能遇見和理解的深邃智慧。</p>
+  </div>
+</details>
+
+<details class="fade-in">
+  <summary>
+    <span class="word" data-zhuyin="ㄍㄨㄢ ㄗˋ ㄗㄞˋ ㄆㄨˊ ㄙㄚˋ" data-pinyin="guān zì zài pú sà" data-definition="觀世音菩薩的另一個名字">觀自在菩薩</span>，
+    <span class="word" data-zhuyin="ㄒㄧㄥˊ ㄕㄣ ㄅㄛ ㄖㄜˇ ㄅㄛ ㄌㄨㄛˊ ㄇㄧˋ ㄉㄨㄛ ㄕˊ" data-pinyin="xíng shēn bō rě bō luó mì duō shí" data-definition="修行深奧的般若波羅蜜多時">行深般若波羅蜜多時</span>，
+    <span class="word" data-zhuyin="ㄓㄠˋ ㄐㄧㄢˋ" data-pinyin="zhào jiàn" data-definition="清楚地看見">照見</span>
+    <span class="word" data-zhuyin="ㄨˇ ㄩㄣˋ ㄐㄧㄝ ㄎㄨㄥ" data-pinyin="wǔ yùn jiē kōng" data-definition="五蘊都是空的">五蘊皆空</span>，
+    <span class="word" data-zhuyin="ㄉㄨˋ ㄧ ㄑㄧㄝˋ ㄎㄨˇ ㄜˋ" data-pinyin="dù yī qiè kǔ è" data-definition="度脫一切苦難">度一切苦厄</span>。
+  </summary>
+  <p class="verse legge-verse">
+    <span class="lang-indicator lang-en">Legge</span>
+    <span class="word" data-definition="Avalokiteshvara，觀世音菩薩">Avalokiteshvara</span>
+    <span class="word" data-definition="practiced deeply">practiced deeply</span> the
+    <span class="word" data-definition="Prajnaparamita，般若波羅蜜多">Prajnaparamita</span>,
+    <span class="word" data-definition="clearly saw">clearly saw</span> that the
+    <span class="word" data-definition="five aggregates，五蘊">five aggregates</span>
+    <span class="word" data-definition="are all empty">are all empty</span>,
+    <span class="word" data-definition="and thus">and thus</span>
+    <span class="word" data-definition="was free from all suffering">was free from all suffering</span>.
+    <span class="audio-control" onclick="playEnglishAudio('Avalokiteshvara practiced deeply the Prajnaparamita, clearly saw that the five aggregates are all empty, and thus was free from all suffering.')"><i class="fas fa-volume-up"></i></span>
+  </p>
+  
+  <div class="concept-card">
+    <div class="concept-title">
+      <i class="fas fa-key concept-icon"></i> 關鍵名相：五蘊 / Five Aggregates
+    </div>
+    <div class="concept-languages">
+      <span class="concept-lang lang-sanskrit">梵文: pañca-skandha</span>
+      <span class="concept-lang lang-chinese">漢: 五蘊</span>
+      <span class="concept-lang lang-english">英: five aggregates, five heaps</span>
+    </div>
+    <div class="concept-meaning">
+      <p>佛教認為「我」或「個體」是由五種元素組合而成：</p>
+      <ol>
+        <li><strong>色 (rūpa)</strong>：物質形體，包括身體和外在物質世界</li>
+        <li><strong>受 (vedanā)</strong>：感受，包括愉悅、痛苦或中性感受</li>
+        <li><strong>想 (saṃjñā)</strong>：概念、想法、認知</li>
+        <li><strong>行 (saṃskāra)</strong>：意志活動、心理現象</li>
+        <li><strong>識 (vijñāna)</strong>：意識、分別心</li>
+      </ol>
+      <div class="concept-example">
+        觀自在菩薩理解到這五種組成「自我」的元素都是空的（無自性、相互依存、無常變化），從而解脫了痛苦。
+      </div>
+    </div>
+  </div>
+  
+  <div class="metaphor-box">
+    <div class="metaphor-title">
+      <i class="fas fa-lightbulb metaphor-icon"></i> 現代比喻
+    </div>
+    <p>五蘊就像一部智慧型手機，由硬體（色）、接收感應器（受）、處理軟體（想）、操作系統（行）和使用者界面（識）組成。當我們過度認同手機就是「我」時，或是「我的延伸」，手機故障或丟失會引起極大痛苦。理解每個組件都不是永恆的、獨立的，而是相互依存且會改變的，就能不再受制於它。</p>
+  </div>
+  
+  <div class="explanation">
+    <span class="explanation-title">經文要點</span>
+    <p>這段經文是心經的核心起點，指出當觀自在菩薩深入修行智慧時，祂看清了構成「我」的五個要素都沒有永恆不變的本質（空），這個覺悟讓祂超越了一切苦難。這並非說「一切不存在」，而是理解到萬物相互依存、沒有獨立不變的本質。</p>
+  </div>
+</details>
+
+<details class="fade-in">
+  <summary>
+    <span class="word" data-zhuyin="ㄕㄜˋ ㄌㄧˋ ㄗˇ" data-pinyin="shè lì zǐ" data-definition="舍利弗，佛陀的弟子，智慧第一大阿羅漢">舍利子</span>，
+    <span class="word" data-zhuyin="ㄙㄜˋ ㄅㄨˋ ㄧˋ ㄎㄨㄥ" data-pinyin="sè bù yì kōng" data-definition="色與空並無不同">色不異空</span>，
+    <span class="word" data-zhuyin="ㄎㄨㄥ ㄅㄨˋ ㄧˋ ㄙㄜˋ" data-pinyin="kōng bù yì sè" data-definition="空與色並無不同">空不異色</span>；
+    <span class="word" data-zhuyin="ㄙㄜˋ ㄐㄧˊ ㄕˋ ㄎㄨㄥ" data-pinyin="sè jí shì kōng" data-definition="色就是空">色即是空</span>，
+    <span class="word" data-zhuyin="ㄎㄨㄥ ㄐㄧˊ ㄕˋ ㄙㄜˋ" data-pinyin="kōng jí shì sè" data-definition="空就是色">空即是色</span>；
+    <span class="word" data-zhuyin="ㄕㄡˋ ㄒㄧㄤˇ ㄒㄧㄥˊ ㄓˋ" data-pinyin="shòu xiǎng xíng zhì" data-definition="感受、想法、行動、識別">受想行識</span>，
+    <span class="word" data-zhuyin="ㄧˋ ㄈㄨˋ ㄖㄨˊ ㄕˋ" data-pinyin="yì fù rú shì" data-definition="也是如此">亦復如是</span>。
+  </summary>
+  <p class="verse legge-verse">
+    <span class="lang-indicator lang-en">Legge</span>
+    <span class="word" data-definition="Shariputra，舍利弗，佛陀的弟子，智慧第一大阿羅漢">Shariputra</span>,
+    <span class="word" data-definition="form is not different from emptiness">form is not different from emptiness</span>,
+    <span class="word" data-definition="and emptiness is not different from form">and emptiness is not different from form</span>.
+    <span class="word" data-definition="Form is emptiness; emptiness is form">Form is emptiness; emptiness is form</span>.
+    <span class="word" data-definition="So too are feeling, perception, volition, and consciousness">So too are feeling, perception, volition, and consciousness</span>.
+    <span class="audio-control" onclick="playEnglishAudio('Shariputra, form is not different from emptiness, and emptiness is not different from form. Form is emptiness; emptiness is form. So too are feeling, perception, volition, and consciousness')"><i class="fas fa-volume-up"></i></span>
+  </p>
+  
+  <div class="concept-card">
+    <div class="concept-title">
+      <i class="fas fa-key concept-icon"></i> 關鍵名相：空 / Emptiness
+    </div>
+    <div class="concept-languages">
+      <span class="concept-lang lang-sanskrit">梵文: śūnyatā</span>
+      <span class="concept-lang lang-chinese">漢: 空</span>
+      <span class="concept-lang lang-english">英: emptiness, voidness</span>
+    </div>
+    <div class="concept-meaning">
+      <p>「空」是佛教哲學中最核心的概念之一，並非指「不存在」或「虛無」，此處Legge使用emptiness，但在理解時不要被漢文和英文的名相綁住，而應該瞭解：</p>
+      <ul>
+        <li>萬物沒有獨立自存的本質（無自性）</li>
+        <li>一切現象都是相互依存、條件組合而成</li>
+        <li>萬物本質上不固定、不永恆、不獨立</li>
+      </ul>
+      <div class="concept-example">
+        色不異空、空不異色，指的是物質現象（色）與空性並非分離對立的，而是同一的不同面向。「色即是空」不是說物質不存在，而是說它們沒有獨立不變的本質。
+      </div>
+    </div>
+  </div>
+  
+  <div class="metaphor-box">
+    <div class="metaphor-title">
+      <i class="fas fa-lightbulb metaphor-icon"></i> 現代比喻
+    </div>
+    <p>「色即是空，空即是色」可以通過水與波浪來理解。波浪（色）看似有獨立形體，但本質上只是水的起伏（空）；沒有水就沒有波浪，沒有波浪也難以表現水的流動本質。波浪雖然「存在」，但找不到獨立於水的「波浪本質」—它是條件（風、水、重力等）和合而生的現象。同樣，我們的身體、感受、想法等看似實體，但深究後發現它們都是相互依存、不斷變化的過程。</p>
+  </div>
+
+</details>
+
+<details class="fade-in">
+  <summary>
+    <span class="word" data-zhuyin="ㄕㄜˋ ㄌㄧˋ ㄗˇ" data-pinyin="shè lì zǐ" data-definition="舍利弗，佛陀的弟子，智慧第一大阿羅漢">舍利子</span>，
+    <span class="word" data-zhuyin="ㄕˋ ㄓㄨ ㄈㄚˇ ㄎㄨㄥ ㄒㄧㄤˋ" data-pinyin="shì zhū fǎ kōng xiàng" data-definition="一切現象都是空的">是諸法空相</span>，
+    <span class="word" data-zhuyin="ㄅㄨˋ ㄕㄥ ㄅㄨˋ ㄇㄧㄝˋ" data-pinyin="bù shēng bù miè" data-definition="不會生也不會滅">不生不滅</span>，
+    <span class="word" data-zhuyin="ㄅㄨˋ ㄍㄡˋ ㄅㄨˋ ㄐㄧㄥˋ" data-pinyin="bù gòu bù jìng" data-definition="既不髒也不淨">不垢不淨</span>，
+    <span class="word" data-zhuyin="ㄅㄨˋ ㄗㄥ ㄅㄨˋ ㄐㄧㄢˇ" data-pinyin="bù zēng bù jiǎn" data-definition="不會增加也不會減少">不增不減</span>。
+  </summary>
+  <p class="verse legge-verse">
+    <span class="lang-indicator lang-en">Legge</span>
+    <span class="word" data-definition="Shariputra，舍利弗">Shariputra</span>,
+    <span class="word" data-definition="all phenomena">all phenomena</span>
+    <span class="word" data-definition="have the characteristic of emptiness">have the characteristic of emptiness</span>:
+    <span class="word" data-definition="they do not come into being">they do not come into being</span>,
+    <span class="word" data-definition="they do not cease">they do not cease</span>,
+    <span class="word" data-definition="they are not dirty">they are not dirty</span>,
+    <span class="word" data-definition="they are not pure">they are not pure</span>,
+    <span class="word" data-definition="they do not increase">they do not increase</span>,
+    <span class="word" data-definition="they do not decrease">they do not decrease</span>.
+    <span class="audio-control" onclick="playEnglishAudio('Shariputra, all phenomena have the characteristic of emptiness: they do not come into being, they do not cease, they are not dirty, they are not pure, they do not increase, they do not decrease.')"><i class="fas fa-volume-up"></i></span>
+  </p>
+  
+  <div class="concept-card">
+    <div class="concept-title">
+      <i class="fas fa-key concept-icon"></i> 關鍵名相：諸法空相 / Empty Characteristics
+    </div>
+    <div class="concept-languages">
+      <span class="concept-lang lang-sanskrit">梵文: dharma-śūnyatā-lakṣaṇa</span>
+      <span class="concept-lang lang-chinese">漢: 諸法空相</span>
+      <span class="concept-lang lang-english">英: empty characteristics of all phenomena</span>
+    </div>
+    <div class="concept-meaning">
+      <p>此處的「法」(dharma，即咒語中的「達摩」) 指一切現象，而「空相」表示空性的特質。經文通過四組對立概念來解釋空性的特質：</p>
+      <ol>
+        <li><strong>不生不滅</strong>：超越生起和消失</li>
+        <li><strong>不垢不淨</strong>：超越污染和清淨</li>
+        <li><strong>不增不減</strong>：超越增加和減少</li>
+      </ol>
+      <div class="concept-example">
+        這四組對立表明，從空性的角度看，所有現象的本質都超越了我們通常認知的二元對立。它們並非是「無」，而是超越了我們概念性思維的框架。
+      </div>
+    </div>
+  </div>
+  
+  <div class="metaphor-box">
+    <div class="metaphor-title">
+      <i class="fas fa-lightbulb metaphor-icon"></i> 現代比喻
+    </div>
+    <p>「不生不滅，不垢不淨，不增不減」可以比作天空。雲在天空中形成（似乎「生」），又消散（似乎「滅」）；天氣可能烏雲密布（似乎「垢」）或晴空萬里（似乎「淨」）；雲層可能變厚（似乎「增」）或變薄（似乎「減」）。但天空本身並沒有因此而改變其本質—它不因雲的出現而生，不因雲的消散而滅，不因污染而變髒，不因晴朗而變淨，不因雲多而增加，不因雲少而減少。同樣，萬物的空性本質也超越了這些表面上的變化。</p>
+  </div>
+  
+  <div class="explanation">
+    <span class="explanation-title">經文要點</span>
+    <p>這段經文進一步闡述了空性的核心特質，指出從空性視角來看，一切現象都超越了我們習慣的二元對立思維。它暗示我們的概念分別（生滅、垢淨、增減等）皆為相對真理，而不是最終實相。這不是否定現象的存在，而是指出我們通常對現象的概念化理解是有限的，無法完全把握實相。</p>
+  </div>
+</details>
+
+<details class="fade-in">
+  <summary>
+    <span class="word" data-zhuyin="ㄕˋ ㄍㄨˋ ㄎㄨㄥ ㄓㄨㄥ" data-pinyin="shì gù kōng zhōng" data-definition="因此在空中">是故空中</span>，
+    <span class="word" data-zhuyin="ㄨˊ ㄙㄜˋ" data-pinyin="wú sè" data-definition="沒有色">無色</span>，
+    <span class="word" data-zhuyin="ㄨˊ ㄕㄡˋ ㄒㄧㄤˇ ㄒㄧㄥˊ ㄓˋ" data-pinyin="wú shòu xiǎng xíng zhì" data-definition="沒有受、想、行、識">無受想行識</span>；
+    <span class="word" data-zhuyin="ㄨˊ ㄧㄢˇ ㄦˇ ㄅㄧˊ ㄕㄜˊ ㄕㄣ ㄧˋ" data-pinyin="wú yǎn ěr bí shé shēn yì" data-definition="沒有六根">無眼耳鼻舌身意</span>，
+    <span class="word" data-zhuyin="ㄨˊ ㄙㄜˋ ㄕㄥ ㄒㄧㄤ ㄨㄟˋ ㄔㄨˋ ㄈㄚˇ" data-pinyin="wú sè shēng xiāng wèi chù fǎ" data-definition="沒有六塵">無色聲香味觸法</span>。
+  </summary>
+  <p class="verse legge-verse">
+    <span class="lang-indicator lang-en">Legge</span>
+    <span class="word" data-definition="Therefore in emptiness">Therefore in emptiness</span>,
+    <span class="word" data-definition="there is no form">there is no form</span>,
+    <span class="word" data-definition="no feeling">no feeling</span>,
+    <span class="word" data-definition="no perception">no perception</span>,
+    <span class="word" data-definition="no mental formations">no mental formations</span>,
+    <span class="word" data-definition="no consciousness">no consciousness</span>;
+    <span class="word" data-definition="no eyes, ears, nose, tongue, body or mind">no eyes, ears, nose, tongue, body or mind</span>;
+    <span class="word" data-definition="no form, sound, smell, taste, touch, or dharmas">no form, sound, smell, taste, touch, or dharmas</span>.
+    <span class="audio-control" onclick="playEnglishAudio('Therefore in emptiness, there is no form, no feeling, no perception, no mental formations, no consciousness; no eyes, ears, nose, tongue, body or mind; no form, sound, smell, taste, touch, or dharmas.')"><i class="fas fa-volume-up"></i></span>
+  </p>
+  
+  <div class="translation-tabs">
+    <div class="tab active" onclick="switchTab(this, 'original-explanation')">核心解釋</div>
+    <div class="tab" onclick="switchTab(this, 'six-sense-explanation')">六根六塵</div>
+    <div class="tab" onclick="switchTab(this, 'modern-connection-tab')">現代連結</div>
+  </div>
+  
+  <div id="original-explanation" class="tab-content active">
+    <div class="explanation">
+      <span class="explanation-title">經文要點</span>
+      <p>這段經文說明在「空性」的層面，五蘊（色、受、想、行、識，即外在世界傳到身體和腦袋感受的過程）、六根（眼、耳、鼻、舌、身、意，即器官）和六塵（色、聲、香、味、觸、法，即感受與理解，這邊的色並非完全等同與五蘊的色，五蘊色是外在世界，六塵色則是眼睛如何感知外在世界的色）都沒有獨立自存的本質。「無」不是指這些不存在，而是它們不以我們通常概念化的方式存在—它們都是空的，都是相互依存的。這闡述了空性不僅適用於物質現象，也適用於我們的感官、認知過程和意識本身。即是所謂若不起反應，或不觀察就不一定能夠感知其存在或受其影響。</p>
+    </div>
+    
+    <div class="concept-card">
+      <div class="concept-title">
+        <i class="fas fa-key concept-icon"></i> 「無」的真正含義
+      </div>
+      <div class="concept-meaning">
+        <p>經文中反覆出現的「無」（無色、無受想行識、無眼耳鼻舌身意等）容易被誤解為「不存在」，但實際上它表達的是：</p>
+        <ol>
+          <li>這些現象沒有獨立自存的本質</li>
+          <li>它們在勝義諦（終極真理）層面上不以凡夫概念化的形式存在</li>
+          <li>它們都是依緣而起、相互依存、沒有固定不變的自性</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  
+  <div id="six-sense-explanation" class="tab-content">
+    <div class="concept-card">
+      <div class="concept-title">
+        <i class="fas fa-key concept-icon"></i> 六根六塵
+      </div>
+      <div class="concept-languages">
+        <span class="concept-lang lang-sanskrit">梵文: ṣaḍāyatana / ṣaḍviṣaya</span>
+        <span class="concept-lang lang-chinese">漢: 六根 / 六塵</span>
+        <span class="concept-lang lang-english">英: six sense bases / six sense objects</span>
+      </div>
+      <div class="concept-meaning">
+        <p><strong>六根（六種感官基礎）：</strong></p>
+        <ol>
+          <li>眼根（視覺器官）</li>
+          <li>耳根（聽覺器官）</li>
+          <li>鼻根（嗅覺器官）</li>
+          <li>舌根（味覺器官）</li>
+          <li>身根（觸覺器官）</li>
+          <li>意根（心識，精神感知）</li>
+        </ol>
+        
+        <p><strong>六塵（六種感官對象）：</strong></p>
+        <ol>
+          <li>色塵（視覺對象），應該要與五蘊色小心審慎地思辨其不同之處</li>
+          <li>聲塵（聽覺對象）</li>
+          <li>香塵（嗅覺對象）</li>
+          <li>味塵（味覺對象）</li>
+          <li>觸塵（觸覺對象）</li>
+          <li>法塵（意識對象，如思想、記憶、概念）</li>
+        </ol>
+        
+        <p>當六根與六塵接觸時產生六識，共同構成我們的認知經驗。心經指出，從空性角度看，這些都沒有獨立自存的實體。換句話說，外在世界由感官接受以後就會產生六識來分別，譬如說耳朵不會去感知紅綠藍光，只能感知光的熱，但是是耳朵皮膚的感知卻不是耳朵能聽到光的聲音。我們也可以把聲音轉成頻譜，用記譜的方式或是物理聲學方式表示成為眼睛可以感知的部份，但畢竟是將聲音（聲塵）轉換為其他器官（眼根）可以理解的部份（色塵）。但這些東西若我們不去感知，就不會產生意義，或是我們因為疾病受損，它們可能存在但無法與我們產生關連。</p>
+      </div>
+    </div>
+  </div>
+  
+  <div id="modern-connection-tab" class="tab-content">
+    <div class="modern-connection">
+      <div class="connection-title">
+        <i class="fas fa-sync-alt connection-icon"></i> 現代認知科學連結
+      </div>
+      <p>心經中「無眼耳鼻舌身意，無色聲香味觸法」的概念在現代認知科學中找到了呼應。研究表明，我們的感官體驗並非客觀現實的「照相機式」紀錄，而是大腦基於有限感官輸入和先前經驗所構建的模型。例如：</p>
+      <ul>
+        <li>顏色感知研究顯示，「紅色」不存在於外部世界，而是大腦對特定波長光的詮釋</li>
+        <li>「錯覺」實驗證明同一物理刺激可因環境不同而被感知為完全不同的體驗</li>
+        <li>記憶研究表明我們的回憶不是固定檔案，而是每次提取都會重構</li>
+      </ul>
+      <p>這些發現指向感官和感官對象的「非實體性」，與佛教所說的「無眼耳鼻舌身意，無色聲香味觸法」有驚人的相似。</p>
+    </div>
+    
+    <div class="metaphor-box">
+      <div class="metaphor-title">
+        <i class="fas fa-lightbulb metaphor-icon"></i> 現代比喻
+      </div>
+      <p>「無眼耳鼻舌身意，無色聲香味觸法」可以比作虛擬實境體驗。當我們戴上VR（虛擬實境）頭盔，「看到」的風景、「聽到」的聲音都不是獨立存在的實體，而是相互依存的數據流和解釋系統的產物。視覺（眼）和影像（色）在VR（虛擬實境）世界中都是「空」的—它們依賴設備、軟體和我們的感知系統才能「存在」。同樣，在實相層面，我們的感官和感官對象也都是相互依存、條件組合而成，沒有獨立固定的本質。</p>
+    </div>
+  </div>
+</details>
+
+
+<details class="fade-in">
+  <summary>
+    <span class="word" data-zhuyin="ㄆㄨˊ ㄉㄧˋ ㄙㄚˋ ㄉㄨㄛˇ" data-pinyin="pú dì sà duō" data-definition="菩薩">菩提薩埵</span>，
+    <span class="word" data-zhuyin="ㄧ" data-pinyin="yī" data-definition="依靠">依</span>
+    <span class="word" data-zhuyin="ㄅㄛ ㄖㄜˇ ㄅㄛ ㄌㄨㄛˊ ㄇㄧˋ ㄉㄨㄛ ㄍㄨˋ" data-pinyin="bō rě bō luó mì duō gù" data-definition="因為般若波羅蜜多">般若波羅蜜多故</span>，
+    <span class="word" data-zhuyin="ㄒㄧㄣ ㄨˊ ㄍㄨㄞ ㄞˋ" data-pinyin="xīn wú guāi ài" data-definition="心無障礙">心無罣礙</span>；
+    <span class="word" data-zhuyin="ㄨˊ ㄍㄨㄞ ㄞˋ ㄍㄨˋ" data-pinyin="wú guāi ài gù" data-definition="因為沒有障礙">無罣礙故</span>，
+    <span class="word" data-zhuyin="ㄨˊ ㄧㄡˇ ㄎㄨㄥˇ ㄅㄨˋ" data-pinyin="wú yǒu kǒng bù" data-definition="沒有恐懼">無有恐怖</span>。
+  </summary>
+  <p class="verse legge-verse">
+    <span class="lang-indicator lang-en">Legge</span>
+    <span class="word" data-definition="Because">Because</span>
+    <span class="word" data-definition="bodhisattvas">bodhisattvas</span>
+    <span class="word" data-definition="rely on">rely on</span>
+    <span class="word" data-definition="Prajnaparamita">Prajnaparamita</span>,
+    <span class="word" data-definition="their minds">their minds</span>
+    <span class="word" data-definition="have no hindrance">have no hindrance</span>;
+    <span class="word" data-definition="because">because</span>
+    <span class="word" data-definition="there is no hindrance">there is no hindrance</span>,
+    <span class="word" data-definition="they have no fear">they have no fear</span>.
+    <span class="audio-control" onclick="playEnglishAudio('Because bodhisattvas rely on Prajnaparamita, their minds have no hindrance; because there is no hindrance, they have no fear.')"><i class="fas fa-volume-up"></i></span>
+  </p>
+  
+  <div class="concept-card">
+    <div class="concept-title">
+      <i class="fas fa-key concept-icon"></i> 關鍵名相：菩提薩埵 / Bodhisattva
+    </div>
+    <div class="concept-languages">
+      <span class="concept-lang lang-sanskrit">梵文: bodhisattva</span>
+      <span class="concept-lang lang-chinese">漢: 菩提薩埵/菩薩</span>
+      <span class="concept-lang lang-english">英: enlightenment being</span>
+    </div>
+    <div class="concept-meaning">
+      <p>「菩提薩埵」是梵文音譯，簡稱「菩薩」，直譯為覺有情，由兩部分組成：</p>
+      <ul>
+        <li><strong>菩提 (bodhi)</strong>：覺悟、智慧</li>
+        <li><strong>薩埵 (sattva)</strong>：有情、眾生</li>
+      </ul>
+      <p>菩薩是指發願追求覺悟並同時幫助所有眾生解脫痛苦的修行者。大乘佛教特別強調菩薩理想，認為真正的覺悟包含智慧（自己覺悟）和慈悲（幫助祂人覺悟）兩個方面。</p>
+      <div class="concept-example">
+        菩薩精神體現在「上求佛道，下化眾生」的理念中—既追求自身的覺悟，也致力於幫助所有眾生脫離苦難。
+      </div>
+    </div>
+  </div>
+  
+  <div class="concept-card">
+    <div class="concept-title">
+      <i class="fas fa-key concept-icon"></i> 關鍵名相：般若波羅蜜多 / Prajnaparamita
+    </div>
+    <div class="concept-languages">
+      <span class="concept-lang lang-sanskrit">梵文: prajñāpāramitā</span>
+      <span class="concept-lang lang-chinese">漢: 般若波羅蜜多</span>
+      <span class="concept-lang lang-english">英: perfection of wisdom</span>
+    </div>
+    <div class="concept-meaning">
+      <p>「般若波羅蜜多」由兩部分組成：</p>
+      <ul>
+        <li><strong>般若 (prajñā)</strong>：智慧，特指能洞察實相的智慧</li>
+        <li><strong>波羅蜜多 (pāramitā)</strong>：到彼岸、完成、圓滿</li>
+      </ul>
+      <p>這是大乘佛教中六波羅蜜（或十波羅蜜）之一，指圓滿的智慧，能夠透視現象背後的空性本質。般若智慧不同於一般知識或概念性理解，它是直接洞察實相的非概念性智慧。</p>
+      <div class="concept-example">
+        心經強調，正是因為依靠這種圓滿智慧，菩薩能夠超越執著和恐懼。「心無罣礙」表明般若智慧能消除心中的障礙和束縛。
+      </div>
+    </div>
+  </div>
+  
+  <div class="metaphor-box">
+    <div class="metaphor-title">
+      <i class="fas fa-lightbulb metaphor-icon"></i> 現代比喻
+    </div>
+    <p>「菩薩依般若波羅蜜多故，心無罣礙；無罣礙故，無有恐怖」可以比作攀登高山的人擁有了最先進的裝備和地圖。普通登山者（凡夫）可能因為對山勢的未知而充滿恐懼和障礙感，但擁有完整地圖和設備的登山者（菩薩依靠般若智慧）能清楚看到路徑、危險和捷徑，因此心中無障礙、無恐懼，可以自在前行並幫助其祂登山者。般若智慧就像這樣的「實相地圖」，讓我們看清生命中的執著和恐懼源自於對實相的誤解。</p>
+  </div>
+</details>
+
+<details class="fade-in mantra-section">
+  <summary>
+    <span class="word" data-zhuyin="ㄐㄧㄝ ㄉㄧˋ" data-pinyin="jiē dì" data-definition="前往">揭諦</span>
+    <span class="word" data-zhuyin="ㄐㄧㄝ ㄉㄧˋ" data-pinyin="jiē dì" data-definition="前往">揭諦</span>
+    <span class="word" data-zhuyin="ㄅㄛ ㄌㄨㄛˊ ㄐㄧㄝ ㄉㄧˋ" data-pinyin="bō luó jiē dì" data-definition="波羅前往">波羅揭諦</span>
+    <span class="word" data-zhuyin="ㄅㄛ ㄌㄨㄛˊ ㄙㄥ ㄐㄧㄝ ㄉㄧˋ" data-pinyin="bō luó sēng jiē dì" data-definition="波羅僧前往">波羅僧揭諦</span>
+    <span class="word" data-zhuyin="ㄆㄨˊ ㄊㄧˊ ㄙㄚˋ ㄆㄛ ㄏㄜ" data-pinyin="pú tí sà pó hē" data-definition="菩提薩婆訶，咒語結尾">菩提薩婆訶</span>。
+  </summary>
+  <div class="mantra-container">
+    <p class="verse mantra-verse">
+      <span class="lang-indicator lang-zh">梵</span>
+      <span class="mantra-word">Gate gate pāragate pārasaṃgate bodhi svāhā</span>
+      <span class="audio-control" onclick="playMantraAudio('Gate gate paragate parasamgate bodhi svaha')"><i class="fas fa-volume-up"></i></span>
+    </p>
+    
+    <div class="concept-card">
+      <div class="concept-title">
+        <i class="fas fa-key concept-icon"></i> 心經咒 / Heart Sutra Mantra
+      </div>
+      <div class="concept-languages">
+        <span class="concept-lang lang-sanskrit">梵文: gate gate pāragate pārasaṃgate bodhi svāhā</span>
+        <span class="concept-lang lang-chinese">漢音譯: 揭諦揭諦，波羅揭諦，波羅僧揭諦，菩提薩婆訶</span>
+      </div>
+      <div class="concept-meaning">
+        <p>梵文咒語的字義分析：</p>
+        <ul>
+          <li><strong>gate</strong>：去、前進（命令式：去吧！）</li>
+          <li><strong>pāragate</strong>：去到彼岸、超越</li>
+          <li><strong>pārasaṃgate</strong>：完全去到彼岸、徹底超越</li>
+          <li><strong>bodhi</strong>：覺悟、證悟</li>
+          <li><strong>svāhā</strong>：祝福、如是、成就（咒語結尾常用語）</li>
+        </ul>
+        <div class="concept-example">
+          這個咒語象徵修行的逐步深入過程：從初步修行（gate），到超越常見的二元執著（pāragate），特別是一些二元論的哲學思潮，再到徹底超越所有概念和執著（pārasaṃgate），最終達到完全覺悟（bodhi svāhā）。
+        </div>
+      </div>
+    </div>
+    
+    <div class="translation-tabs">
+      <div class="tab active" onclick="switchMantraTab(this, 'literal-translation')">字面翻譯</div>
+      <div class="tab" onclick="switchMantraTab(this, 'metaphorical-translation')">象徵意義</div>
+      <div class="tab" onclick="switchMantraTab(this, 'practice-guide')">修持指引</div>
+    </div>
+    
+    <div id="literal-translation" class="tab-content active">
+      <p class="verse mantra-meaning">
+        <span class="lang-indicator lang-zh">直譯</span>
+        去吧，去吧，去到彼岸吧，完全去到彼岸吧，覺悟，成就！
+      </p>
+      <p class="verse b1-verse">
+        <span class="lang-indicator lang-en">英譯</span>
+        Go, go, go beyond, go completely beyond, awaken, rejoice!
+        <span class="audio-control" onclick="playEnglishAudio('Go, go, go beyond, go completely beyond, awaken, rejoice!')"><i class="fas fa-volume-up"></i></span>
+      </p>
+    </div>
+    
+    <div id="metaphorical-translation" class="tab-content">
+      <div class="metaphor-box">
+        <div class="metaphor-title">
+          <i class="fas fa-lightbulb metaphor-icon"></i> 象徵意義
+        </div>
+        <p>心經咒語象徵著修行者的精神旅程，就像渡河到達彼岸：</p>
+        <ol>
+          <li><strong>此岸</strong>：代表世間的迷惑、執著和痛苦</li>
+          <li><strong>渡河</strong>：代表修行的過程</li>
+          <li><strong>彼岸</strong>：代表覺悟、解脫的境界</li>
+        </ol>
+        <p>「去吧，去吧」重複兩次，表示堅定向前的決心和鼓勵。「去到彼岸」指超越二元對立的概念。「完全去到彼岸」則指完全超越所有概念執著。「覺悟，成就」是對最終目標的確認。</p>
+        <p>整個咒語可理解為：「繼續前進，不要停留，超越表象和二元對立，徹底超越所有概念和執著，達到圓滿覺悟！」</p>
+      </div>
+    </div>
+</details>
+
+<div class="resource-section fade-in">
+  <h3>📚 翻譯版本與延伸資源</h3>
+  <div class="translation-tabs">
+    <div class="tab active" onclick="switchResourceTab(this, 'translation-resources')">翻譯版本</div>
+    <div class="tab" onclick="switchResourceTab(this, 'academic-resources')">學術資源</div>
+    <div class="tab" onclick="switchResourceTab(this, 'practice-resources')">修行指引</div>
+  </div>
+  
+  <div id="translation-resources" class="tab-content active">
+    <ul>
+      <li><strong>漢譯經典：</strong> 除玄奘譯本外，尚有鳩摩羅什、真諦等多位譯師的譯本，各有側重</li>
+      <li><strong>現代學術翻譯：</strong> 如 <strong>Edward Conze</strong>、<strong>Red Pine</strong>、<strong>Thích Nhất Hạnh</strong> 等版本，未進入公版領域，不引述全文</li>
+      <li><strong>當代漢語註釋：</strong> 
+        <ul>
+          <li><a href="https://www.abtemple.org/" target="_blank"><i class="fas fa-external-link-alt"></i> 大毘盧寺成觀法師註釋版</a></li>
+          <li><a href="https://www.fgs.org.tw/" target="_blank"><i class="fas fa-external-link-alt"></i> 佛光山星雲大師解說</a></li>
+          <li><a href="https://www.ddc.org.tw/" target="_blank"><i class="fas fa-external-link-alt"></i> 法鼓山聖嚴法師心經講記</a></li>
+        </ul>
+      </li>
+      <li><strong>多語對照資源：</strong>
+        <ul>
+          <li><a href="https://suttacentral.net/" target="_blank"><i class="fas fa-external-link-alt"></i> SuttaCentral (國際對照)</a></li>
+          <li><a href="https://www.bdk.tw/tripitaka.html" target="_blank"><i class="fas fa-external-link-alt"></i> 佛教傳道協會（BDK 台灣，開放公版）</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  
+  <div id="academic-resources" class="tab-content">
+    <ul>
+      <li><strong>哈佛大學開放課程：</strong> <a href="https://online-learning.harvard.edu/course/buddhism-through-its-scriptures" target="_blank"><i class="fas fa-external-link-alt"></i> Buddhism Through Its Scriptures</a> — 由哈佛宗教學者 Charles Hallisey 教授講授的佛教經典閱讀指南</li>
+      <li><strong>牛津佛學研究中心：</strong> <a href="https://www.ocbs.org/resources/" target="_blank"><i class="fas fa-external-link-alt"></i> Oxford Centre for Buddhist Studies</a> — 提供佛教經典學術研究資源</li>
+      <li><strong>史丹佛哲學百科：</strong> <a href="https://plato.stanford.edu/entries/buddha/" target="_blank"><i class="fas fa-external-link-alt"></i> Stanford Encyclopedia of Philosophy: Buddha</a> — 提供佛教哲學的學術概述</li>
+      <li><strong>佛學數位圖書館：</strong> <a href="https://www.bdrc.io/" target="_blank"><i class="fas fa-external-link-alt"></i> Buddhist Digital Resource Center</a> — 數位化佛教文獻資料庫</li>
+      <li><strong>CBETA 電子佛典：</strong> <a href="https://www.cbeta.org/" target="_blank"><i class="fas fa-external-link-alt"></i> 中華電子佛典協會</a> — 提供漢傳佛教經典的數位全文</li>
+    </ul>
+  </div>
+  
+  <div id="practice-resources" class="tab-content">
+    <ul>
+      <li><strong>正念冥想指引：</strong> <a href="https://www.mindfulnessbellsanctuary.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Mindfulness Bell Sanctuary</a> — 提供以心經為基礎的正念練習</li>
+      <li><strong>禪修中心：</strong>
+        <ul>
+          <li><a href="https://dharma.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Insight Meditation Society</a> — 美國著名禪修中心</li>
+          <li><a href="https://plumvillage.org/" target="_blank"><i class="fas fa-external-link-alt"></i> Plum Village</a> — 一行禪師創立的正念生活中心</li>
+          <li><a href="https://ddm.org.tw/" target="_blank"><i class="fas fa-external-link-alt"></i> 法鼓山國際禪修中心</a> — 提供漢傳禪修課程</li>
+        </ul>
+      </li>
+      <li><strong>應用程式：</strong>
+        <ul>
+          <li><a href="#" target="_blank"><i class="fas fa-mobile-alt"></i> Insight Timer</a> — 含有心經誦讀和引導冥想</li>
+          <li><a href="#" target="_blank"><i class="fas fa-mobile-alt"></i> Plum Village App</a> — 一行禪師傳統的正念練習</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="future-plans fade-in">
+  <h3>🔮 未來規劃</h3>
+  <p>本站將逐步串連更多台灣在地特色與國際佛學資源：</p>
+  <div class="plans-list">
+    <div class="plan-item">
+      <div class="plan-icon"><i class="fas fa-book"></i></div>
+      <strong>佛教詞彙動態卡片</strong>
+      <p>整合多種佛學詞典的互動式卡片系統，提供梵漢英多語對照</p>
+    </div>
+    <div class="plan-item">
+      <div class="plan-icon"><i class="fas fa-brain"></i></div>
+      <strong>佛教概念實例解說</strong>
+      <p>以現代例子、多媒體和比喻解釋佛教概念，旨在接引種善根</p>
+    </div>
+    <div class="plan-item">
+      <div class="plan-icon"><i class="fas fa-scroll"></i></div>
+      <strong>法數與系統化知識</strong>
+      <p>建立視覺化的佛教知識體系，方便初學者入門</p>
+    </div>
+    <div class="plan-item">
+      <div class="plan-icon"><i class="fas fa-globe-asia"></i></div>
+      <strong>佛教旅行與文化資源</strong>
+      <p>連結台灣和國際佛教文化場所，提供多語言旅行和文化學習資源</p>
+    </div>
+  </div>
+  
+  <div class="modern-connection">
+    <div class="connection-title">
+      <i class="fas fa-sync-alt connection-icon"></i> 教學資源發展理念
+    </div>
+    <p>依據牛津大學佛學研究中心和哈佛大學佛教經典教學方法，本站遵循以下原則開發資源：</p>
+    <ol>
+      <li><strong>保留原典完整性</strong>：不簡化經文深度，而是通過多層次註解系統幫助理解</li>
+      <li><strong>提供文化脈絡</strong>：佛法不只是哲學概念，也有其文化和歷史脈絡</li>
+      <li><strong>連結現代生活</strong>：透過現代比喻和科學連結，使古老智慧在當代生活中有所應用</li>
+      <li><strong>多元學習路徑</strong>：提供學術研究、修行實踐和文化理解等多元進入點</li>
+    </ol>
+    <p>這一特色讓我們的資源既適合深入學術研究，也適合日常生活中的應用和理解。</p>
+  </div>
+</div>
+
+<footer class="fade-in">
+  <div class="copyright">
+    <p>本站特色：</p>
+    <ul>
+      <li>依據牛津、哈佛等佛學教學方法設計的多層次理解系統</li>
+      <li>融合台灣在地佛教文化視角與國際學術資源</li>
+      <li>保留經文完整性，同時提供現代連結和生活應用</li>
+      <li>互動式學習工具（滑鼠查詢、聲音朗讀、概念解釋卡）</li>
+    </ul>
+    <p style="margin-top: 15px;">
+      創用CC-姓名標示-非商業性-相同方式分享 Attribution-Noncommercial-Share Alike<br>
+      Creative Commons Attribution-Noncommercial-Share Alike<br>
+      since 佛曆 2569 (B.E.) / 2025 (C.E.)
+    </p>
+  </div>
+</footer>
+
+<div id="tooltip"></div>
+
+<script>
+  // Tooltip functionality
+  const tooltip = document.getElementById('tooltip');
+  document.body.addEventListener('mousemove', e => {
+    const t = e.target;
+    if(!t.classList.contains('word')) { 
+      tooltip.style.display = 'none'; 
+      return;
+    }  
+    
+    const defs = [t.dataset.definition, t.dataset.zhuyin, t.dataset.pinyin, t.dataset.kk, t.dataset.ipa]
+      .filter(x => x).map(x => x).join('<br>');
+    tooltip.innerHTML = `<strong>${t.textContent}</strong><br>${defs}`;
+    
+    let x = e.pageX + 12, y = e.pageY - tooltip.offsetHeight - 12;
+    if (x > window.innerWidth - tooltip.offsetWidth - 20) 
+      x = window.innerWidth - tooltip.offsetWidth - 20;
+    if (y < 20) 
+      y = e.pageY + 20;
+    
+    Object.assign(tooltip.style, {
+      left: x + 'px',
+      top: y + 'px',
+      display: 'block'
+    });
+  });
+
+  // Text-to-speech functionality
+  function playChineseAudio(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-TW';
+    speechSynthesis.speak(utterance);
+  }
+
+  function playEnglishAudio(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    speechSynthesis.speak(utterance);
+  }
+
+  function playMantraAudio(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'sa'; // Sanskrit
+    utterance.rate = 0.8; // Slower rate for mantra
+    speechSynthesis.speak(utterance);
+  }
+
+  document.body.addEventListener('click', e => {
+    if (e.target.classList.contains('word')) {
+      const text = e.target.textContent;
+      // Detect language and use appropriate voice
+      if (/[\u4e00-\u9fa5]/.test(text)) { // Chinese characters
+        playChineseAudio(text);
+      } else { // Default to English
+        playEnglishAudio(text);
+      }
+    }
+  });
+
+  // Dark mode toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const icon = themeToggle.querySelector('i');
+
+  // Check for saved theme preference or default to light
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  if (savedTheme === 'dark') {
+    body.classList.add('dark-theme');
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
+  }
+
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-theme');
+    
+    // Toggle icon
+    if (body.classList.contains('dark-theme')) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('theme', 'light');
+    }
+  });
+
+  // Scroll animation
+  function checkScroll() {
+    const elements = document.querySelectorAll('.fade-in');
+    const triggerBottom = window.innerHeight * 0.8;
+
+    elements.forEach(element => {
+      const elementTop = element.getBoundingClientRect().top;
+      if (elementTop < triggerBottom) {
+        element.classList.add('visible');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', checkScroll);
+  window.addEventListener('load', checkScroll);
+  window.addEventListener('resize', checkScroll);
+
+  // Initialize elements that are already in view
+  checkScroll();
+  
+  // Tab system for mantra sections
+  function switchMantraTab(selectedTab, contentId) {
+    // Remove active class from all tabs
+    var tabs = document.querySelectorAll('.translation-tabs .tab');
+    tabs.forEach(function(tab) {
+      tab.classList.remove('active');
+    });
+    
+    // Add active class to selected tab
+    selectedTab.classList.add('active');
+    
+    // Hide all tab contents
+    var contents = document.querySelectorAll('.mantra-container .tab-content');
+    contents.forEach(function(content) {
+      content.classList.remove('active');
+    });
+    
+    // Show selected content
+    document.getElementById(contentId).classList.add('active');
+  }
+  
+  // Tab system for resource sections
+  function switchResourceTab(selectedTab, contentId) {
+    // Remove active class from all tabs
+    var tabs = document.querySelectorAll('.resource-section .tab');
+    tabs.forEach(function(tab) {
+      tab.classList.remove('active');
+    });
+    
+    // Add active class to selected tab
+    selectedTab.classList.add('active');
+    
+    // Hide all tab contents
+    var contents = document.querySelectorAll('.resource-section .tab-content');
+    contents.forEach(function(content) {
+      content.classList.remove('active');
+    });
+    
+    // Show selected content
+    document.getElementById(contentId).classList.add('active');
+  }
+  
+  // Tab system for content sections
+  function switchTab(selectedTab, contentId) {
+    // Remove active class from all tabs
+    var tabs = document.querySelectorAll('.translation-tabs .tab');
+    tabs.forEach(function(tab) {
+      tab.classList.remove('active');
+    });
+    
+    // Add active class to selected tab
+    selectedTab.classList.add('active');
+    
+    // Hide all tab contents
+    var contents = document.querySelectorAll('.tab-content');
+    contents.forEach(function(content) {
+      content.classList.remove('active');
+    });
+    
+    // Show selected content
+    document.getElementById(contentId).classList.add('active');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>🏆 精進排行榜</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: 'Noto Serif TC', serif;
+      background: #fffdf6;
+      padding: 2em;
+      max-width: 960px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #5a3825;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2em;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.7em;
+      text-align: center;
+    }
+    th {
+      background-color: #eee4d0;
+    }
+    .reset-btn {
+      display: block;
+      margin: auto;
+      padding: 0.5em 1em;
+      background-color: #946c45;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🏆 精進排行榜</h1>
+
+  <h2>🌿 最佳精進榜（累積正確數）</h2>
+  <table id="topTable">
+    <thead>
+      <tr><th>暱稱</th><th>正確句數</th><th>總題數</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>🚀 勇猛精進榜（進步幅度最大）</h2>
+  <table id="improveTable">
+    <thead>
+      <tr><th>暱稱</th><th>第一次分數</th><th>最近分數</th><th>進步值</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button class="reset-btn" onclick="resetRecords()">清除所有紀錄</button>
+
+  <script>
+    const topTable = document.querySelector("#topTable tbody");
+    const improveTable = document.querySelector("#improveTable tbody");
+
+    function collectData(source) {
+      const records = JSON.parse(localStorage.getItem(source) || "[]");
+      const stats = {};
+
+      records.forEach(r => {
+        const name = r.name || "無名行者";
+        if (!stats[name]) stats[name] = { correct: 0, total: 0, scores: [] };
+        stats[name].correct += r.correct ? 1 : 0;
+        stats[name].total += 1;
+        stats[name].scores.push(r.correct ? 1 : 0);
+      });
+
+      return stats;
+    }
+
+    function loadRanking() {
+      const allStats = [collectData("sentenceRecord"), collectData("vocabRecord")];
+
+      const mergedStats = {};
+      allStats.forEach(group => {
+        for (const [name, stat] of Object.entries(group)) {
+          if (!mergedStats[name]) mergedStats[name] = { correct: 0, total: 0, scores: [] };
+          mergedStats[name].correct += stat.correct;
+          mergedStats[name].total += stat.total;
+          mergedStats[name].scores = mergedStats[name].scores.concat(stat.scores);
+        }
+      });
+
+      // 🌿 Best Performer
+      const sorted = Object.entries(mergedStats).sort((a, b) => b[1].correct - a[1].correct);
+      topTable.innerHTML = sorted.map(([name, stat]) =>
+        `<tr><td>${name}</td><td>${stat.correct}</td><td>${stat.total}</td></tr>`).join("");
+
+      // 🚀 Improvement
+      const improved = Object.entries(mergedStats).map(([name, stat]) => {
+        const scores = stat.scores;
+        const first = scores[0] || 0;
+        const last = scores[scores.length - 1] || 0;
+        return { name, first, last, diff: last - first };
+      }).sort((a, b) => b.diff - a.diff);
+
+      improveTable.innerHTML = improved.map(s =>
+        `<tr><td>${s.name}</td><td>${s.first}</td><td>${s.last}</td><td>${s.diff}</td></tr>`).join("");
+    }
+
+    function resetRecords() {
+      if (confirm("確定要清除所有紀錄？這將無法復原。")) {
+        localStorage.removeItem("sentenceRecord");
+        localStorage.removeItem("vocabRecord");
+        location.reload();
+      }
+    }
+
+    loadRanking();
+  </script>
+
+</body>
+</html>
