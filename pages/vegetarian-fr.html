@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>🇫🇷 法文素食用語卡</title>
+  <title>🇫🇷 法國素食用語學習卡</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../css/assetsstyles.css">
   <style>
@@ -10,6 +10,8 @@
       font-family: "Noto Sans TC", sans-serif;
       background: #fcfcf9;
       padding: 2em;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     h1 {
@@ -17,64 +19,467 @@
       color: #4b3a32;
     }
 
+    .filters {
+      display: flex;
+      justify-content: center;
+      margin: 1.5em 0;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+
+    select {
+      padding: 0.5em;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: white;
+      font-family: inherit;
+      margin: 0 0.5em;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      margin: 0.5em;
+    }
+
+    .filter-label {
+      margin-right: 0.5em;
+      font-weight: bold;
+      color: #4b3a32;
+    }
+
     .card {
       background: #fff;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       border-radius: 8px;
-      padding: 1em;
-      margin: 1em 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 1.2em;
+      margin: 1.2em 0;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+    }
+
+    .level-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #5c6bc0;
+      color: white;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9em;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .level-a1 {
+      background: #4CAF50; /* 綠色 - 入門 */
+    }
+
+    .level-a2 {
+      background: #FFC107; /* 黃色 - 初級 */
+    }
+
+    .level-b1 {
+      background: #2196F3; /* 藍色 - 中級 */
+    }
+
+    .category-tag {
+      display: inline-block;
+      padding: 0.2em 0.6em;
+      background: #e9e4f5;
+      color: #5d4a7e;
+      border-radius: 4px;
+      font-size: 0.85em;
+      margin-bottom: 0.6em;
+    }
+
+    .zh-text {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 0.5em;
+    }
+
+    .fr-text {
+      font-size: 1.15em;
+      color: #3f51b5;
+      font-weight: 500;
+      margin-bottom: 0.8em;
     }
 
     .details {
       display: none;
-      background: #eef6ff;
-      margin-top: 0.5em;
-      padding: 0.6em;
+      background: #f3f8ff;
+      margin-top: 0.8em;
+      padding: 1em;
+      border-radius: 6px;
+      border-left: 4px solid #5c6bc0;
+    }
+
+    .pronunciation {
+      color: #888;
+      font-style: italic;
+      margin-bottom: 0.5em;
+    }
+
+    .definition {
+      line-height: 1.5;
+    }
+
+    .example {
+      margin-top: 0.8em;
+      padding: 0.8em;
+      background: #f5f5f5;
       border-radius: 4px;
+      font-style: italic;
+      color: #555;
     }
 
     button {
       background-color: #5c6bc0;
       color: white;
       border: none;
-      padding: 0.4em 0.8em;
+      padding: 0.6em 1em;
       border-radius: 4px;
       cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      transition: background-color 0.2s;
     }
 
     button:hover {
       background-color: #3f51b5;
     }
+
+    .intro-text {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 2em;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 2em;
+      font-style: italic;
+      color: #777;
+    }
+
+    .level-info {
+      display: flex;
+      justify-content: center;
+      margin: 0.5em 0 1.5em;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+
+    .level-indicator {
+      display: flex;
+      align-items: center;
+      margin: 0 0.5em;
+    }
+
+    .level-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1em;
+      }
+      
+      .filters {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .filter-group {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      select {
+        width: 60%;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <h1>🇫🇷 法文素食常用語彙</h1>
-  <p style="text-align:center;">Vegetarian French phrases for travel and daily life.</p>
+  <h1>🇫🇷 法國素食餐廳實用會話</h1>
+  <p class="intro-text">在法國旅遊或生活時，這些素食相關用語將幫助您順利點餐和溝通飲食需求。每個用語都標註了歐洲共同語言參考架構 (CEFR) 的等級，從入門 (A1) 到中級 (B1)。</p>
+
+  <div class="level-info">
+    <div class="level-indicator">
+      <div class="level-dot level-a1"></div>
+      <span>A1 入門</span>
+    </div>
+    <div class="level-indicator">
+      <div class="level-dot level-a2"></div>
+      <span>A2 初級</span>
+    </div>
+    <div class="level-indicator">
+      <div class="level-dot level-b1"></div>
+      <span>B1 中級</span>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-group">
+      <div class="filter-label">難度：</div>
+      <select id="level-filter">
+        <option value="all">全部等級</option>
+        <option value="A1">A1 入門</option>
+        <option value="A2">A2 初級</option>
+        <option value="B1">B1 中級</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">情境：</div>
+      <select id="category-filter">
+        <option value="all">全部情境</option>
+        <option value="restaurant">餐廳點餐</option>
+        <option value="food-type">食物種類</option>
+        <option value="request">特殊需求</option>
+        <option value="ingredients">食材詢問</option>
+        <option value="conversation">日常對話</option>
+      </select>
+    </div>
+  </div>
 
   <div id="cards-container"></div>
+  <div id="no-results" class="no-results" style="display: none;">沒有符合您篩選條件的結果，請嘗試其他篩選選項。</div>
 
   <script>
-    async function loadData() {
-      const res = await fetch("../data/vegetarian-fr.json");
-      const data = await res.json();
-      const container = document.getElementById("cards-container");
+    // 法國素食用語資料
+    const vegetarianPhrases = [
+      {
+        zh: "我是素食者",
+        fr: "Je suis végétarien / végétarienne",
+        ipa: "/ʒə sɥi veʒetaʁjɛ̃ / veʒetaʁjɛn/",
+        definition: "男性用「végétarien」，女性用「végétarienne」。這是最基本的表達素食身份的句子。",
+        level: "A1",
+        category: "conversation",
+        example: "在餐廳入座時，可以直接告訴服務員：「Je suis végétarien, avez-vous un menu adapté?」(我是素食者，您有適合的菜單嗎？)"
+      },
+      {
+        zh: "我不吃肉",
+        fr: "Je ne mange pas de viande",
+        ipa: "/ʒə nə mɑ̃ʒ pa də vjɑ̃d/",
+        definition: "直接表明不吃肉的飲食習慣，清晰明瞭。",
+        level: "A1",
+        category: "request",
+        example: "當服務員推薦肉類菜品時，可以回應：「Désolé, je ne mange pas de viande.」(抱歉，我不吃肉。)"
+      },
+      {
+        zh: "這道菜有肉嗎？",
+        fr: "Est-ce que ce plat contient de la viande ?",
+        ipa: "/ɛs kə sə pla kɔ̃tjɛ̃ də la vjɑ̃d/",
+        definition: "詢問特定菜品是否含有肉類的常用問句。",
+        level: "A1",
+        category: "ingredients",
+        example: "看到菜單上不確定的菜品，可以詢問：「Est-ce que ce plat contient de la viande ?」"
+      },
+      {
+        zh: "我想要一個素食沙拉",
+        fr: "Je voudrais une salade végétarienne",
+        ipa: "/ʒə vudʁɛ yn salad veʒetaʁjɛn/",
+        definition: "點素食沙拉的基本句型，「Je voudrais」是禮貌的「我想要」表達方式。",
+        level: "A1",
+        category: "restaurant",
+        example: "點餐時：「Je voudrais une salade végétarienne et un verre d'eau, s'il vous plaît.」(我想要一個素食沙拉和一杯水，謝謝。)"
+      },
+      {
+        zh: "您有素食菜單嗎？",
+        fr: "Avez-vous un menu végétarien ?",
+        ipa: "/ave vu œ̃ məny veʒetaʁjɛ̃/",
+        definition: "詢問餐廳是否提供專門的素食菜單。",
+        level: "A1",
+        category: "restaurant",
+        example: "剛進入餐廳時可以詢問：「Bonjour, avez-vous un menu végétarien ?」(您好，有素食菜單嗎？)"
+      },
+      {
+        zh: "我可以要一份不含肉的義大利麵嗎？",
+        fr: "Puis-je avoir des pâtes sans viande ?",
+        ipa: "/pɥiʒ avwaʁ de pɑt sɑ̃ vjɑ̃d/",
+        definition: "請求提供不含肉的義大利麵，「sans viande」意思是「不含肉」。",
+        level: "A2",
+        category: "request",
+        example: "點餐時：「Puis-je avoir des pâtes sans viande, mais avec beaucoup de légumes ?」(我可以要一份不含肉的義大利麵，但是多加蔬菜嗎？)"
+      },
+      {
+        zh: "這個湯是用蔬菜高湯做的嗎？",
+        fr: "Cette soupe est-elle préparée avec du bouillon de légumes ?",
+        ipa: "/sɛt sup ɛtɛl pʁepaʁe avɛk dy bujɔ̃ də leɡym/",
+        definition: "詢問湯品是否使用蔬菜高湯而非肉湯，這是素食者常需確認的細節。",
+        level: "B1",
+        category: "ingredients",
+        example: "當服務員推薦例湯時：「Cette soupe est-elle préparée avec du bouillon de légumes ou de viande ?」(這個湯是用蔬菜高湯還是肉湯做的？)"
+      },
+      {
+        zh: "我是純素者，不吃任何動物製品",
+        fr: "Je suis végétalien / végétalienne, je ne consomme aucun produit animal",
+        ipa: "/ʒə sɥi veʒetaljɛ̃ / veʒetaljɛn, ʒə nə kɔ̃sɔm okœ̃ pʁɔdɥi animal/",
+        definition: "表明自己是純素食者（不吃蛋、奶等任何動物產品）。男性用「végétalien」，女性用「végétalienne」。",
+        level: "B1",
+        category: "conversation",
+        example: "可以更詳細說明：「Je suis végétalien, donc je ne mange ni viande, ni poisson, ni œufs, ni produits laitiers.」(我是純素食者，所以不吃肉、魚、蛋和乳製品。)"
+      },
+      {
+        zh: "這個甜點含有蛋或牛奶嗎？",
+        fr: "Ce dessert contient-il des œufs ou du lait ?",
+        ipa: "/sə desɛʁ kɔ̃tjɛ̃til dezø u dy lɛ/",
+        definition: "詢問甜點是否含有蛋或奶製品，純素食者常需確認的問題。",
+        level: "A2",
+        category: "ingredients",
+        example: "看到好吃的甜點時：「Excusez-moi, ce gâteau au chocolat contient-il des œufs ou du lait ?」(不好意思，這個巧克力蛋糕含有蛋或牛奶嗎？)"
+      },
+      {
+        zh: "我可以點一份蔬菜燉菜嗎？",
+        fr: "Puis-je commander un ratatouille ?",
+        ipa: "/pɥiʒ kɔmɑ̃de œ̃ ʁatatuj/",
+        definition: "點法國傳統素食菜餚「蔬菜燉菜」(ratatouille)，這是由茄子、櫛瓜、番茄等蔬菜燉煮的普羅旺斯料理。",
+        level: "A2",
+        category: "food-type",
+        example: "「J'aimerais goûter votre ratatouille, c'est une spécialité régionale, n'est-ce pas ?」(我想嚐嚐你們的蔬菜燉菜，這是當地的特色菜，對吧？)"
+      },
+      {
+        zh: "請不要在我的沙拉裡放火腿",
+        fr: "S'il vous plaît, pas de jambon dans ma salade",
+        ipa: "/sil vu plɛ, pa də ʒɑ̃bɔ̃ dɑ̃ ma salad/",
+        definition: "請求不要在沙拉中加入火腿，因為有些餐廳會自動在沙拉中加入火腿片。",
+        level: "A2",
+        category: "request",
+        example: "點凱撒沙拉時：「Une salade César sans jambon ni lardons, s'il vous plaît.」(一份不含火腿和培根的凱撒沙拉，謝謝。)"
+      },
+      {
+        zh: "這個醬汁是用什麼做的？",
+        fr: "Avec quoi cette sauce est-elle préparée ?",
+        ipa: "/avɛk kwa sɛt sos ɛtɛl pʁepaʁe/",
+        definition: "詢問醬汁的成分，因為許多法式醬汁可能含有肉汁或動物油脂。",
+        level: "B1",
+        category: "ingredients",
+        example: "「Avec quoi cette sauce est-elle préparée ? Contient-elle du bouillon de viande ?」(這個醬汁是用什麼做的？含有肉湯嗎？)"
+      },
+      {
+        zh: "我喜歡蔬菜煎餅",
+        fr: "J'aime les galettes de légumes",
+        ipa: "/ʒɛm le ɡalɛt də leɡym/",
+        definition: "表達對蔬菜煎餅的喜愛，這是法國常見的素食選項。",
+        level: "A1",
+        category: "food-type",
+        example: "「J'aime les galettes de légumes, surtout celles avec des courgettes.」(我喜歡蔬菜煎餅，尤其是含有櫛瓜的那種。)"
+      },
+      {
+        zh: "這個菜是素的嗎？",
+        fr: "Ce plat est-il végétarien ?",
+        ipa: "/sə pla ɛtil veʒetaʁjɛ̃/",
+        definition: "直接詢問某道菜是否為素食。",
+        level: "A1",
+        category: "ingredients",
+        example: "看到菜單上不熟悉的菜名時：「Excusez-moi, ce plat 'Tian Provençal' est-il végétarien ?」(不好意思，這道「普羅旺斯蔬菜烤盤」是素食嗎？)"
+      },
+      {
+        zh: "我能否吃到不含肉的法式可麗餅？",
+        fr: "Puis-je avoir une crêpe sans viande ?",
+        ipa: "/pɥiʒ avwaʁ yn kʁɛp sɑ̃ vjɑ̃d/",
+        definition: "請求提供不含肉的法式可麗餅，這是法國常見的街頭小吃。",
+        level: "A2",
+        category: "food-type",
+        example: "「Je voudrais une crêpe au fromage et aux champignons, sans jambon s'il vous plaît.」(我想要一份起司蘑菇口味的可麗餅，不要火腿，謝謝。)"
+      },
+      {
+        zh: "法國有哪些傳統素食菜餚？",
+        fr: "Quels sont les plats végétariens traditionnels français ?",
+        ipa: "/kɛl sɔ̃ le pla veʒetaʁjɛ̃ tʁadisjɔnɛl fʁɑ̃sɛ/",
+        definition: "詢問法國傳統的素食菜餚，是了解法國飲食文化的好方式。",
+        level: "B1",
+        category: "conversation",
+        example: "與廚師交流：「Pouvez-vous me recommander des plats végétariens traditionnels de votre région ?」(您能向我推薦您當地的傳統素食菜餚嗎？)"
+      },
+      {
+        zh: "請問這個乳酪是用素食凝乳製成的嗎？",
+        fr: "Ce fromage est-il fait avec de la présure végétale ?",
+        ipa: "/sə fʁomaʒ ɛtil fɛ avɛk də la pʁezyʁ veʒetal/",
+        definition: "詢問乳酪是否使用素食凝乳而非傳統的動物凝乳，這是嚴格素食者會關心的細節。",
+        level: "B1",
+        category: "ingredients",
+        example: "在購買乳酪時：「Pouvez-vous me dire si ce fromage est préparé avec de la présure végétale ou animale ?」(您能告訴我這個乳酪是用植物還是動物凝乳製成的嗎？)"
+      }
+    ];
 
-      data.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <p><strong>法文：</strong> ${item.fr}</p>
-          <p><strong>中文：</strong> ${item.zh}</p>
-          <button onclick="toggleDetails(this)">📖 顯示發音與解釋</button>
-          <div class="details">
-            <p><strong>IPA：</strong> ${item.ipa || "-"}</p>
-            <p><strong>說明：</strong> ${item.definition || "-"}</p>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+    function renderCards() {
+      const container = document.getElementById("cards-container");
+      const noResults = document.getElementById("no-results");
+      container.innerHTML = "";
+      
+      // 取得篩選值
+      const levelFilter = document.getElementById("level-filter").value;
+      const categoryFilter = document.getElementById("category-filter").value;
+      
+      // 篩選資料
+      let filteredData = vegetarianPhrases;
+      
+      if (levelFilter !== "all") {
+        filteredData = filteredData.filter(item => item.level === levelFilter);
+      }
+      
+      if (categoryFilter !== "all") {
+        filteredData = filteredData.filter(item => item.category === categoryFilter);
+      }
+      
+      // 顯示結果或無結果訊息
+      if (filteredData.length === 0) {
+        noResults.style.display = "block";
+      } else {
+        noResults.style.display = "none";
+        
+        filteredData.forEach(item => {
+          const card = document.createElement("div");
+          card.className = "card";
+          
+          // 等級標籤
+          const levelClass = `level-badge level-${item.level.toLowerCase()}`;
+          
+          // 建立類別標籤文字
+          let categoryText = "";
+          switch(item.category) {
+            case "restaurant": categoryText = "餐廳點餐"; break;
+            case "food-type": categoryText = "食物種類"; break;
+            case "request": categoryText = "特殊需求"; break;
+            case "ingredients": categoryText = "食材詢問"; break;
+            case "conversation": categoryText = "日常對話"; break;
+            default: categoryText = item.category;
+          }
+          
+          card.innerHTML = `
+            <div class="${levelClass}">${item.level}</div>
+            <div class="category-tag">${categoryText}</div>
+            <p class="zh-text"><strong>${item.zh}</strong></p>
+            <p class="fr-text">${item.fr}</p>
+            <button onclick="toggleDetails(this)">📖 顯示發音與解釋</button>
+            <div class="details">
+              <p class="pronunciation"><strong>發音：</strong> ${item.ipa || "-"}</p>
+              <p class="definition"><strong>說明：</strong> ${item.definition || "-"}</p>
+              ${item.example ? `<div class="example"><strong>情境範例：</strong> ${item.example}</div>` : ''}
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
     }
 
     function toggleDetails(btn) {
@@ -84,7 +489,12 @@
       btn.textContent = open ? "📖 顯示發音與解釋" : "📘 收起發音與解釋";
     }
 
-    loadData();
+    // 篩選器變更事件
+    document.getElementById("level-filter").addEventListener("change", renderCards);
+    document.getElementById("category-filter").addEventListener("change", renderCards);
+
+    // 初始渲染
+    window.onload = renderCards;
   </script>
 
 </body>

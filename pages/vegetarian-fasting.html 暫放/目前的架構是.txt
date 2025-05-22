@@ -1,0 +1,9 @@
+📁 pages/
+├── vegetarian-fasting.html           ← 主導航頁面（各版本選擇）
+├── vegetarian-fasting-interactive.html ← 原有互動版
+├── vegetarian-fasting-b1.html        ← 我剛創建的B1版
+├── vegetarian-fasting-c1.html        ← 待建立
+├── vegetarian-fasting-bilingual.html ← 待建立
+├── vegetarian-fasting-highschool.html ← 待建立（含SDG）
+├── vegetarian-fasting-middleschool.html ← 待建立
+└── vegetarian-fasting-elementary.html ← 待建立（含注音選項）

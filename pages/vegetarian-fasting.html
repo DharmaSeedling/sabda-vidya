@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>素 Vegetarian 與 齋 Fasting 學習中心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: linear-gradient(135deg, #f9fdf7 0%, #e8f5e8 100%);
+      padding: 20px;
+      margin: 0;
+      line-height: 1.6;
+      color: #3e4a24;
+      min-height: 100vh;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #4a7c30;
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    
+    .description {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #555;
+      line-height: 1.7;
+      background: #f8fcf4;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #4a7c30;
+    }
+    
+    .version-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .version-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .version-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(74, 124, 48, 0.1), transparent);
+      transition: left 0.5s;
+    }
+    
+    .version-card:hover::before {
+      left: 100%;
+    }
+    
+    .version-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      border-color: #4a7c30;
+    }
+    
+    .card-icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .card-title {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #4a7c30;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    .card-description {
+      color: #666;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    
+    .card-features {
+      font-size: 0.9em;
+      color: #777;
+      text-align: left;
+      margin: 15px 0;
+    }
+    
+    .card-features ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .difficulty-badge {
+      display: inline-block;
+      background: #4a7c30;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 0.8em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    
+    .age-badge {
+      display: inline-block;
+      background: #6a9240;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 10px;
+      font-size: 0.7em;
+      margin-left: 8px;
+    }
+    
+    .coming-soon {
+      opacity: 0.6;
+      pointer-events: none;
+      position: relative;
+    }
+    
+    .coming-soon::after {
+      content: '即將推出';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff6b6b;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 0.7em;
+    }
+    
+    .footer-info {
+      margin-top: 50px;
+      text-align: center;
+      color: #666;
+      font-size: 0.9em;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .quick-guide {
+      margin-top: 30px;
+      background: #fff7e6;
+      border: 1px solid #ffa940;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .quick-guide h3 {
+      color: #d4822a;
+      margin-top: 0;
+      text-align: center;
+    }
+    
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .guide-item {
+      text-align: center;
+      padding: 10px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #ffd591;
+    }
+    
+    @media (max-width: 768px) {
+      .version-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      .header {
+        padding: 20px;
+      }
+      
+      .description {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🥬 素 與 齋 學習中心</h1>
+    <p class="subtitle">Vegetarian & Fasting Learning Hub</p>
+    <div class="description">
+      <p><strong>深入了解「素食」與「齋戒」的區別</strong></p>
+      <p>透過不同難度和年齡層的內容，全面掌握這兩個重要概念。從國小到大學程度，從基礎認知到專業分析，選擇最適合你的學習方式。</p>
+      <p><em>Explore the differences between vegetarianism and fasting through various difficulty levels and age-appropriate content.</em></p>
+    </div>
+  </div>
+
+  <div class="version-grid">
+    <!-- 互動比較版（原版） -->
+    <a href="vegetarian-fasting-interactive.html" class="version-card">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">互動比較版</div>
+      <div class="card-description">
+        原有的互動式比較功能，可即時切換語言、難度和譬喻層級
+      </div>
+      <div class="card-features">
+        <ul>
+          <li>即時語言切換（中英文）</li>
+          <li>難度調整（B1/C1）</li>
+          <li>三種譬喻層級</li>
+          <li>科學背景說明</li>
+        </ul>
+      </div>
+      <div class="difficulty-badge">B1/C1</div>
+      <span class="age-badge">全年齡</span>
+    </a>
+
+    <!-- B1 基礎版 -->
+    <a href="vegetarian-fasting-b1.html" class="version-card">
+      <div class="card-icon">📚</div>
+      <div class="card-title">B1 基礎版</div>
+      <div class="card-description">
+        簡單易懂的語言，適合英語初學者和想要清楚理解基本概念的學習者
+      </div>
+      <div class="card-features">
+        <ul>
+          <li>簡化詞彙和句型</li>
+          <li>基礎概念解釋</li>
+          <li>日常生活連結</li>
+          <li>視覺化比較表格</li>
+        </ul>
+      </div>
+      <div class="difficulty-badge">B1 中級</div>
+      <span class="age-badge">國中以上</span>
+    </a>
+
+    <!-- C1 進階版 -->
+    <a href="vegetarian-fasting-c1.html" class="version-card">
+      <div class="card-icon">🎓</div>
+      <div class="card-title">C1 進階版</div>
+      <div class="card-description">
+        更深入的分析和專業術語，適合高階英語學習者和專業研究
+      </div>
+      <div class="card-features">
+        <ul>
+          <li>進階詞彙和語法</li>
+          <li>文化背景分析</li>
+          <li>哲學和宗教觀點</li>
+          <li>學術研究引用</li>
+        </ul>
+      </div>
+      <div class="difficulty-badge">C1 高級</div>
+      <span class="age-badge">大學以上</span>
+    </a>
+
+    <!-- 中英對照版 -->
+    <a href="vegetarian-fasting-bilingual.html" class="version-card">
+      <div class="card-icon">🌍</div>
+      <div class="card-title">中英對照版</div>
+      <div class="card-description">
+        嚴謹的中英文對照學習，適合雙語學習者和翻譯學習
+      </div>
+      <div class="card-features">
+        <ul>
+          <li>逐句中英對照</li>
+          <li>專業術語對譯</li>
+          <li>文化差異說明</li>
+          <li>翻譯技巧提示</li>
+        </ul>
+      </div>
+      <div class="difficulty-badge">學術級</div>
+      <span class="age-badge">高中以上</span>
+    </a>
+
+    <!-- 高中 SDG 版 -->
+    <a href="vegetarian-fasting-highschool.html" class="version-card">
+      <div class="card-icon">🌱</div>
+      <div class="card-title">高中 SDG 永續版</div>
+      <div class="card-description">
+        結合聯合國永續發展目標（SDG），培養全球視野和批判思考
+      </div>
+      <div class="card-features">
+        <ul>
+          <li>SDG目標2、3、12、13連結</li>
+          <li>環境影響分析</li>
+          <li>全球化議題探討</li>
+          <li>批判性思考訓練</li>
+        </ul>
+      </div>
+      <div class="difficulty-badge">高中級 + SDG</div>
+      <span class="age-badge">15-18歲</span>
+    </a>
+
+    <!-- 國中版 -->
+    <a href="vegetarian-fasting-middleschool.html" class="version-card">
+      <div class="card-icon">🏫</div>
+      <div class="card-title">國中版</div>
+      <div class="card-description">
+        適合國中生的內容深度，搭配生活化範例和基礎永續概念
+      </div>
+      <div class="card-features">
+        <ul>
+          <li>生活化例子和比喻</li>
+          <li>基礎環保概念</li>
+          <li>健康飲食教育</li>
+          <li>文化尊重理念</li>
+        </ul>
+      </div>
+      <div class="difficulty-badge">國中級</div>
+      <span class="age-badge">12-15歲</span>
+    </a>
+
+    <!-- 國小版 -->
+    <a href="vegetarian-fasting-elementary.html" class="version-card">
+      <div class="card-icon">🎨</div>
+      <div class="card-title">國小版</div>
+      <div class="card-description">
+        簡單有趣的說明，可選擇注音輔助，培養基礎文化理解
+      </div>
+      <div class="card-features">
+        <ul>
+          <li>注音符號輔助選項</li>
+          <li>卡通插圖說明</li>
+          <li>簡單故事形式</li>
+          <li>互動小遊戲</li>
+        </ul>
+      </div>
+      <div class="difficulty-badge">國小級</div>
+      <span class="age-badge">6-12歲</span>
+    </a>
+  </div>
+
+  <div class="quick-guide">
+    <h3>🧭 快速選擇指南</h3>
+    <div class="guide-grid">
+      <div class="guide-item">
+        <strong>初學者</strong><br>
+        B1基礎版<br>
+        或互動版
+      </div>
+      <div class="guide-item">
+        <strong>學生族群</strong><br>
+        依年級選擇<br>
+        國小/國中/高中版
+      </div>
+      <div class="guide-item">
+        <strong>英語學習</strong><br>
+        中英對照版<br>
+        或B1/C1版
+      </div>
+      <div class="guide-item">
+        <strong>永續議題</strong><br>
+        高中SDG版<br>
+        或國中版
+      </div>
+      <div class="guide-item">
+        <strong>專業研究</strong><br>
+        C1進階版<br>
+        或學術級對照
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-info">
+    <h4>📖 學習建議</h4>
+    <p>💡 <strong>建議學習路徑：</strong>從適合自己程度的版本開始，再逐步嘗試其他難度</p>
+    <p>🔄 <strong>比較學習：</strong>可以同時開啟兩個版本進行對照，加深理解</p>
+    <p>🌱 <strong>永續教育：</strong>高中版和國中版特別加入SDG永續發展概念</p>
+    <p>🌏 <strong>文化學習：</strong>每個版本都包含中華文化中素齋概念的深度說明</p>
+    <br>
+    <p><em>Start with the version that matches your level, then explore others for comprehensive understanding</em></p>
+  </div>
+</body>
+</html>

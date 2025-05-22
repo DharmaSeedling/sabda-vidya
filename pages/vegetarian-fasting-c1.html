@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>素 Vegetarian 與 齋 Fasting 中英對照學習 - C1 互動版</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: "Noto Serif TC", serif;
+      background-color: #fafaf7;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      color: #2f4f2f;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+    }
+    .title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #3f6d3f;
+      margin-bottom: 1.25rem;
+      border-bottom: 3px solid #a4c08b;
+      padding-bottom: 0.5rem;
+    }
+    .part-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #4a7c30;
+      margin: 1rem 0 0.5rem 0;
+      border-bottom: 1px solid #cee6b7;
+      padding-bottom: 0.2rem;
+    }
+    p {
+      margin: 0.8rem 0;
+      font-size: 1.05rem;
+    }
+    .word {
+      position: relative;
+      cursor: help;
+      border-bottom: 1px dotted #7aa87a;
+      color: #356935;
+      font-weight: 600;
+    }
+    .word:hover::after {
+      content: attr(data-definition);
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #2e4d2e;
+      color: #fff;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      max-width: 280px;
+      white-space: normal;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .pronunciation {
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+      color: #5a7c43;
+      margin-left: 6px;
+      font-style: italic;
+      user-select: none;
+    }
+    .audio-button {
+      margin-left: 8px;
+      cursor: pointer;
+      font-size: 1.15rem;
+      color: #4a7c30;
+      user-select: none;
+      vertical-align: middle;
+      transition: color 0.3s ease;
+    }
+    .audio-button:hover {
+      color: #2c5f2c;
+    }
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🥬 素 Vegetarian 與 齋 Fasting 中英對照學習 - C1 互動版</h1>
+  <div class="container">
+    <section class="section" lang="zh">
+      <div class="title">素 Vegetarian</div>
+
+      <div class="part-title">定義 Definition</div>
+      <p>
+        <span class="word" data-definition="素食主義（Vegetarianism）是避免食用肉類、魚類及家禽的飲食方式，常包含蛋類及乳製品。">素食主義（Vegetarianism）</span>是一種飲食習慣，主張不食用肉類、魚類及家禽，並通常包含蛋類與乳製品。
+      </p>
+
+      <div class="part-title">原因 Why</div>
+      <p>
+        選擇素食通常基於道德考量、健康需求與環境永續等多重原因，展現對生命尊重與自然保護的承諾。
+      </p>
+
+      <div class="part-title">舉例 Example</div>
+      <p>
+        就像選擇穿著環保材質的衣物，既保護動物權益，也支持永續時尚。
+      </p>
+    </section>
+
+    <section class="section" lang="en">
+      <div class="title">Vegetarian</div>
+
+      <div class="part-title">Definition</div>
+      <p>
+        <span class="word" data-definition="Vegetarianism is the dietary practice of abstaining from meat, fish, and poultry, often including eggs and dairy products.">Vegetarianism</span> is a dietary practice that excludes meat, fish, and poultry, and often includes eggs and dairy products.
+      </p>
+
+      <div class="part-title">Why</div>
+      <p>
+        Choosing vegetarianism is often motivated by ethical considerations, health concerns, and environmental sustainability, reflecting a commitment to respect for life and nature conservation.
+      </p>
+
+      <div class="part-title">Example</div>
+      <p>
+        It is like choosing to wear eco-friendly clothing, which protects animal rights and supports sustainable fashion.
+      </p>
+    </section>
+
+    <section class="section" lang="zh">
+      <div class="title">齋 Fasting</div>
+
+      <div class="part-title">定義 Definition</div>
+      <p>
+        <span class="word" data-definition="齋戒是一種嚴格的飲食規範，除避免食用肉類外，還避開蔥、蒜等辛辣刺激的食物。">齋戒</span>是一種嚴格的飲食規範，除了不吃肉外，也避免食用蔥、蒜等辛辣刺激的食物。
+      </p>
+
+      <div class="part-title">原因 Why</div>
+      <p>
+        齋戒的目的是為了淨化身心，提升精神專注力與修行品質。
+      </p>
+
+      <div class="part-title">舉例 Example</div>
+      <p>
+        就像在重要考試前保持安靜與專注，為心靈準備最好的狀態。
+      </p>
+    </section>
+
+    <section class="section" lang="en">
+      <div class="title">Fasting</div>
+
+      <div class="part-title">Definition</div>
+      <p>
+        <span class="word" data-definition="Fasting is a strict dietary discipline that excludes meat and also pungent foods like onions and garlic.">Fasting</span> is a strict dietary discipline that excludes meat and also pungent foods such as onions and garlic.
+      </p>
+
+      <div class="part-title">Why</div>
+      <p>
+        The purpose of fasting is to purify body and mind, enhancing mental focus and the quality of spiritual practice.
+      </p>
+
+      <div class="part-title">Example</div>
+      <p>
+        It is like maintaining silence and focus before an important examination to prepare the mind.
+      </p>
+    </section>
+  </div>
+
+</body>
+</html>

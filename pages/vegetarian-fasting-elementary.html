@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<title>素 Vegetarian 與 齋 Fasting 國小版（純中文＋英文hover）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+    font-family: "Noto Sans TC", sans-serif;
+    background-color: #fffbee;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.8;
+    color: #4a6d35;
+  }
+  h1 {
+    text-align: center;
+    color: #567a3a;
+    margin-bottom: 1rem;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  section {
+    background: #f3f9d2;
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 3px 8px rgba(74,109,53,0.15);
+  }
+  .title {
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid #8aac54;
+    padding-bottom: 0.4rem;
+    color: #48702a;
+  }
+  .part-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
+    color: #4b7031;
+  }
+  p {
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
+  }
+  /* 英文單字hover中文解釋 */
+  .word {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted #4a7c30;
+    color: #356935;
+    font-weight: 600;
+  }
+  .word:hover::after {
+    content: attr(data-definition);
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2e4d2e;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    max-width: 220px;
+    white-space: normal;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<h1>🥬 素 Vegetarian 與 齋 Fasting 國小版（純中文＋英文hover）</h1>
+<div class="container">
+
+  <!-- 中文區塊 -->
+  <section lang="zh">
+    <div class="title">素 Vegetarian</div>
+
+    <div class="part-title">定義 Definition</div>
+    <p>素食主義是不吃肉，吃植物、蛋和奶的飲食方式。</p>
+
+    <div class="part-title">為什麼 Why</div>
+    <p>有些人選擇素食，是因為想保護動物，還有保持身體健康。</p>
+
+    <div class="part-title">舉例 Example</div>
+    <p>就像穿舒服的衣服，不穿真皮草，因為你愛動物。</p>
+  </section>
+
+  <!-- 英文區塊 -->
+  <section lang="en">
+    <div class="title">Vegetarian</div>
+
+    <div class="part-title">Definition</div>
+    <p>
+      <span class="word" data-definition="素食主義">Vegetarianism</span> means not eating <span class="word" data-definition="肉">meat</span> but eating <span class="word" data-definition="植物">plants</span>, <span class="word" data-definition="蛋">eggs</span>, and milk.
+    </p>
+
+    <div class="part-title">Why</div>
+    <p>
+      Some people choose vegetarian food because they want to protect <span class="word" data-definition="動物">animals</span> and stay healthy.
+    </p>
+
+    <div class="part-title">Example</div>
+    <p>
+      It is like wearing comfortable clothes and not wearing real fur because you love <span class="word" data-definition="動物">animals</span>.
+    </p>
+  </section>
+
+  <!-- 中文區塊 -->
+  <section lang="zh">
+    <div class="title">齋 Fasting</div>
+
+    <div class="part-title">定義 Definition</div>
+    <p>齋戒是不吃肉，也不吃蔥、蒜這些辛辣的食物。</p>
+
+    <div class="part-title">為什麼 Why</div>
+    <p>這樣做可以讓身心保持清淨，讓心情平靜。</p>
+
+    <div class="part-title">舉例 Example</div>
+    <p>就像考試前保持安靜，專心準備。</p>
+  </section>
+
+  <!-- 英文區塊 -->
+  <section lang="en">
+    <div class="title">Fasting</div>
+
+    <div class="part-title">Definition</div>
+    <p>
+      <span class="word" data-definition="齋戒">Fasting</span> means not eating meat and avoiding spicy foods like onions and garlic.
+    </p>
+
+    <div class="part-title">Why</div>
+    <p>
+      It helps keep the body and mind pure and calm.
+    </p>
+
+    <div class="part-title">Example</div>
+    <p>
+      It is like staying quiet and focused before a test.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

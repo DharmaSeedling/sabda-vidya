@@ -2,83 +2,608 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>🇬🇧🇫🇷 英法素食英語詞彙對照</title>
+  <title>🇬🇧🇫🇷 UK & France Vegetarian Guide | 英法素食指南</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../css/assetsstyles.css">
   <style>
     body {
-      font-family: "Noto Sans TC", sans-serif;
+      font-family: "Noto Sans TC", "Noto Sans", sans-serif;
       background: #f7f6f3;
       padding: 2em;
+      line-height: 1.6;
+      max-width: 1000px;
+      margin: 0 auto;
     }
+
     h1 {
       text-align: center;
       color: #3a2f2f;
+      margin-bottom: 0.5em;
     }
+
+    .intro-section {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 2em;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .country-tabs {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+      gap: 1em;
+    }
+
+    .tab {
+      padding: 1em 2em;
+      background: #ddd;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: all 0.3s;
+    }
+
+    .tab.active {
+      background: #5c6bc0;
+      color: white;
+    }
+
+    .tab:hover {
+      transform: translateY(-2px);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .section-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5em;
+      border-radius: 10px;
+      margin: 2em 0 1em;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.4em;
+      margin-bottom: 0.5em;
+    }
+
+    .section-subtitle {
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5em;
+      margin: 2em 0;
+    }
+
     .card {
       background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 1em;
-      margin: 1em 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1.5em;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1em;
+    }
+
+    .word-main {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .word-translation {
+      font-size: 1.1em;
+      color: #666;
+      font-style: italic;
+    }
+
+    .flag {
+      font-size: 1.5em;
+    }
+
     .details {
       display: none;
-      margin-top: 0.5em;
-      background: #eef6ff;
-      padding: 0.5em;
-      border-radius: 4px;
+      margin-top: 1em;
+      background: #f8f9ff;
+      padding: 1em;
+      border-radius: 8px;
+      border-left: 4px solid #5c6bc0;
     }
+
+    .pronunciation {
+      font-family: 'Courier New', monospace;
+      color: #555;
+      margin-bottom: 0.5em;
+    }
+
+    .definition {
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .cultural-note {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 1em;
+      margin-top: 0.5em;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .cultural-note-title {
+      font-weight: bold;
+      color: #856404;
+      margin-bottom: 0.5em;
+    }
+
     button {
       background-color: #5c6bc0;
       color: white;
       border: none;
-      padding: 0.4em 0.8em;
-      border-radius: 4px;
+      padding: 0.6em 1.2em;
+      border-radius: 6px;
       cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      transition: background-color 0.2s;
+      width: 100%;
+      margin-top: 1em;
     }
+
     button:hover {
       background-color: #3f51b5;
     }
+
+    .difficulty-indicator {
+      display: inline-block;
+      padding: 0.2em 0.6em;
+      border-radius: 12px;
+      font-size: 0.8em;
+      font-weight: bold;
+      margin-left: 0.5em;
+    }
+
+    .difficulty-a1 {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .difficulty-a2 {
+      background: #FFC107;
+      color: #333;
+    }
+
+    .difficulty-b1 {
+      background: #2196F3;
+      color: white;
+    }
+
+    .comparison-section {
+      background: #e8f5e8;
+      border-radius: 10px;
+      padding: 2em;
+      margin: 2em 0;
+    }
+
+    .comparison-title {
+      text-align: center;
+      color: #2e7d32;
+      font-size: 1.3em;
+      margin-bottom: 1em;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2em;
+    }
+
+    .country-section {
+      background: white;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .country-title {
+      font-weight: bold;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1em;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .country-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .tab {
+        width: 80%;
+        margin: 0.3em 0;
+      }
+      
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>🇬🇧🇫🇷 英國 / 法國常見素食詞彙</h1>
-  <p style="text-align: center;">中英對照、IPA音標、簡易解釋</p>
+  <h1>🇬🇧🇫🇷 UK & France Vegetarian Guide</h1>
+  <p style="text-align: center; color: #666; font-size: 1.1em;">英法素食文化詞彙對照 | Vegetarian Vocabulary & Cultural Guide</p>
 
-  <div id="cards-container"></div>
+  <div class="intro-section">
+    <h2>Welcome to European Vegetarian Dining</h2>
+    <p><strong>English:</strong> Navigate vegetarian dining in the UK and France with confidence. This guide covers essential vocabulary, cultural differences, and practical phrases for both countries.</p>
+    <p><strong>中文：</strong> 輕鬆在英國和法國享用素食。本指南涵蓋兩國的基礎詞彙、文化差異和實用短語，讓您的歐洲素食之旅更加順利。</p>
+  </div>
+
+  <!-- 文化比較區塊 -->
+  <div class="comparison-section">
+    <h2 class="comparison-title">🍽️ Cultural Differences | 文化差異比較</h2>
+    <div class="comparison-grid">
+      <div class="country-section">
+        <h3 class="country-title">🇬🇧 United Kingdom</h3>
+        <ul>
+          <li><strong>Vegetarian-friendly:</strong> Very accommodating with clearly marked menus</li>
+          <li><strong>Pub culture:</strong> Most pubs now offer vegetarian options</li>
+          <li><strong>Supermarkets:</strong> Extensive vegetarian and vegan sections</li>
+          <li><strong>Common cuisines:</strong> Indian, Middle Eastern, Mediterranean</li>
+        </ul>
+        <p><em>英國對素食者非常友善，菜單標示清楚，連傳統酒吧都有素食選擇。</em></p>
+      </div>
+      <div class="country-section">
+        <h3 class="country-title">🇫🇷 France</h3>
+        <ul>
+          <li><strong>Traditional approach:</strong> More focus on fresh vegetables and cheese</li>
+          <li><strong>Regional variations:</strong> Mediterranean south more vegetarian-friendly</li>
+          <li><strong>Restaurants:</strong> Ask specifically, as vegetarian isn't always obvious</li>
+          <li><strong>Market culture:</strong> Excellent fresh produce in local markets</li>
+        </ul>
+        <p><em>法國傳統上重視新鮮蔬菜和乳製品，南部地中海地區對素食者更友善。</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="country-tabs">
+    <button class="tab active" onclick="showCountry('uk')">🇬🇧 United Kingdom</button>
+    <button class="tab" onclick="showCountry('france')">🇫🇷 France</button>
+  </div>
+
+  <!-- 英國內容 -->
+  <div id="uk-content" class="tab-content active">
+    <div class="section-header">
+      <div class="section-title">🇬🇧 UK Vegetarian Vocabulary</div>
+      <div class="section-subtitle">Essential phrases for vegetarian dining in Britain</div>
+    </div>
+    <div id="uk-cards" class="cards-grid"></div>
+  </div>
+
+  <!-- 法國內容 -->
+  <div id="france-content" class="tab-content">
+    <div class="section-header">
+      <div class="section-title">🇫🇷 French Vegetarian Vocabulary</div>
+      <div class="section-subtitle">Navigate French cuisine as a vegetarian</div>
+    </div>
+    <div id="france-cards" class="cards-grid"></div>
+  </div>
 
   <script>
-    async function loadData() {
-      const response = await fetch("../data/vegetarian-uk-fr.json");
-      const data = await response.json();
-      const container = document.getElementById("cards-container");
+    // 英國素食詞彙
+    const ukVocabulary = [
+      {
+        en: "I'm vegetarian",
+        zh: "我是素食者",
+        ipa: "/aɪm ˌvedʒɪˈteəriən/",
+        definition: "Basic statement of dietary preference. Clear and universally understood in the UK.",
+        culturalNote: "British restaurants are very accommodating to vegetarians, and this phrase will immediately get you help.",
+        difficulty: "A1"
+      },
+      {
+        en: "Do you have vegetarian options?",
+        zh: "你們有素食選擇嗎？",
+        ipa: "/duː juː hæv ˌvedʒɪˈteəriən ˈɒpʃənz/",
+        definition: "Asking about vegetarian menu items. Most UK establishments will have clearly marked options.",
+        culturalNote: "Almost all UK restaurants have vegetarian options, often with a dedicated section on the menu.",
+        difficulty: "A1"
+      },
+      {
+        en: "Is this suitable for vegetarians?",
+        zh: "這個適合素食者嗎？",
+        ipa: "/ɪz ðɪs ˈsuːtəbl fɔː ˌvedʒɪˈteəriənz/",
+        definition: "More formal way to inquire about vegetarian suitability of a dish.",
+        culturalNote: "British staff are trained to understand dietary requirements and will check ingredients for you.",
+        difficulty: "A2"
+      },
+      {
+        en: "Meat-free",
+        zh: "無肉的",
+        ipa: "/miːt friː/",
+        definition: "Common UK term for vegetarian food, often seen on packaging and menus.",
+        culturalNote: "Very popular term in UK supermarkets and casual dining. Clearer than 'vegetarian' for some people.",
+        difficulty: "A1"
+      },
+      {
+        en: "Plant-based",
+        zh: "植物性的",
+        ipa: "/plɑːnt beɪst/",
+        definition: "Modern term emphasizing food derived from plants. Popular in health-conscious establishments.",
+        culturalNote: "Trendy term in the UK, especially in London and other major cities. Often implies vegan.",
+        difficulty: "B1"
+      },
+      {
+        en: "Veggie burger",
+        zh: "素食漢堡",
+        ipa: "/ˈvedʒi ˈbɜːɡə/",
+        definition: "Casual British term for vegetarian burger. 'Veggie' is a common abbreviation.",
+        culturalNote: "Every pub and casual restaurant in the UK will have veggie burgers. Very mainstream option.",
+        difficulty: "A1"
+      },
+      {
+        en: "Does this contain any meat products?",
+        zh: "這個含有任何肉製品嗎？",
+        ipa: "/dʌz ðɪs kənˈteɪn ˈeni miːt ˈprɒdʌkts/",
+        definition: "Specific inquiry about meat content, including hidden meat products like stock or gelatin.",
+        culturalNote: "Important question in the UK where dishes may contain meat stock or worcestershire sauce.",
+        difficulty: "B1"
+      },
+      {
+        en: "Jacket potato with cheese",
+        zh: "起司烤馬鈴薯",
+        ipa: "/ˈdʒækɪt pəˈteɪtəʊ wɪð tʃiːz/",
+        definition: "Classic British vegetarian comfort food. Baked potato with cheese filling.",
+        culturalNote: "Quintessentially British dish available everywhere. Safe vegetarian option in any pub.",
+        difficulty: "A2"
+      },
+      {
+        en: "Ploughman's lunch (vegetarian)",
+        zh: "農夫午餐（素食版）",
+        ipa: "/ˈplaʊmənz lʌntʃ/",
+        definition: "Traditional British cold lunch with cheese, bread, pickles, and salad.",
+        culturalNote: "Traditional British meal. Ask for vegetarian version to ensure no meat products included.",
+        difficulty: "B1"
+      },
+      {
+        en: "Sunday roast (vegetarian)",
+        zh: "週日烤餐（素食版）",
+        ipa: "/ˈsʌndeɪ rəʊst/",
+        definition: "Traditional British Sunday meal adapted for vegetarians with nut roast or vegetarian alternatives.",
+        culturalNote: "Many British pubs now offer vegetarian Sunday roasts with nut roast instead of meat.",
+        difficulty: "B1"
+      }
+    ];
 
-      data.forEach(item => {
+    // 法國素食詞彙
+    const franceVocabulary = [
+      {
+        en: "Je suis végétarien/végétarienne",
+        zh: "我是素食者",
+        ipa: "/ʒə sɥi veʒetaʁjɛ̃ / veʒetaʁjɛn/",
+        definition: "I am vegetarian (masculine/feminine). Essential phrase for French dining.",
+        culturalNote: "Use 'végétarien' if you're male, 'végétarienne' if you're female. French waiters will understand your dietary needs.",
+        difficulty: "A1"
+      },
+      {
+        en: "Avez-vous des plats végétariens?",
+        zh: "你們有素食菜餚嗎？",
+        ipa: "/ave vu de pla veʒetaʁjɛ̃/",
+        definition: "Do you have vegetarian dishes? Polite inquiry about vegetarian options.",
+        culturalNote: "Not all French restaurants highlight vegetarian options, so asking is important.",
+        difficulty: "A2"
+      },
+      {
+        en: "Sans viande, s'il vous plaît",
+        zh: "請不要肉",
+        ipa: "/sɑ̃ vjɑ̃d sil vu plɛ/",
+        definition: "Without meat, please. Useful for customizing dishes.",
+        culturalNote: "French chefs are often willing to adapt dishes. This phrase helps you customize orders.",
+        difficulty: "A1"
+      },
+      {
+        en: "Est-ce que c'est végétarien?",
+        zh: "這是素食的嗎？",
+        ipa: "/ɛs kə sɛ veʒetaʁjɛ̃/",
+        definition: "Is this vegetarian? Direct question about a specific dish.",
+        culturalNote: "Always ask when unsure. French cuisine often has hidden meat ingredients like lardons.",
+        difficulty: "A1"
+      },
+      {
+        en: "Qu'est-ce que vous me conseillez?",
+        zh: "您建議我吃什麼？",
+        ipa: "/kɛs kə vu mə kɔ̃seje/",
+        definition: "What do you recommend for me? Asking for vegetarian recommendations.",
+        culturalNote: "French servers appreciate being asked for recommendations and will suggest suitable dishes.",
+        difficulty: "B1"
+      },
+      {
+        en: "Salade composée",
+        zh: "綜合沙拉",
+        ipa: "/salad kɔ̃poze/",
+        definition: "Mixed salad with various ingredients. Common vegetarian option in French cafés.",
+        culturalNote: "Safe bet in French restaurants. Usually contains cheese, vegetables, and sometimes eggs.",
+        difficulty: "A2"
+      },
+      {
+        en: "Omelette aux fines herbes",
+        zh: "香草煎蛋",
+        ipa: "/ɔmlɛt o fin ɛʁb/",
+        definition: "Herb omelet. Classic French vegetarian dish available almost everywhere.",
+        culturalNote: "Traditional French comfort food. Available in bistros, cafés, and brasseries throughout France.",
+        difficulty: "A2"
+      },
+      {
+        en: "Ratatouille",
+        zh: "法式燉菜",
+        ipa: "/ʁatatuj/",
+        definition: "Traditional Provençal vegetable stew. Iconic French vegetarian dish.",
+        culturalNote: "Famous vegetarian dish from southern France. Made with eggplant, tomatoes, zucchini, and herbs.",
+        difficulty: "A1"
+      },
+      {
+        en: "Fromage de chèvre chaud",
+        zh: "熱山羊起司",
+        ipa: "/fʁomaʒ də ʃɛvʁ ʃo/",
+        definition: "Warm goat cheese, often served on salad. Popular French vegetarian starter.",
+        culturalNote: "Very French dish, typically served on toast with salad. Found in most French restaurants.",
+        difficulty: "B1"
+      },
+      {
+        en: "Tarte aux légumes",
+        zh: "蔬菜塔",
+        ipa: "/taʁt o leɡym/",
+        definition: "Vegetable tart. Common French vegetarian dish, often made with seasonal vegetables.",
+        culturalNote: "Quintessentially French. Each region has variations using local vegetables and cheeses.",
+        difficulty: "A2"
+      }
+    ];
+
+    function showCountry(country) {
+      // 隱藏所有內容
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // 移除所有標籤的活動狀態
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // 顯示選中的內容
+      document.getElementById(`${country}-content`).classList.add('active');
+      
+      // 設置對應標籤為活動狀態
+      document.querySelector(`[onclick="showCountry('${country}')"]`).classList.add('active');
+    }
+
+    function loadVocabulary() {
+      // 載入英國詞彙
+      const ukContainer = document.getElementById("uk-cards");
+      ukContainer.innerHTML = "";
+      
+      ukVocabulary.forEach((item, index) => {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <p><strong>英文：</strong> ${item.en}</p>
-          <p><strong>中文：</strong> ${item.zh}</p>
-          <button onclick="toggleDetails(this)">📖 顯示發音資訊</button>
+          <div class="card-header">
+            <div>
+              <div class="word-main">${item.en}</div>
+              <div class="word-translation">${item.zh}</div>
+            </div>
+            <div>
+              <span class="flag">🇬🇧</span>
+              <span class="difficulty-indicator difficulty-${item.difficulty.toLowerCase()}">${item.difficulty}</span>
+            </div>
+          </div>
+          <button onclick="toggleDetails(this, 'uk', ${index})">📖 Show Details | 顯示詳情</button>
           <div class="details">
-            <p><strong>IPA：</strong> ${item.ipa || "-"}</p>
-            <p><strong>解釋：</strong> ${item.definition || "-"}</p>
+            <div class="pronunciation"><strong>Pronunciation:</strong> ${item.ipa}</div>
+            <div class="definition"><strong>Definition:</strong> ${item.definition}</div>
+            ${item.culturalNote ? `
+              <div class="cultural-note">
+                <div class="cultural-note-title">🇬🇧 Cultural Note:</div>
+                <div>${item.culturalNote}</div>
+              </div>
+            ` : ''}
           </div>
         `;
-        container.appendChild(card);
+        ukContainer.appendChild(card);
+      });
+
+      // 載入法國詞彙
+      const franceContainer = document.getElementById("france-cards");
+      franceContainer.innerHTML = "";
+      
+      franceVocabulary.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-header">
+            <div>
+              <div class="word-main">${item.en}</div>
+              <div class="word-translation">${item.zh}</div>
+            </div>
+            <div>
+              <span class="flag">🇫🇷</span>
+              <span class="difficulty-indicator difficulty-${item.difficulty.toLowerCase()}">${item.difficulty}</span>
+            </div>
+          </div>
+          <button onclick="toggleDetails(this, 'france', ${index})">📖 Show Details | 顯示詳情</button>
+          <div class="details">
+            <div class="pronunciation"><strong>Pronunciation:</strong> ${item.ipa}</div>
+            <div class="definition"><strong>Definition:</strong> ${item.definition}</div>
+            ${item.culturalNote ? `
+              <div class="cultural-note">
+                <div class="cultural-note-title">🇫🇷 Cultural Note:</div>
+                <div>${item.culturalNote}</div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+        franceContainer.appendChild(card);
       });
     }
 
-    function toggleDetails(btn) {
+    function toggleDetails(btn, country, index) {
       const details = btn.nextElementSibling;
-      const shown = details.style.display === "block";
-      details.style.display = shown ? "none" : "block";
-      btn.textContent = shown ? "📖 顯示發音資訊" : "📘 收起發音資訊";
+      const isShown = details.style.display === "block";
+      
+      // 隱藏所有其他詳細資訊
+      document.querySelectorAll('.details').forEach(detail => {
+        detail.style.display = "none";
+      });
+      document.querySelectorAll('button').forEach(button => {
+        if (button.textContent.includes('Show Details')) {
+          button.textContent = "📖 Show Details | 顯示詳情";
+        }
+      });
+      
+      // 如果當前未展開，則展開
+      if (!isShown) {
+        details.style.display = "block";
+        btn.textContent = "📘 Hide Details | 隱藏詳情";
+      }
     }
 
-    loadData();
+    // 初始化頁面
+    window.onload = function() {
+      loadVocabulary();
+    };
   </script>
 </body>
 </html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vegetarian vs Fasting - B1 English Version</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: "Noto Sans", "Noto Sans TC", sans-serif;
+      background: linear-gradient(135deg, #f9fdf7 0%, #e8f5e8 100%);
+      padding: 20px;
+      margin: 0;
+      line-height: 1.8;
+      color: #2c3e15;
+      min-height: 100vh;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #4a7c30;
+      font-size: 2.5em;
+      margin-bottom: 15px;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    
+    .comparison-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .concept-section {
+      padding: 20px;
+      border-radius: 10px;
+      background: #f8fcf4;
+      border-left: 5px solid #4a7c30;
+    }
+    
+    .concept-title {
+      font-size: 1.8em;
+      color: #4a7c30;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    .section-label {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #4a7c30;
+      margin: 20px 0 10px 0;
+      border-bottom: 2px solid #e8f0d9;
+      padding-bottom: 5px;
+    }
+    
+    .content {
+      font-size: 1.1em;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+    
+    .word {
+      position: relative;
+      cursor: help;
+      padding: 2px 4px;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      border-bottom: 1px dotted #4a7c30;
+    }
+    
+    .word:hover {
+      background-color: #e8f0d9;
+      color: #2c3e15;
+    }
+    
+    .word:hover::after {
+      content: attr(data-definition);
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2c3e15;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      white-space: nowrap;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      max-width: 300px;
+      white-space: normal;
+      width: max-content;
+    }
+    
+    .word:hover::before {
+      content: "";
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: #2c3e15;
+      z-index: 1000;
+    }
+    
+    .pronunciation {
+      font-family: 'Courier New', monospace;
+      color: #666;
+      font-size: 0.9em;
+      margin-left: 8px;
+      font-style: italic;
+    }
+    
+    .audio-control {
+      display: inline-block;
+      margin-left: 10px;
+      cursor: pointer;
+      color: #4a7c30;
+      font-size: 1.2em;
+      transition: all 0.3s ease;
+    }
+    
+    .audio-control:hover {
+      color: #2c3e15;
+      transform: scale(1.1);
+    }
+    
+    .scientific-info {
+      background: #f0f6df;
+      border: 2px solid #9dcc81;
+      border-radius: 10px;
+      padding: 25px;
+      margin-top: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .scientific-title {
+      color: #4a7c30;
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    
+    .scientific-content {
+      line-height: 1.7;
+      color: #3b4b1c;
+    }
+    
+    .scientific-content a {
+      color: #4a7c30;
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      .header, .comparison-container {
+        padding: 20px;
+      }
+      
+      .word:hover::after {
+        max-width: 250px;
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+<section id="vocabGameB1" style="margin-top: 60px; background:#fff7ee; padding: 2em; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center; color:#5a3825;">🧠 詞彙配對小遊戲（B1）</h2>
+  <p style="text-align:center; color:#6a4e3b;">
+    將左邊的英文拖曳到右側正確的中文解釋上～<br>
+    每一詞都來自於上面講解內容喔！
+  </p>
+
+  <div style="display:flex; justify-content:space-between; gap:2em; flex-wrap:wrap; margin-top:2em;">
+    <div id="dragAreaB1" style="flex:1; min-width:200px;"></div>
+    <div id="dropAreaB1" style="flex:1; min-width:200px;"></div>
+  </div>
+
+  <div style="text-align:center; margin-top: 1.5em;">
+    <button onclick="loadVocabGameB1()">🔄 重來</button>
+    <span id="gameResultB1" style="display:inline-block; margin-left:20px; font-weight:bold;"></span>
+  </div>
+</section>
+  <div class="header">
+    <h1>🥬 Vegetarian vs Fasting</h1>
+    <p class="subtitle">Understanding the Difference - B1 Level</p>
+    <p>Hover over highlighted words for definitions and pronunciation</p>
+  </div>
+
+  <div class="comparison-container">
+    <div class="comparison-grid">
+      <!-- Vegetarian Section -->
+      <div class="concept-section">
+        <h2 class="concept-title">🌱 Vegetarian</h2>
+        
+        <div class="section-label">Definition</div>
+        <div class="content">
+          <span class="word" data-definition="Vegetarian /ˌvedʒɪˈteriən/ - 素食者，不吃肉的人">Vegetarian</span> 
+          <span class="pronunciation">/ˌvedʒɪˈteriən/</span>
+          <span class="audio-control" onclick="playAudio('vegetarian')"><i class="fas fa-volume-up"></i></span>
+          people do not eat 
+          <span class="word" data-definition="Meat /mit/ - 肉類，動物的肌肉組織">meat</span>
+          <span class="pronunciation">/mit/</span>. 
+          They eat 
+          <span class="word" data-definition="Plants /plænts/ - 植物，包括蔬菜、水果、穀物">plants</span>
+          <span class="pronunciation">/plænts/</span>, 
+          <span class="word" data-definition="Eggs /egz/ - 雞蛋或其他鳥蛋">eggs</span>
+          <span class="pronunciation">/egz/</span>, 
+          and 
+          <span class="word" data-definition="Dairy /ˈderi/ - 乳製品，如牛奶、起司、優格">dairy</span> 
+          <span class="pronunciation">/ˈderi/</span>
+          <span class="word" data-definition="Products /ˈprɑdʌkts/ - 產品，製成品">products</span>
+          <span class="pronunciation">/ˈprɑdʌkts/</span> 
+          like milk and cheese.
+          <span class="audio-control" onclick="playAudio('vegetarian-definition')"><i class="fas fa-volume-up"></i></span>
+        </div>
+        
+        <div class="section-label">Why People Choose This</div>
+        <div class="content">
+          People choose to be vegetarian to 
+          <span class="word" data-definition="Protect /prəˈtekt/ - 保護，守護">protect</span>
+          <span class="pronunciation">/prəˈtekt/</span> 
+          <span class="word" data-definition="Animals /ˈænəməlz/ - 動物">animals</span>
+          <span class="pronunciation">/ˈænəməlz/</span> 
+          and stay 
+          <span class="word" data-definition="Healthy /ˈhelθi/ - 健康的">healthy</span>
+          <span class="pronunciation">/ˈhelθi/</span>. 
+          It also helps the 
+          <span class="word" data-definition="Environment /ɪnˈvaɪrənmənt/ - 環境，自然環境">environment</span>
+          <span class="pronunciation">/ɪnˈvaɪrənmənt/</span>.
+          <span class="audio-control" onclick="playAudio('vegetarian-why')"><i class="fas fa-volume-up"></i></span>
+        </div>
+        
+        <div class="section-label">Simple Example</div>
+        <div class="content">
+          It's like choosing to wear a 
+          <span class="word" data-definition="Comfortable /ˈkʌmftəbəl/ - 舒適的">comfortable</span>
+          <span class="pronunciation">/ˈkʌmftəbəl/</span> 
+          cotton T-shirt instead of 
+          <span class="word" data-definition="Real /riəl/ - 真的，真實的">real</span>
+          <span class="pronunciation">/riəl/</span> 
+          <span class="word" data-definition="Fur /fɜr/ - 毛皮，動物的皮毛">fur</span>
+          <span class="pronunciation">/fɜr/</span> 
+          because you love animals.
+          <span class="audio-control" onclick="playAudio('vegetarian-example')"><i class="fas fa-volume-up"></i></span>
+        </div>
+      </div>
+
+      <!-- Fasting Section -->
+      <div class="concept-section">
+        <h2 class="concept-title">🧘 Fasting</h2>
+        
+        <div class="section-label">Definition</div>
+        <div class="content">
+          <span class="word" data-definition="Fasting /ˈfæstɪŋ/ - 齋戒，嚴格的素食規範">Fasting</span>
+          <span class="pronunciation">/ˈfæstɪŋ/</span>
+          <span class="audio-control" onclick="playAudio('fasting')"><i class="fas fa-volume-up"></i></span>
+          means not eating meat AND also 
+          <span class="word" data-definition="Avoiding /əˈvɔɪdɪŋ/ - 避免，避開">avoiding</span>
+          <span class="pronunciation">/əˈvɔɪdɪŋ/</span> 
+          <span class="word" data-definition="Strong /strɔŋ/ - 強烈的，刺激的">strong</span>
+          <span class="pronunciation">/strɔŋ/</span> 
+          foods like 
+          <span class="word" data-definition="Onions /ˈʌnjənz/ - 洋蔥">onions</span>
+          <span class="pronunciation">/ˈʌnjənz/</span> 
+          and 
+          <span class="word" data-definition="Garlic /ˈgɑrlɪk/ - 大蒜">garlic</span>
+          <span class="pronunciation">/ˈgɑrlɪk/</span>.
+          <span class="audio-control" onclick="playAudio('fasting-definition')"><i class="fas fa-volume-up"></i></span>
+        </div>
+        
+        <div class="section-label">Why People Do This</div>
+        <div class="content">
+          People do this to keep their 
+          <span class="word" data-definition="Body /ˈbɑdi/ - 身體">body</span>
+          <span class="pronunciation">/ˈbɑdi/</span> 
+          and 
+          <span class="word" data-definition="Mind /maɪnd/ - 心靈，思想">mind</span>
+          <span class="pronunciation">/maɪnd/</span> 
+          <span class="word" data-definition="Pure /pjʊr/ - 純淨的，純潔的">pure</span>
+          <span class="pronunciation">/pjʊr/</span> 
+          and 
+          <span class="word" data-definition="Calm /kɑm/ - 平靜的，安詳的">calm</span>
+          <span class="pronunciation">/kɑm/</span>. 
+          It helps with 
+          <span class="word" data-definition="Meditation /ˌmedɪˈteɪʃən/ - 冥想，靜思">meditation</span>
+          <span class="pronunciation">/ˌmedɪˈteɪʃən/</span> 
+          and 
+          <span class="word" data-definition="Spiritual /ˈspɪrɪtʃuəl/ - 精神的，靈性的">spiritual</span>
+          <span class="pronunciation">/ˈspɪrɪtʃuəl/</span> 
+          <span class="word" data-definition="Practice /ˈpræktɪs/ - 練習，修行">practice</span>
+          <span class="pronunciation">/ˈpræktɪs/</span>.
+          <span class="audio-control" onclick="playAudio('fasting-why')"><i class="fas fa-volume-up"></i></span>
+        </div>
+        
+        <div class="section-label">Simple Example</div>
+        <div class="content">
+          It's like being very 
+          <span class="word" data-definition="Quiet /ˈkwaɪət/ - 安靜的">quiet</span>
+          <span class="pronunciation">/ˈkwaɪət/</span> 
+          and 
+          <span class="word" data-definition="Focused /ˈfoʊkəst/ - 專注的">focused</span>
+          <span class="pronunciation">/ˈfoʊkəst/</span> 
+          before an important 
+          <span class="word" data-definition="Test /test/ - 考試，測驗">test</span>
+          <span class="pronunciation">/test/</span> 
+          to prepare your mind.
+          <span class="audio-control" onclick="playAudio('fasting-example')"><i class="fas fa-volume-up"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scientific-info">
+    <h3 class="scientific-title">🧪 Scientific Information</h3>
+    <div class="scientific-content">
+      <p>
+        The 
+        <span class="word" data-definition="Five pungent spices /faɪv ˈpʌndʒənt ˈspaɪsəz/ - 五辛，五種刺激性香料">five pungent spices</span>
+        <span class="pronunciation">/faɪv ˈpʌndʒənt ˈspaɪsəz/</span>
+        (like 
+        <span class="word" data-definition="Scallions /ˈskæljənz/ - 青蔥">scallions</span>
+        <span class="pronunciation">/ˈskæljənz/</span>, 
+        garlic, 
+        <span class="word" data-definition="Chives /tʃaɪvz/ - 韭菜">chives</span>
+        <span class="pronunciation">/tʃaɪvz/</span>, 
+        onions) contain 
+        <span class="word" data-definition="Natural /ˈnætʃərəl/ - 天然的">natural</span>
+        <span class="pronunciation">/ˈnætʃərəl/</span> 
+        <span class="word" data-definition="Sulfur compounds /ˈsʌlfər ˈkɑmpaʊndz/ - 硫化物">sulfur compounds</span>
+        <span class="pronunciation">/ˈsʌlfər ˈkɑmpaʊndz/</span>.
+        <span class="audio-control" onclick="playAudio('scientific-info')"><i class="fas fa-volume-up"></i></span>
+      </p>
+      <p>
+        These can 
+        <span class="word" data-definition="Stimulate /ˈstɪmjəˌleɪt/ - 刺激，興奮">stimulate</span>
+        <span class="pronunciation">/ˈstɪmjəˌleɪt/</span> 
+        the 
+        <span class="word" data-definition="Nervous system /ˈnɜrvəs ˈsɪstəm/ - 神經系統">nervous system</span>
+        <span class="pronunciation">/ˈnɜrvəs ˈsɪstəm/</span> 
+        and affect mental 
+        <span class="word" data-definition="Calmness /ˈkɑmnəs/ - 平靜，冷靜">calmness</span>
+        <span class="pronunciation">/ˈkɑmnəs/</span>. 
+        For more details, see this 
+        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4103721/" target="_blank" rel="noopener noreferrer">
+          medical article
+        </a>.
+        <span class="audio-control" onclick="playAudio('scientific-explanation')"><i class="fas fa-volume-up"></i></span>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Text-to-Speech function
+    function playAudio(textKey) {
+      const texts = {
+        'vegetarian': 'Vegetarian',
+        'vegetarian-definition': 'Vegetarian people do not eat meat. They eat plants, eggs, and dairy products like milk and cheese.',
+        'vegetarian-why': 'People choose to be vegetarian to protect animals and stay healthy. It also helps the environment.',
+        'vegetarian-example': 'It is like choosing to wear a comfortable cotton T-shirt instead of real fur because you love animals.',
+        'fasting': 'Fasting',
+        'fasting-definition': 'Fasting means not eating meat and also avoiding strong foods like onions and garlic.',
+        'fasting-why': 'People do this to keep their body and mind pure and calm. It helps with meditation and spiritual practice.',
+        'fasting-example': 'It is like being very quiet and focused before an important test to prepare your mind.',
+        'scientific-info': 'The five pungent spices like scallions, garlic, chives, onions contain natural sulfur compounds.',
+        'scientific-explanation': 'These can stimulate the nervous system and affect mental calmness.'
+      };
+
+      const text = texts[textKey] || textKey;
+      
+      if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.8;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+        
+        // Try to use an English voice
+        const voices = speechSynthesis.getVoices();
+        const englishVoice = voices.find(voice => 
+          voice.lang.startsWith('en') && voice.name.includes('US')
+        ) || voices.find(voice => voice.lang.startsWith('en'));
+        
+        if (englishVoice) {
+          utterance.voice = englishVoice;
+        }
+        
+        speechSynthesis.speak(utterance);
+      } else {
+        alert('Sorry, your browser does not support text-to-speech.');
+      }
+    }
+
+    // Load voices when available
+    speechSynthesis.addEventListener('voiceschanged', function() {
+      // Voices are now loaded
+    });
+  </script>
+</body>
+</html>

@@ -2,89 +2,719 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>🇺🇸🇨🇦 美加常見素食詞彙</title>
+  <title>🇺🇸🇨🇦 North America Vegetarian Guide | 北美素食指南</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../css/assetsstyles.css">
   <style>
     body {
-      font-family: "Noto Sans TC", sans-serif;
+      font-family: "Noto Sans TC", "Noto Sans", sans-serif;
       background: #f9f9f6;
       padding: 2em;
+      line-height: 1.6;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     h1 {
       text-align: center;
       color: #4a3b30;
+      margin-bottom: 0.5em;
+    }
+
+    .intro-section {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 2em;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2em;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .category-selector {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1em;
+      margin: 2em 0;
+    }
+
+    .category-btn {
+      padding: 1em 1.5em;
+      background: #e0e0e0;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1em;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .category-btn.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .category-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .category-content {
+      display: none;
+    }
+
+    .category-content.active {
+      display: block;
+    }
+
+    .section-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2em;
+      border-radius: 12px;
+      margin: 2em 0 1.5em;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .section-subtitle {
+      font-style: italic;
+      opacity: 0.9;
+      font-size: 1.1em;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.5em;
+      margin: 2em 0;
     }
 
     .card {
       background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 1em;
-      margin: 1em 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1.5em;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1em;
+    }
+
+    .word-main {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.3em;
+    }
+
+    .word-translation {
+      font-size: 1.1em;
+      color: #666;
+      font-style: italic;
+    }
+
+    .restaurant-type {
+      background: #4CAF50;
+      color: white;
+      padding: 0.3em 0.8em;
+      border-radius: 15px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+
+    .restaurant-type.middle-eastern {
+      background: #FF9800;
+    }
+
+    .restaurant-type.jewish {
+      background: #2196F3;
+    }
+
+    .restaurant-type.mexican {
+      background: #E91E63;
+    }
+
+    .restaurant-type.chain {
+      background: #9C27B0;
+    }
+
+    .restaurant-type.general {
+      background: #607D8B;
     }
 
     .details {
       display: none;
-      margin-top: 0.5em;
-      background: #eef6ff;
-      padding: 0.5em;
-      border-radius: 4px;
+      margin-top: 1.2em;
+      background: #f8f9ff;
+      padding: 1.2em;
+      border-radius: 10px;
+      border-left: 4px solid #5c6bc0;
+    }
+
+    .pronunciation-section {
+      margin-bottom: 1em;
+      padding-bottom: 1em;
+      border-bottom: 1px solid #eee;
+    }
+
+    .pronunciation-item {
+      margin-bottom: 0.5em;
+      font-family: 'Courier New', monospace;
+      color: #555;
+    }
+
+    .label {
+      display: inline-block;
+      min-width: 80px;
+      font-weight: 500;
+      color: #333;
+      font-family: inherit;
+    }
+
+    .definition {
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+
+    .ordering-tip {
+      background: #e8f5e8;
+      border-left: 4px solid #4CAF50;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .ordering-tip-title {
+      font-weight: bold;
+      color: #2e7d32;
+      margin-bottom: 0.5em;
+    }
+
+    .chain-specific {
+      background: #fff3e0;
+      border-left: 4px solid #FF9800;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .chain-title {
+      font-weight: bold;
+      color: #f57c00;
+      margin-bottom: 0.5em;
     }
 
     button {
-      background-color: #5c6bc0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       border: none;
-      padding: 0.4em 0.8em;
-      border-radius: 4px;
+      padding: 0.8em 1.5em;
+      border-radius: 8px;
       cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: 1em;
+      font-weight: 500;
     }
 
     button:hover {
-      background-color: #3f51b5;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .difficulty-indicator {
+      display: inline-block;
+      padding: 0.3em 0.8em;
+      border-radius: 15px;
+      font-size: 0.8em;
+      font-weight: bold;
+      margin-left: 0.5em;
+    }
+
+    .difficulty-a1 {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .difficulty-a2 {
+      background: #FFC107;
+      color: #333;
+    }
+
+    .difficulty-b1 {
+      background: #2196F3;
+      color: white;
+    }
+
+    .difficulty-b2 {
+      background: #9C27B0;
+      color: white;
+    }
+
+    .tips-section {
+      background: #e3f2fd;
+      border-radius: 12px;
+      padding: 2em;
+      margin: 3em 0;
+    }
+
+    .tips-title {
+      color: #1565c0;
+      font-size: 1.3em;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5em;
+    }
+
+    .tip-item {
+      background: white;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .tip-icon {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+
+    .tip-title {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5em;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1em;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .category-selector {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .category-btn {
+        width: 80%;
+        margin: 0.3em 0;
+      }
+      
+      .tips-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .restaurant-type {
+        margin-top: 0.5em;
+      }
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>🇺🇸🇨🇦 美加常見素食詞彙</h1>
-  <p style="text-align:center;">Vegetarian Vocabulary in US & Canada</p>
+  <h1>🇺🇸🇨🇦 North America Vegetarian Guide</h1>
+  <p style="text-align: center; color: #666; font-size: 1.1em;">北美素食完全指南 | Complete Guide to Vegetarian Dining in US & Canada</p>
 
-  <div id="cards-container"></div>
+  <div class="intro-section">
+    <h2>🌱 Navigate North American Vegetarian Scene</h2>
+    <p><strong>English:</strong> Discover vegetarian options across diverse North American dining scenes - from traditional delis to modern plant-based chains, Middle Eastern markets to Jewish kosher restaurants.</p>
+    <p><strong>中文：</strong> 探索北美多元化的素食選擇 - 從傳統熟食店到現代植物肉連鎖店，從中東市場到猶太潔食餐廳，全方位素食指南。</p>
+  </div>
+
+  <div class="category-selector">
+    <button class="category-btn active" onclick="showCategory('general')">🍽️ General | 一般餐廳</button>
+    <button class="category-btn" onclick="showCategory('chains')">🍔 Chain Restaurants | 連鎖餐廳</button>
+    <button class="category-btn" onclick="showCategory('middle-eastern')">🧆 Middle Eastern | 中東料理</button>
+    <button class="category-btn" onclick="showCategory('jewish')">🥯 Jewish Kosher | 猶太潔食</button>
+    <button class="category-btn" onclick="showCategory('mexican')">🌮 Mexican | 墨西哥料理</button>
+  </div>
+
+  <!-- 一般餐廳 -->
+  <div id="general-content" class="category-content active">
+    <div class="section-header">
+      <div class="section-title">🍽️ General Restaurant Vocabulary</div>
+      <div class="section-subtitle">Essential phrases for everyday dining in North America</div>
+    </div>
+    <div id="general-cards" class="cards-grid"></div>
+  </div>
+
+  <!-- 連鎖餐廳 -->
+  <div id="chains-content" class="category-content">
+    <div class="section-header">
+      <div class="section-title">🍔 Chain Restaurant Guide</div>
+      <div class="section-subtitle">Navigate popular chains with plant-based options</div>
+    </div>
+    <div id="chains-cards" class="cards-grid"></div>
+  </div>
+
+  <!-- 中東料理 -->
+  <div id="middle-eastern-content" class="category-content">
+    <div class="section-header">
+      <div class="section-title">🧆 Middle Eastern Cuisine</div>
+      <div class="section-subtitle">Naturally vegetarian-friendly options</div>
+    </div>
+    <div id="middle-eastern-cards" class="cards-grid"></div>
+  </div>
+
+  <!-- 猶太潔食 -->
+  <div id="jewish-content" class="category-content">
+    <div class="section-header">
+      <div class="section-title">🥯 Jewish Kosher Dining</div>
+      <div class="section-subtitle">Understanding kosher vegetarian options</div>
+    </div>
+    <div id="jewish-cards" class="cards-grid"></div>
+  </div>
+
+  <!-- 墨西哥料理 -->
+  <div id="mexican-content" class="category-content">
+    <div class="section-header">
+      <div class="section-title">🌮 Mexican Restaurant Guide</div>
+      <div class="section-subtitle">Plant-based Mexican favorites and chains like Chipotle</div>
+    </div>
+    <div id="mexican-cards" class="cards-grid"></div>
+  </div>
+
+  <!-- 實用小貼士 -->
+  <div class="tips-section">
+    <h2 class="tips-title">💡 Practical Tips for North American Vegetarian Dining</h2>
+    <div class="tips-grid">
+      <div class="tip-item">
+        <div class="tip-icon">📱</div>
+        <div class="tip-title">Apps to Use</div>
+        <p>Download HappyCow, Yelp, and restaurant-specific apps for easy vegetarian options discovery.</p>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">🏪</div>
+        <div class="tip-title">Grocery Stores</div>
+        <p>Whole Foods, Trader Joe's, and Kroger have extensive plant-based sections with prepared foods.</p>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">🍔</div>
+        <div class="tip-title">Fast Food</div>
+        <p>Most major chains now offer plant-based burgers and impossible meat options.</p>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">🌮</div>
+        <div class="tip-title">Ethnic Cuisines</div>
+        <p>Indian, Thai, Mediterranean, and Mexican restaurants typically have many vegetarian dishes.</p>
+      </div>
+    </div>
+  </div>
 
   <script>
-    async function loadData() {
-      const res = await fetch("../data/vegetarian-us-ca.json");
-      const data = await res.json();
-      const container = document.getElementById("cards-container");
+    // 一般餐廳詞彙
+    const generalVocabulary = [
+      {
+        en: "I'm vegetarian",
+        zh: "我是素食者",
+        ipa: "/aɪm ˌvedʒɪˈteriən/",
+        kk: "/aɪm ˌvɛdʒɪˈtɛriən/",
+        definition: "Standard way to communicate dietary preference in North America.",
+        orderingTip: "Most servers will immediately understand and offer suggestions or point out vegetarian items on the menu.",
+        difficulty: "A1",
+        type: "general"
+      },
+      {
+        en: "Do you have plant-based options?",
+        zh: "你們有植物性選擇嗎？",
+        ipa: "/duː juː hæv plænt beɪst ˈɑːpʃənz/",
+        kk: "/du ju hæv plænt best ˈɑpʃənz/",
+        definition: "Modern term widely understood in North America, often preferred over 'vegetarian'.",
+        orderingTip: "This term is especially effective in trendy restaurants and health-conscious establishments.",
+        difficulty: "A2",
+        type: "general"
+      },
+      {
+        en: "Is this made with vegetable broth?",
+        zh: "這是用蔬菜高湯做的嗎？",
+        ipa: "/ɪz ðɪs meɪd wɪθ ˈvedʒtəbəl brɔːθ/",
+        kk: "/ɪz ðɪs med wɪθ ˈvɛdʒtəbəl brɔθ/",
+        definition: "Important question for soups and sauces that may contain meat-based broths.",
+        orderingTip: "Many restaurants use chicken or beef broth as a base. Always ask about soups, gravies, and rice dishes.",
+        difficulty: "B1",
+        type: "general"
+      }
+    ];
 
-      data.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <p><strong>英文：</strong> ${item.en}</p>
-          <p><strong>中文：</strong> ${item.zh}</p>
-          <button onclick="toggleDetails(this)">📖 顯示發音資訊</button>
-          <div class="details">
-            <p><strong>IPA：</strong> ${item.ipa || "-"}</p>
-            <p><strong>KK：</strong> ${item.kk || "-"}</p>
-            <p><strong>解釋：</strong> ${item.definition || "-"}</p>
-          </div>
-        `;
-        container.appendChild(card);
+    // 連鎖餐廳詞彙
+    const chainsVocabulary = [
+      {
+        en: "Do you have Beyond Burgers?",
+        zh: "你們有Beyond漢堡嗎？",
+        ipa: "/duː juː hæv bɪˈjɑːnd ˈbɜːrɡərz/",
+        kk: "/du ju hæv bɪˈjɑnd ˈbɝɡɝz/",
+        definition: "Popular plant-based burger brand available at many North American chains.",
+        orderingTip: "Available at McDonald's, Carl's Jr., and many other chains. Ask if they can prepare it on a separate grill.",
+        chainSpecific: "McDonald's calls it 'McPlant', Carl's Jr. has 'Beyond Famous Star', A&W offers 'Beyond Burger'",
+        difficulty: "A1",
+        type: "chain"
+      },
+      {
+        en: "Can I get the Impossible Whopper?",
+        zh: "我可以點Impossible華堡嗎？",
+        ipa: "/kæn aɪ ɡet ði ɪmˈpɑːsəbəl ˈwʌpər/",
+        kk: "/kæn aɪ ɡɛt ði ɪmˈpɑsəbəl ˈhwʌpɝ/",
+        definition: "Burger King's plant-based version of their signature Whopper burger.",
+        orderingTip: "Specify 'no mayo' if you want it vegan, as the regular mayo contains eggs.",
+        chainSpecific: "Burger King exclusive. Ask for it 'plant-based style' (no mayo) for vegan option.",
+        difficulty: "A2",
+        type: "chain"
+      },
+      {
+        en: "I'd like extra guac on my veggie bowl",
+        zh: "我的蔬菜碗要加酪梨醬",
+        ipa: "/aɪd laɪk ˈekstrə ˈɡwɑːk ɑːn maɪ ˈvedʒi boʊl/",
+        kk: "/aɪd laɪk ˈɛkstrə ˈɡwɑk ɑn maɪ ˈvɛdʒi bol/",
+        definition: "Common order at Chipotle and similar Mexican fast-casual chains.",
+        orderingTip: "Guacamole is usually extra charge but adds healthy fats and flavor to veggie bowls.",
+        chainSpecific: "Chipotle, Qdoba, Moe's all offer customizable veggie bowls with beans, rice, and vegetables.",
+        difficulty: "A2",
+        type: "chain"
+      }
+    ];
+
+    // 中東料理詞彙
+    const middleEasternVocabulary = [
+      {
+        en: "I'll have the falafel plate",
+        zh: "我要沙拉炸豆餅套餐",
+        ipa: "/aɪl hæv ðə fəˈlɑːfəl pleɪt/",
+        kk: "/aɪl hæv ðə fəˈlɑfəl plet/",
+        definition: "Classic Middle Eastern vegetarian dish made from chickpeas or fava beans.",
+        orderingTip: "Usually comes with hummus, tahini, pita bread, and salad. Naturally vegan and protein-rich.",
+        difficulty: "A1",
+        type: "middle-eastern"
+      },
+      {
+        en: "Is the hummus made fresh daily?",
+        zh: "鷹嘴豆泥是每天現做的嗎？",
+        ipa: "/ɪz ðə ˈhʌməs meɪd freʃ ˈdeɪli/",
+        kk: "/ɪz ðə ˈhʌməs med frɛʃ ˈdeli/",
+        definition: "Quality question for a staple Middle Eastern dip made from chickpeas.",
+        orderingTip: "Fresh hummus is smoother and more flavorful. Most authentic Middle Eastern restaurants make it daily.",
+        difficulty: "B1",
+        type: "middle-eastern"
+      },
+      {
+        en: "Can I get extra tahini sauce?",
+        zh: "可以多給我一些芝麻醬嗎？",
+        ipa: "/kæn aɪ ɡet ˈekstrə təˈhiːni sɔːs/",
+        kk: "/kæn aɪ ɡɛt ˈɛkstrə təˈhini sɔs/",
+        definition: "Sesame seed paste sauce, popular condiment in Middle Eastern cuisine.",
+        orderingTip: "Tahini is rich, creamy, and vegan. Great on falafel, vegetables, and salads.",
+        difficulty: "A2",
+        type: "middle-eastern"
+      }
+    ];
+
+    // 猶太潔食詞彙
+    const jewishVocabulary = [
+      {
+        en: "Is this pareve?",
+        zh: "這是中性食品嗎？",
+        ipa: "/ɪz ðɪs ˈpɑːrəv/",
+        kk: "/ɪz ðɪs ˈpɑrəv/",
+        definition: "Kosher term for foods that contain neither meat nor dairy, suitable for vegetarians.",
+        orderingTip: "Pareve foods can be eaten with either meat or dairy meals according to kosher laws.",
+        difficulty: "B2",
+        type: "jewish"
+      },
+      {
+        en: "I'll take the lox and bagel, hold the lox",
+        zh: "我要貝果配煙燻鮭魚，但不要魚",
+        ipa: "/aɪl teɪk ðə lɑːks ænd ˈbeɪɡəl hoʊld ðə lɑːks/",
+        kk: "/aɪl tek ðə lɑks ænd ˈbeɡəl hold ðə lɑks/",
+        definition: "Humorous way to order just a bagel with cream cheese and toppings, minus the fish.",
+        orderingTip: "Jewish delis understand this order - you'll get bagel with cream cheese, capers, onions, tomato.",
+        difficulty: "B1",
+        type: "jewish"
+      },
+      {
+        en: "What vegetarian options are kosher today?",
+        zh: "今天有什麼素食的潔食選擇？",
+        ipa: "/wʌt ˌvedʒɪˈteriən ˈɑːpʃənz ɑːr ˈkoʊʃər təˈdeɪ/",
+        kk: "/hwʌt ˌvɛdʒɪˈtɛriən ˈɑpʃənz ɑr ˈkoʃɝ təˈde/",
+        definition: "Asking about vegetarian foods that also meet kosher dietary requirements.",
+        orderingTip: "Kosher restaurants often have dairy and meat sections. Vegetarian options are usually in the dairy section.",
+        difficulty: "B2",
+        type: "jewish"
+      }
+    ];
+
+    // 墨西哥料理詞彙
+    const mexicanVocabulary = [
+      {
+        en: "Bean and rice burrito, no cheese",
+        zh: "豆子飯捲餅，不要起司",
+        ipa: "/biːn ænd raɪs bəˈriːtoʊ noʊ tʃiːz/",
+        kk: "/bin ænd raɪs bəˈrito no tʃiz/",
+        definition: "Simple vegan Mexican option available at most Mexican restaurants and chains.",
+        orderingTip: "Add guacamole, salsa, lettuce, and tomatoes for a complete meal. Beans provide protein.",
+        chainSpecific: "At Chipotle: Choose brown rice, black or pinto beans, veggies, salsa, and guac.",
+        difficulty: "A1",
+        type: "mexican"
+      },
+      {
+        en: "Are the refried beans made with lard?",
+        zh: "重炸豆泥是用豬油做的嗎？",
+        ipa: "/ɑːr ðə riˈfraɪd biːnz meɪd wɪθ lɑːrd/",
+        kk: "/ɑr ðə riˈfraɪd binz med wɪθ lɑrd/",
+        definition: "Important question as traditional refried beans often contain pork fat.",
+        orderingTip: "Many chains now use vegetable oil, but traditional Mexican restaurants may still use lard.",
+        chainSpecific: "Chipotle, Qdoba, and Taco Bell use vegetarian refried beans.",
+        difficulty: "B1",
+        type: "mexican"
+      },
+      {
+        en: "Veggie bowl with sofritas, please",
+        zh: "蔬菜碗配豆腐絲，謝謝",
+        ipa: "/ˈvedʒi boʊl wɪθ soʊˈfriːtəs pliːz/",
+        kk: "/ˈvɛdʒi bol wɪθ soˈfritəs pliz/",
+        definition: "Chipotle's seasoned tofu protein option, popular among vegetarians.",
+        orderingTip: "Sofritas is Chipotle's spicy, shredded tofu. Good protein source for veggie bowls.",
+        chainSpecific: "Chipotle exclusive. Made with organic tofu, poblano peppers, and spices.",
+        difficulty: "A2",
+        type: "mexican"
+      }
+    ];
+
+    // 組合所有詞彙
+    const allVocabulary = {
+      general: generalVocabulary,
+      chains: chainsVocabulary,
+      'middle-eastern': middleEasternVocabulary,
+      jewish: jewishVocabulary,
+      mexican: mexicanVocabulary
+    };
+
+    function showCategory(category) {
+      // 隱藏所有內容
+      document.querySelectorAll('.category-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // 移除所有按鈕的活動狀態
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // 顯示選中的內容
+      document.getElementById(`${category}-content`).classList.add('active');
+      
+      // 設置對應按鈕為活動狀態
+      document.querySelector(`[onclick="showCategory('${category}')"]`).classList.add('active');
+    }
+
+    function loadVocabulary() {
+      Object.keys(allVocabulary).forEach(category => {
+        const container = document.getElementById(`${category}-cards`);
+        if (!container) return;
+        
+        container.innerHTML = "";
+        
+        allVocabulary[category].forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          
+          const chainSpecificHtml = item.chainSpecific ? `
+            <div class="chain-specific">
+              <div class="chain-title">🏪 Chain Specific Info:</div>
+              <div>${item.chainSpecific}</div>
+            </div>
+          ` : '';
+          
+          card.innerHTML = `
+            <div class="card-header">
+              <div>
+                <div class="word-main">${item.en}</div>
+                <div class="word-translation">${item.zh}</div>
+              </div>
+              <div>
+                <span class="restaurant-type ${item.type}">${item.type.replace('-', ' ').toUpperCase()}</span>
+                <span class="difficulty-indicator difficulty-${item.difficulty.toLowerCase()}">${item.difficulty}</span>
+              </div>
+            </div>
+            <button onclick="toggleDetails(this, '${category}', ${index})">📖 Show Details | 顯示詳情</button>
+            <div class="details">
+              <div class="pronunciation-section">
+                <div style="font-weight: bold; margin-bottom: 0.5em;">🔊 Pronunciation:</div>
+                <div class="pronunciation-item">
+                  <span class="label">IPA:</span> ${item.ipa}
+                </div>
+                <div class="pronunciation-item">
+                  <span class="label">KK:</span> ${item.kk}
+                </div>
+              </div>
+              <div class="definition"><strong>Definition:</strong> ${item.definition}</div>
+              ${item.orderingTip ? `
+                <div class="ordering-tip">
+                  <div class="ordering-tip-title">💡 Ordering Tip:</div>
+                  <div>${item.orderingTip}</div>
+                </div>
+              ` : ''}
+              ${chainSpecificHtml}
+            </div>
+          `;
+          container.appendChild(card);
+        });
       });
     }
 
-    function toggleDetails(btn) {
-      const detail = btn.nextElementSibling;
-      const open = detail.style.display === "block";
-      detail.style.display = open ? "none" : "block";
-      btn.textContent = open ? "📖 顯示發音資訊" : "📘 收起發音資訊";
-    }
+    function toggleDetails(btn, category, index) {
+      const details = btn.nextElementSibling;
+      const isShown = details.style.display === "block";
+      
+// 隱藏所有其他詳細資訊
+document.querySelectorAll('button').forEach(button => {
+        if (button.textContent.includes('Show Details')) {
+          button.textContent = "📖 Show Details | 顯示詳情";
+        }
+      });
 
-    loadData();
+      // 如果當前未展開，則展開
+      if (!isShown) {
+        details.style.display = "block";
+        btn.textContent = "📘 Hide Details | 隱藏詳情";
+      }
+    }
+    // 初始化頁面
+    window.onload = function() {
+      loadVocabulary();
+    };
   </script>
 </body>
 </html>

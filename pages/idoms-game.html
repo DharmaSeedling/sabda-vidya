@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>佛教成語與英文學習</title>
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2B48C;
+            --accent-color: #f5d389;
+            --text-color: #4A4A4A;
+            --light-color: #F5F5DC;
+            --success-color: #4CAF50;
+            --error-color: #F44336;
+            --hint-color: #2196F3;
+            --english-color: #9C27B0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans TC', 'Noto Sans', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://img.freepik.com/free-photo/beige-wooden-textured-flooring-background_53876-108115.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border: 2px solid var(--primary-color);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .english-subtitle {
+            color: var(--english-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .level-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .level-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .level-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .level-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .level-btn.completed {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .game-area {
+            text-align: center;
+        }
+        
+        .level-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .level-title-en {
+            font-size: 1.2rem;
+            color: var(--english-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(210, 180, 140, 0.2);
+            border-radius: 10px;
+        }
+        
+        .question-en {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            text-align: center;
+            padding: 0.5rem 1rem 1rem;
+            color: var(--english-color);
+            background-color: rgba(210, 180, 140, 0.2);
+            border-radius: 0 0 10px 10px;
+            border-top: 1px dashed rgba(156, 39, 176, 0.3);
+            font-style: italic;
+        }
+        
+        .answer-input {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .char-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 5px;
+            background-color: white;
+            color: var(--text-color);
+        }
+        
+        .char-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .submit-btn:hover {
+            background-color: #6b3b16;
+            transform: translateY(-3px);
+        }
+        
+        .hint-btn {
+            background-color: var(--hint-color);
+            color: white;
+        }
+        
+        .hint-btn:hover {
+            background-color: #0b7dda;
+            transform: translateY(-3px);
+        }
+        
+        .feedback {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            min-height: 50px;
+            text-align: center;
+        }
+        
+        .feedback.success {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .feedback.error {
+            color: var(--error-color);
+        }
+        
+        .idiom-meaning {
+            background-color: rgba(210, 180, 140, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .idiom-meaning h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .english-section h3 {
+            color: var(--english-color);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .next-btn {
+            background-color: var(--success-color);
+            color: white;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .next-btn:hover {
+            background-color: #3e8e41;
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        .achievement {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .vocabulary-section {
+            margin-top: 1rem;
+            text-align: left;
+            border-top: 1px solid var(--secondary-color);
+            padding-top: 1rem;
+        }
+        
+        .vocabulary-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .vocabulary-word {
+            font-weight: bold;
+            color: var(--english-color);
+        }
+        
+        .pronunciation {
+            font-style: italic;
+            color: #777;
+            margin-left: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .level-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .char-input {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .level-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .char-input {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+.intro-section {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--primary-color);
+}
+
+.intro-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.instructions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(210, 180, 140, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.step-number {
+    background: var(--primary-color);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content strong {
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.step-content em {
+    color: var(--english-color);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .instructions {
+        grid-template-columns: 1fr;
+    }
+    
+    .instruction-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .step-number {
+        align-self: center;
+    }
+}
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>佛教成語與英文學習</h1>
+            <p class="subtitle">探索佛教智慧，增進英文能力</p>
+            <p class="english-subtitle">Explore Buddhist Wisdom While Enhancing English Skills</p>
+        </header>
+<div class="intro-section">
+            <h2>🎮 遊戲說明 How to Play</h2>
+            <div class="instructions">
+                <div class="instruction-item">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <strong>閱讀題目</strong>：仔細閱讀中英文題目描述
+                        <br><em>Read the question in both Chinese and English</em>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <strong>填入成語</strong>：在空格中輸入正確的佛教成語
+                        <br><em>Fill in the correct Buddhist idiom in the blanks</em>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <strong>獲得解釋</strong>：答對後可看到詳細解釋和英文詞彙
+                        <br><em>Get detailed explanations and vocabulary after correct answers</em>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <strong>使用提示</strong>：遇到困難可點擊「提示」按鈕
+                        <br><em>Use the "Hint" button if you need help</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="level-selector">
+                <button class="level-btn active" data-level="1">初心</button>
+            </div>
+            
+            <div class="game-area">
+                <h2 class="level-title">第一關：覺悟之門</h2>
+                <p class="level-title-en">Level 1: Gateway to Enlightenment</p>
+                <p class="question"></p>
+                <p class="question-en"></p>
+                <div class="answer-input"></div>
+                <div class="feedback"></div>
+                <div class="idiom-meaning">
+                    <h3>成語解釋</h3>
+                    <p class="meaning-text"></p>
+                    <div class="english-section">
+                        <h3>English Explanation</h3>
+                        <p class="meaning-text-en"></p>
+                    </div>
+                    <div class="vocabulary-section">
+                        <h3>核心詞彙 (Key Vocabulary)</h3>
+                        <div class="vocabulary-list"></div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn submit-btn">提交答案</button>
+                    <button class="btn hint-btn">提示</button>
+                </div>
+                <button class="btn next-btn">下一題</button>
+            </div>
+        </div>
+    </div>    
+    <div class="modal" id="levelCompleteModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>恭喜完成！</h2>
+            <p>你已成功完成這一關的挑戰！</p>
+            <p class="achievement">你已初窺佛法門徑，同時豐富了英文詞彙！</p>
+            <p class="achievement-en">You have begun your journey of Buddhist wisdom while enriching your English vocabulary!</p>
+            <button class="btn restart-btn">重新挑戰</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 佛教成語與英文學習 | Buddhist Idioms and English Learning</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 遊戲資料
+            const gameLevels = [
+                {
+                    title: "第一關：覺悟之門",
+                    titleEn: "Level 1: Gateway to Enlightenment",
+                    idioms: [
+                        {
+                            question: "佛陀教導我們要「__」，不將過去的錯誤執念於心，以寬容之心看待他人曾經的過失。",
+                            questionEn: "Buddha teaches us to practice 'not dwelling on past wrongs', showing forgiveness toward others' past mistakes rather than harboring resentment.",
+                            answer: "不念舊惡",
+                            hint: "不記住他人曾經的過錯",
+                            meaning: "「不念舊惡」意指不記住別人過去對自己的惡行。此一成語源自《論語·公冶長》，體現了佛家重要的寬恕與慈愛精神。在修行中，我們需學會放下對過去的執著，不讓負面情緒佔據心靈，方能達到內心的清淨與自在。",
+                            meaningEn: "The idiom 'not dwelling on past wrongs' refers to the practice of not holding onto memories of others' harmful actions toward oneself. This concept embodies the Buddhist spirit of forgiveness and compassion. In spiritual practice, we must learn to release attachments to past grievances and not allow negative emotions to occupy our minds, thereby achieving inner purity and freedom.",
+                            vocabulary: [
+                                {
+                                    word: "dwelling on",
+                                    pronunciation: "/ˈdwelɪŋ ɒn/",
+                                    meaning: "沉溺於、執著於"
+                                },
+                                {
+                                    word: "harboring",
+                                    pronunciation: "/ˈhɑːbərɪŋ/",
+                                    meaning: "心懷、懷有（通常指負面情緒）"
+                                },
+                                {
+                                    word: "resentment",
+                                    pronunciation: "/rɪˈzentmənt/",
+                                    meaning: "怨恨、憤恨"
+                                },
+                                {
+                                    word: "forgiveness",
+                                    pronunciation: "/fəˈɡɪvnəs/",
+                                    meaning: "寬恕、原諒"
+                                }
+                            ]
+                        },
+                        {
+                            question: "修行之路要「__」，透徹了悟生命的真諦，徹底解決一切煩惱。",
+                            questionEn: "The path of spiritual practice requires 'complete understanding and resolution', thoroughly comprehending life's true meaning to resolve all afflictions.",
+                            answer: "一了百了",
+                            hint: "一旦徹底理解就能解決所有問題",
+                            meaning: "「一了百了」原指一件事情徹底了結，就等於把許多事情都解決了。在佛教修行中，這個成語有更深層的意義，表示一旦徹底覺悟，就能同時解脫所有煩惱。真正的了悟不是部分的，而是全面的，一法通則萬法通。",
+                            meaningEn: "The idiom 'complete understanding and resolution' originally meant that thoroughly resolving one matter is equivalent to solving many problems. In Buddhist practice, this phrase carries a deeper meaning, suggesting that once true enlightenment is achieved, all sufferings are simultaneously liberated. Genuine awakening is not partial but comprehensive—when one truth is fully understood, all truths become clear.",
+                            vocabulary: [
+                                {
+                                    word: "comprehending",
+                                    pronunciation: "/ˌkɒmprɪˈhendɪŋ/",
+                                    meaning: "理解、領悟"
+                                },
+                                {
+                                    word: "afflictions",
+                                    pronunciation: "/əˈflɪkʃənz/",
+                                    meaning: "痛苦、煩惱"
+                                },
+                                {
+                                    word: "enlightenment",
+                                    pronunciation: "/ɪnˈlaɪtnmənt/",
+                                    meaning: "覺悟、開悟"
+                                },
+                                {
+                                    word: "liberation",
+                                    pronunciation: "/ˌlɪbəˈreɪʃən/",
+                                    meaning: "解脫、釋放"
+                                }
+                            ]
+                        },
+                        {
+                            question: "佛家認為，人生在世，難免有「__」的煩惱，唯有修行才能超越情感與慾望的束縛。",
+                            questionEn: "Buddhism teaches that in life, we inevitably experience 'emotional and sensual entanglements', and only through spiritual practice can we transcend the bondage of feelings and desires.",
+                            answer: "七情六欲",
+                            hint: "人的七種情感和六種慾望",
+                            meaning: "「七情六欲」指人的七種基本情感（喜、怒、哀、懼、愛、惡、欲）和六種慾望（眼對色、耳對聲、鼻對香、舌對味、身對觸、意對法）。在佛教中，這些都是造成人生煩惱的根源。修行的目的之一便是超越這些情感和慾望的束縛，達到心靈的清淨與自在。",
+                            meaningEn: "The idiom 'seven emotions and six desires' refers to humans' seven basic emotions (joy, anger, sorrow, fear, love, hatred, and desire) and six sensual desires (eyes craving forms, ears craving sounds, nose craving smells, tongue craving tastes, body craving touch, and mind craving mental objects). In Buddhism, these are considered the root causes of life's suffering. One purpose of spiritual practice is to transcend the bondage of these emotions and desires, achieving mental purity and freedom.",
+                            vocabulary: [
+                                {
+                                    word: "entanglements",
+                                    pronunciation: "/ɪnˈtæŋɡəlmənts/",
+                                    meaning: "糾纏、牽連"
+                                },
+                                {
+                                    word: "transcend",
+                                    pronunciation: "/trænˈsend/",
+                                    meaning: "超越、超脫"
+                                },
+                                {
+                                    word: "bondage",
+                                    pronunciation: "/ˈbɒndɪdʒ/",
+                                    meaning: "束縛、奴役"
+                                },
+                                {
+                                    word: "sensual",
+                                    pronunciation: "/ˈsenʃuəl/",
+                                    meaning: "感官的、肉體的"
+                                }
+                            ]
+                        },
+                        {
+                            question: "禪宗強調「__」，不執著特殊的境界，在日常生活中修行。",
+                            questionEn: "Zen Buddhism emphasizes 'maintaining an ordinary mindset as the path', not pursuing special states but practicing in everyday life.",
+                            answer: "平常心是道",
+                            hint: "以平凡的心態即是修行之道",
+                            meaning: "「平常心是道」出自禪宗馬祖道一的教導，意思是不要刻意追求特殊的境界，平常的心態即是修行的道路。這是禪宗重要的思想，強調修行不在形式，而在日常生活的一舉一動中。真正的覺悟就在平凡的日常裡，吃飯時吃飯，睡覺時睡覺，自然而然，不著痕跡。",
+                            meaningEn: "The teaching that 'an ordinary mind is the Way' originates from Zen Master Mazu Daoyi, meaning that one shouldn't deliberately pursue special states, as an ordinary mindset is itself the path of practice. This is a key concept in Zen Buddhism, emphasizing that spiritual practice doesn't lie in formalities but in everyday actions. True enlightenment exists within ordinary daily life—eating when eating, sleeping when sleeping—naturally and without affectation.",
+                            vocabulary: [
+                                {
+                                    word: "pursuing",
+                                    pronunciation: "/pəˈsjuːɪŋ/",
+                                    meaning: "追求、追尋"
+                                },
+                                {
+                                    word: "ordinary",
+                                    pronunciation: "/ˈɔːdnri/",
+                                    meaning: "普通的、平凡的"
+                                },
+                                {
+                                    word: "mindset",
+                                    pronunciation: "/ˈmaɪndset/",
+                                    meaning: "心態、思維方式"
+                                },
+                                {
+                                    word: "affectation",
+                                    pronunciation: "/ˌæfekˈteɪʃn/",
+                                    meaning: "做作、矯揉造作"
+                                }
+                            ]
+                        },
+                        {
+                            question: "修行者要達到「__」的境界，不為外在的得失、毀譽、稱譏、苦樂所動搖。",
+                            questionEn: "Practitioners aim to reach a state of 'remaining unmoved by the eight worldly winds', not being swayed by external gain or loss, praise or blame, fame or disgrace, pleasure or pain.",
+                            answer: "八風不動",
+                            hint: "八種世間風不能動搖心志",
+                            meaning: "「八風不動」是指修行人的心不為「八風」所動搖。「八風」指的是世間上能使人心動搖的八種境界：利（得利）、衰（受損）、毀（被毀謗）、譽（受讚譽）、稱（被稱讚）、譏（被譏諷）、苦（痛苦）、樂（快樂）。達到「八風不動」的境界，意味著心靈的堅定與自在，無論外在環境如何變化，內心始終保持平靜。",
+                            meaningEn: "The idiom 'unmoved by the eight worldly winds' refers to practitioners whose minds remain steadfast regardless of the 'eight winds'—worldly conditions that typically disturb people's equanimity: gain, loss, defamation, praise, acclaim, ridicule, suffering, and pleasure. Achieving this state signifies mental fortitude and freedom, maintaining inner calm regardless of external circumstances.",
+                            vocabulary: [
+                                {
+                                    word: "unmoved",
+                                    pronunciation: "/ˌʌnˈmuːvd/",
+                                    meaning: "不動搖的、無動於衷的"
+                                },
+                                {
+                                    word: "swayed",
+                                    pronunciation: "/sweɪd/",
+                                    meaning: "受影響、被說服"
+                                },
+                                {
+                                    word: "equanimity",
+                                    pronunciation: "/ˌekwəˈnɪməti/",
+                                    meaning: "平靜、沉著"
+                                },
+                                {
+                                    word: "fortitude",
+                                    pronunciation: "/ˈfɔːtɪtjuːd/",
+                                    meaning: "堅毅、剛毅"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ];
+            
+            // 遊戲狀態
+            let currentLevel = 0;
+            let currentQuestion = 0;
+            let completedQuestions = [];
+            let hintUsed = false;
+            
+            // DOM元素
+            const levelBtns = document.querySelectorAll('.level-btn');
+            const levelTitle = document.querySelector('.level-title');
+            const levelTitleEn = document.querySelector('.level-title-en');
+            const question = document.querySelector('.question');
+            const questionEn = document.querySelector('.question-en');
+            const answerInput = document.querySelector('.answer-input');
+            const feedback = document.querySelector('.feedback');
+            const idiomMeaning = document.querySelector('.idiom-meaning');
+            const meaningText = document.querySelector('.meaning-text');
+            const meaningTextEn = document.querySelector('.meaning-text-en');
+            const vocabularyList = document.querySelector('.vocabulary-list');
+            const submitBtn = document.querySelector('.submit-btn');
+            const hintBtn = document.querySelector('.hint-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const levelCompleteModal = document.getElementById('levelCompleteModal');
+            const restartBtn = document.querySelector('.restart-btn');
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            
+            // 初始化遊戲
+            function initGame() {
+                // 從本地存儲加載已完成的題目
+                const saved = localStorage.getItem('buddhist-idioms-completed');
+                if (saved) {
+                    completedQuestions = JSON.parse(saved);
+                }
+                
+                // 綁定按鈕事件
+                submitBtn.addEventListener('click', checkAnswer);
+                hintBtn.addEventListener('click', showHint);
+                nextBtn.addEventListener('click', nextQuestion);
+                restartBtn.addEventListener('click', restartGame);
+                
+                closeModalBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        levelCompleteModal.style.display = 'none';
+                    });
+                });
+                
+                // 加載第一關
+                loadLevel(currentLevel);
+            }
+            
+            // 加載關卡
+            function loadLevel(level) {
+                currentLevel = level;
+                currentQuestion = 0;
+                
+                // 更新關卡標題
+                levelTitle.textContent = gameLevels[level].title;
+                levelTitleEn.textContent = gameLevels[level].titleEn;
+                
+                // 載入第一個問題
+                loadQuestion();
+            }
+            
+            // 載入問題
+            function loadQuestion() {
+                const currentLevelData = gameLevels[currentLevel];
+                const currentQuestionData = currentLevelData.idioms[currentQuestion];
+                
+                // 更新問題文本
+                question.textContent = currentQuestionData.question;
+                questionEn.textContent = currentQuestionData.questionEn;
+                
+                // 清空答案區域
+                answerInput.innerHTML = '';
+                
+                // 創建輸入框
+                const answer = currentQuestionData.answer;
+                for (let i = 0; i < answer.length; i++) {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'char-input';
+                    input.maxLength = 1;
+                    input.dataset.index = i;
+                    
+                    // 添加輸入事件
+                    input.addEventListener('input', function(e) {
+                        if (e.target.value && e.target.nextElementSibling) {
+                            e.target.nextElementSibling.focus();
+                        }
+                    });
+                    
+                    input.addEventListener('keydown', function(e) {
+                        // 處理退格鍵
+                        if (e.key === 'Backspace' && !e.target.value && e.target.previousElementSibling) {
+                            e.preventDefault();
+                            e.target.previousElementSibling.focus();
+                        }
+                        // 處理左右箭頭鍵
+                        else if (e.key === 'ArrowLeft' && e.target.previousElementSibling) {
+                            e.preventDefault();
+                            e.target.previousElementSibling.focus();
+                        }
+                        else if (e.key === 'ArrowRight' && e.target.nextElementSibling) {
+                            e.preventDefault();
+                            e.target.nextElement
+else if (e.key === 'ArrowRight' && e.target.nextElementSibling) {
+                            e.preventDefault();
+                            e.target.nextElementSibling.focus();
+                        }
+                    });
+                    
+                    answerInput.appendChild(input);
+                }
+                
+                // 清空反饋區域
+                feedback.textContent = '';
+                feedback.className = 'feedback';
+                
+                // 隱藏成語解釋和下一題按鈕
+                idiomMeaning.style.display = 'none';
+                nextBtn.style.display = 'none';
+                
+                // 重置提示狀態
+                hintUsed = false;
+                
+                // 自動聚焦到第一個輸入框
+                answerInput.querySelector('.char-input').focus();
+            }
+            
+            // 檢查答案
+            function checkAnswer() {
+                const currentLevelData = gameLevels[currentLevel];
+                const currentQuestionData = currentLevelData.idioms[currentQuestion];
+                const correctAnswer = currentQuestionData.answer;
+                
+                // 獲取用戶輸入
+                let userAnswer = '';
+                const inputs = answerInput.querySelectorAll('.char-input');
+                inputs.forEach(input => {
+                    userAnswer += input.value || '';
+                });
+                
+                // 檢查答案
+                if (userAnswer === correctAnswer) {
+                    // 答案正確
+                    feedback.textContent = '恭喜，答案正確！';
+                    feedback.className = 'feedback success';
+                    
+                    // 顯示成語解釋
+                    meaningText.textContent = currentQuestionData.meaning;
+                    meaningTextEn.textContent = currentQuestionData.meaningEn;
+                    
+                    // 顯示詞彙表
+                    vocabularyList.innerHTML = '';
+                    currentQuestionData.vocabulary.forEach(item => {
+                        const vocabItem = document.createElement('div');
+                        vocabItem.className = 'vocabulary-item';
+                        vocabItem.innerHTML = `
+                            <span class="vocabulary-word">${item.word}</span>
+                            <span class="pronunciation">${item.pronunciation}</span> - ${item.meaning}
+                        `;
+                        vocabularyList.appendChild(vocabItem);
+                    });
+                    
+                    idiomMeaning.style.display = 'block';
+                    
+                    // 禁用輸入和提交
+                    inputs.forEach(input => {
+                        input.disabled = true;
+                    });
+                    submitBtn.disabled = true;
+                    hintBtn.disabled = true;
+                    
+                    // 將題目標記為已完成
+                    if (!completedQuestions.includes(currentQuestion)) {
+                        completedQuestions.push(currentQuestion);
+                        localStorage.setItem('buddhist-idioms-completed', JSON.stringify(completedQuestions));
+                    }
+                    
+                    // 顯示下一題按鈕
+                    nextBtn.style.display = 'block';
+                } else {
+                    // 答案錯誤
+                    feedback.textContent = '答案不正確，請再試一次。';
+                    feedback.className = 'feedback error';
+                }
+            }
+            
+            // 顯示提示
+            function showHint() {
+                if (hintUsed) return;
+                
+                const currentLevelData = gameLevels[currentLevel];
+                const currentQuestionData = currentLevelData.idioms[currentQuestion];
+                
+                feedback.textContent = `提示：${currentQuestionData.hint}`;
+                feedback.className = 'feedback';
+                
+                hintUsed = true;
+            }
+            
+            // 下一題
+            function nextQuestion() {
+                currentQuestion++;
+                
+                // 檢查是否還有下一題
+                if (currentQuestion < gameLevels[currentLevel].idioms.length) {
+                    loadQuestion();
+                } else {
+                    // 關卡完成
+                    showLevelCompleteModal();
+                }
+            }
+            
+            // 顯示關卡完成模態框
+            function showLevelCompleteModal() {
+                levelCompleteModal.style.display = 'flex';
+            }
+            
+            // 重新開始遊戲
+            function restartGame() {
+                levelCompleteModal.style.display = 'none';
+                completedQuestions = [];
+                localStorage.removeItem('buddhist-idioms-completed');
+                currentQuestion = 0;
+                loadQuestion();
+            }
+            
+            // 初始化遊戲
+            initGame();
+        });
+    </script>
+</body>
+</html>

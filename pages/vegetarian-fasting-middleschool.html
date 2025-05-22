@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<title>國中版 SDG 素食與齋戒互動配對遊戲</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+    font-family: "Noto Sans TC", sans-serif;
+    background-color: #fafaf7;
+    margin: 0; padding: 2rem; color: #3e4a24;
+    max-width: 900px; margin-left: auto; margin-right: auto;
+    line-height: 1.7;
+  }
+  a.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    color: #4a7c30;
+    border: 2px solid #4a7c30;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+  a.back-link:hover {
+    background-color: #4a7c30;
+    color: white;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  h2 {
+    color: #4a7c30;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  /* 配對遊戲 */
+  #englishWords, #chineseMeanings {
+    list-style: none;
+    padding: 0;
+  }
+  #englishWords li, #chineseMeanings li {
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #4a7c30;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  #englishWords li {
+    background: #e0f0c0;
+  }
+  #chineseMeanings li {
+    background: #f3f9d2;
+  }
+  #chineseMeanings li.droppable {
+    min-height: 36px;
+  }
+  #chineseMeanings li.droppable.correct {
+    background: #a4d07a;
+    border-color: #3b6625;
+  }
+  #checkBtn {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: #4a7c30;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #result {
+    font-weight: bold;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+
+<a href="english-games.html" class="back-link">← 返回佛學英語互動練習專區</a>
+
+<h1>國中版 SDG 素食與齋戒互動配對遊戲</h1>
+
+<section>
+  <h2>🧩 單字配對遊戲 Vocabulary Match</h2>
+  <p>請將左邊的英文單字拖拉到對應的中文意思上。</p>
+
+  <div style="display:flex; justify-content:space-between; max-width:600px; margin:auto;">
+    <ul id="englishWords" style="width:45%;">
+      <li draggable="true" class="draggable" data-word="Vegetarian">Vegetarian</li>
+      <li draggable="true" class="draggable" data-word="Fasting">Fasting</li>
+      <li draggable="true" class="draggable" data-word="Climate action">Climate action</li>
+      <li draggable="true" class="draggable" data-word="Health">Health</li>
+    </ul>
+
+    <ul id="chineseMeanings" style="width:45%;">
+      <li data-meaning="素食者" class="droppable">素食者</li>
+      <li data-meaning="齋戒" class="droppable">齋戒</li>
+      <li data-meaning="氣候行動" class="droppable">氣候行動</li>
+      <li data-meaning="健康" class="droppable">健康</li>
+    </ul>
+  </div>
+
+  <button id="checkBtn">檢查答案</button>
+  <p id="result"></p>
+</section>
+
+<script>
+  const draggables = document.querySelectorAll('.draggable');
+  const droppables = document.querySelectorAll('.droppable');
+  let dragged = null;
+
+  draggables.forEach(item => {
+    item.addEventListener('dragstart', e => {
+      dragged = item;
+      setTimeout(() => item.style.display = 'none', 0);
+    });
+    item.addEventListener('dragend', e => {
+      setTimeout(() => {
+        dragged.style.display = 'block';
+        dragged = null;
+      }, 0);
+    });
+  });
+
+  droppables.forEach(target => {
+    target.addEventListener('dragover', e => {
+      e.preventDefault();
+      target.style.background = '#d4e8a2';
+    });
+    target.addEventListener('dragleave', e => {
+      target.style.background = '#f3f9d2';
+    });
+    target.addEventListener('drop', e => {
+      e.preventDefault();
+      if (dragged) {
+        // 避免重複放置
+        if (target.dataset.assigned) return;
+
+        target.textContent = dragged.textContent;
+        target.dataset.assigned = dragged.dataset.word;
+        dragged.style.display = 'none';
+        target.style.background = '#a4d07a';
+      }
+    });
+  });
+
+  document.getElementById('checkBtn').addEventListener('click', () => {
+    let correctCount = 0;
+    droppables.forEach(target => {
+      const meaning = target.dataset.meaning;
+      const assigned = target.dataset.assigned;
+      if (
+        (meaning === '素食者' && assigned === 'Vegetarian') ||
+        (meaning === '齋戒' && assigned === 'Fasting') ||
+        (meaning === '氣候行動' && assigned === 'Climate action') ||
+        (meaning === '健康' && assigned === 'Health')
+      ) {
+        correctCount++;
+        target.classList.add('correct');
+      } else {
+        target.classList.remove('correct');
+      }
+    });
+    const result = document.getElementById('result');
+    if (correctCount === droppables.length) {
+      result.textContent = "🎉 全對了！你太厲害了！";
+      result.style.color = "green";
+    } else {
+      result.textContent = `你答對了 ${correctCount} 個，繼續加油喔！`;
+      result.style.color = "orange";
+    }
+  });
+</script>
+
+</body>
+</html>
